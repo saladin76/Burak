@@ -82,7 +82,7 @@ const tr: typeof ar = {
     groupGaza: "Gazze ve Filistin",
     type: "Bağış türü",
     noMonthly: "Bu proje için aylık bağış mevcut değil.",
-    amount: "Tutar (ABD Doları)",
+    amount: "Tutar ({c})",
     popular: "En çok tercih edilen",
     other: "Diğer tutar",
     donateWith: "Bağışla:",

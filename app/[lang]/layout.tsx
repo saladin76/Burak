@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { CurrencyProvider } from "@/lib/currency";
 import { notFound } from "next/navigation";
 import "@fontsource-variable/rubik/wght.css";
 import "@fontsource/amiri/400.css";
@@ -53,6 +54,7 @@ export default async function LangLayout({ children, params }: { children: React
       )}
       <body>
         <LangProvider lang={lang}>
+          <CurrencyProvider lang={lang}>
           <CartProvider>
             <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:p-3">
               {t.common.skip}
@@ -70,6 +72,7 @@ export default async function LangLayout({ children, params }: { children: React
             <GivingAssistant />
             <MobileDonateBar />
           </CartProvider>
+          </CurrencyProvider>
         </LangProvider>
       </body>
     </html>

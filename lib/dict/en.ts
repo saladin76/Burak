@@ -82,7 +82,7 @@ const en: typeof ar = {
     groupGaza: "Gaza & Palestine",
     type: "Donation type",
     noMonthly: "Monthly giving isn't available for this project.",
-    amount: "Amount (US Dollar)",
+    amount: "Amount ({c})",
     popular: "Most chosen",
     other: "Other amount",
     donateWith: "Donate",

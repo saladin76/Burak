@@ -1,5 +1,6 @@
 "use client";
 
+import CurrencySwitcher from "./CurrencySwitcher";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -43,16 +44,16 @@ export default function Header() {
   return (
     <>
       <div className="bg-night text-[13px] text-teal-100">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-1 [&_a]:min-h-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-1 sm:px-5 [&_a]:min-h-8">
           <div className="flex items-center gap-5">
-            <a href={phone.h} className="flex items-center gap-1.5 hover:text-accent-300" dir="ltr">
+            <a href={phone.h} className="flex items-center gap-1.5 whitespace-nowrap hover:text-accent-300" dir="ltr">
               <IconPhone size={15} /> {phone.v}
             </a>
             <a href={`mailto:${contact.email}`} className="hidden items-center gap-1.5 hover:text-accent-300 sm:flex">
               <IconMail size={15} /> {contact.email}
             </a>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-4">
             <Link href={href("/teachers-day")} className="hidden items-center font-semibold text-accent-300 hover:text-accent-400 lg:inline-flex">
               ✦ {f.teach.navLabel}
             </Link>
@@ -65,8 +66,8 @@ export default function Header() {
               {t.common.bank}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 md:inline" />
-            <span className="flex items-center gap-1.5" dir="ltr">
-              <IconGlobe size={15} />
+            <span className="flex items-center gap-1 sm:gap-1.5" dir="ltr">
+              <IconGlobe size={15} className="hidden sm:block" />
               {locales.map((l, i) => (
                 <span key={l} className="flex items-center gap-1.5">
                   {i > 0 && <span className="text-teal-300">·</span>}
@@ -80,6 +81,7 @@ export default function Header() {
                 </span>
               ))}
             </span>
+            <CurrencySwitcher />
           </div>
         </div>
       </div>

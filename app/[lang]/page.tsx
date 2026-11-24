@@ -5,7 +5,6 @@ import ProjectsExplorer from "@/components/ProjectsExplorer";
 import { DomeOfTheRock, GivingRings, Khatam } from "@/components/Motifs";
 import { IconArrow, IconBank, IconCheck, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
-import StoriesBar from "@/components/StoriesBar";
 import JerusalemClock from "@/components/JerusalemClock";
 import Lamps from "@/components/Lamps";
 import Reveal from "@/components/Reveal";
@@ -45,7 +44,6 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
   return (
     <>
-      <StoriesBar lang={lang} />
 
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#eef8fb] to-[#c5e5f1] text-teal-900">

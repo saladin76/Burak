@@ -1,10 +1,11 @@
 "use client";
 
+import { useCurrency } from "@/lib/currency";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { projects, type Project } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
 import { IconBag, IconGift, IconRepeat, IconShield } from "./Icons";
@@ -34,7 +35,8 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const value = custom ? Number(custom) || 0 : amount;
+  const C$ = useCurrency();
+  const value = custom ? C$.toUsd(Number(custom) || 0) : C$.pick(amount);
   const popular = project.amounts[1] ?? project.amounts[0];
 
   const pickProject = (s: string) => {
@@ -116,7 +118,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
       </fieldset>
 
       <fieldset className="mb-4">
-        <legend className="mb-1.5 text-sm font-semibold text-muted">{d.amount}</legend>
+        <legend className="mb-1.5 text-sm font-semibold text-muted">{d.amount.replace("{c}", C$.name)}</legend>
         <div className={`grid gap-2 ${project.amounts.length > 3 ? "grid-cols-4" : "grid-cols-3"}`}>
           {project.amounts.map((a) => {
             const on = !custom && a === amount;
@@ -138,7 +140,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
                     {d.popular}
                   </span>
                 )}
-                ${fmt(a)}
+                <span dir="ltr">{C$.money(a, { nice: true })}</span>
               </button>
             );
           })}
@@ -153,7 +155,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
             onChange={(e) => setCustom(e.target.value.replace(/[^\d]/g, ""))}
             className="h-12 w-full rounded-xl border border-stone-300 bg-stone-50 pe-10 ps-4 text-[15px] focus:border-teal-500 focus:outline-none"
           />
-          <span className="pointer-events-none absolute inset-y-0 end-4 grid place-items-center font-bold text-muted">$</span>
+          <span className="pointer-events-none absolute inset-y-0 end-4 grid place-items-center font-bold text-muted">{C$.symbol}</span>
         </div>
       </fieldset>
 
@@ -163,7 +165,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
           disabled={!value}
           className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_12px_30px_-12px_rgba(0,125,165,1)] transition hover:bg-accent-600 disabled:opacity-50"
         >
-          {d.donateWith} <span className="num">${fmt(value)}</span>
+          {d.donateWith} <span className="num" dir="ltr">{C$.money(value)}</span>
           {freq === "monthly" && <span className="text-base font-semibold">{t.common.monthly}</span>}
         </button>
         <button
