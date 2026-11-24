@@ -69,9 +69,9 @@ export default function Header() {
           scrolled ? "border-stone-200 bg-stone-50/95 shadow-[0_8px_30px_-18px_rgba(1,64,78,.45)] backdrop-blur" : "border-transparent bg-stone-50"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center gap-6 px-5 py-3">
+        <div className="mx-auto flex max-w-7xl items-center gap-6 px-5 py-2">
           <Link href="/" aria-label="مؤسسة البراق — الرئيسية">
-            <BurakLogo />
+            <BurakLogo className="h-14 md:h-[68px]" />
           </Link>
 
           <nav aria-label="القائمة الرئيسية" className="hidden flex-1 lg:block">

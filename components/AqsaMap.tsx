@@ -80,7 +80,7 @@ export default function AqsaMap() {
         <div className="pattern-khatam absolute inset-0 opacity-[.06]" />
         <svg viewBox="0 0 620 700" className="relative mx-auto block w-full max-w-[520px]" role="group" aria-label="مخطط المسجد الأقصى المبارك">
           {/* السور */}
-          <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="#07313b" stroke="#ebcd7a" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="#032c3d" stroke="#ebcd7a" strokeWidth="3" strokeLinejoin="round" />
           <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="none" stroke="#ebcd7a" strokeOpacity=".25" strokeWidth="14" strokeDasharray="4 10" />
           {/* أشجار الزيتون */}
           {[
@@ -89,14 +89,14 @@ export default function AqsaMap() {
             <circle key={i} cx={cx} cy={cy} r="9" fill="#56693a" opacity=".7" />
           ))}
           {/* مصطبة قبة الصخرة */}
-          <rect x="222" y="226" width="150" height="138" rx="6" fill="#0b3f4a" stroke="#d6c7a8" strokeOpacity=".6" />
-          <polygon points="292,252 318,262 328,288 318,314 292,324 266,314 256,288 266,262" fill="#1597a8" stroke="#ebcd7a" strokeWidth="2" />
+          <rect x="222" y="226" width="150" height="138" rx="6" fill="#0a3a4f" stroke="#d6c7a8" strokeOpacity=".6" />
+          <polygon points="292,252 318,262 328,288 318,314 292,324 266,314 256,288 266,262" fill="#3aafc9" stroke="#ebcd7a" strokeWidth="2" />
           <circle cx="292" cy="288" r="14" fill="#c99a2e" />
           {/* المسجد القبلي */}
-          <rect x="290" y="560" width="80" height="80" rx="4" fill="#0b3f4a" stroke="#d6c7a8" strokeOpacity=".6" />
+          <rect x="290" y="560" width="80" height="80" rx="4" fill="#0a3a4f" stroke="#d6c7a8" strokeOpacity=".6" />
           <circle cx="330" cy="578" r="10" fill="#8aa1a8" />
           {/* المرواني */}
-          <rect x="410" y="560" width="80" height="60" rx="4" fill="#0b3f4a" stroke="#d6c7a8" strokeOpacity=".4" strokeDasharray="5 4" />
+          <rect x="410" y="560" width="80" height="60" rx="4" fill="#0a3a4f" stroke="#d6c7a8" strokeOpacity=".4" strokeDasharray="5 4" />
           {/* الشمال */}
           <g transform="translate(560 80)" fill="#ebcd7a">
             <path d="M0 -26 L8 0 L0 -6 L-8 0 Z" />
@@ -110,7 +110,7 @@ export default function AqsaMap() {
                 {on && <circle r="26" fill="#ebcd7a" opacity=".18" className="animate-ping" style={{ transformOrigin: "center", transformBox: "fill-box" }} />}
                 <circle
                   r={on ? 15 : 12}
-                  fill={on ? "#ebcd7a" : "#052229"}
+                  fill={on ? "#ebcd7a" : "#011f2c"}
                   stroke="#ebcd7a"
                   strokeWidth="3"
                   tabIndex={0}
@@ -121,7 +121,7 @@ export default function AqsaMap() {
                   onClick={() => setActive(s)}
                   onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setActive(s))}
                 />
-                <circle r="4" fill={on ? "#052229" : "#ebcd7a"} pointerEvents="none" />
+                <circle r="4" fill={on ? "#011f2c" : "#ebcd7a"} pointerEvents="none" />
               </g>
             );
           })}

@@ -1,17 +1,28 @@
 import Link from "next/link";
-import { BurakLogo, OrnamentDivider, QudsSkyline } from "./Motifs";
-import { IconBank, IconFacebook, IconMail, IconPhone, IconShield, IconWhatsapp, IconYoutube } from "./Icons";
-import { contact } from "@/lib/data";
+import { BurakLogo, GivingWaves, OrnamentDivider, QudsSkyline } from "./Motifs";
+import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube } from "./Icons";
+import { contact, socials } from "@/lib/data";
+
+const sIcon: Record<string, React.ReactNode> = {
+  facebook: <IconFacebook size={19} />,
+  instagram: <IconInstagram size={19} />,
+  x: <IconX size={17} />,
+  tiktok: <IconTiktok size={19} />,
+  youtube: <IconYoutube size={19} />,
+};
 
 export default function Footer() {
   return (
     <footer className="relative mt-24 bg-night text-teal-100">
-      <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#052229" />
+      <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#011f2c" />
       <div className="pattern-khatam absolute inset-0 opacity-[.07]" />
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <GivingWaves className="absolute -bottom-10 end-[-60px] h-[420px] w-auto" opacity={0.1} rings={8} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
+      </div>
       <div className="relative mx-auto max-w-7xl px-5 pb-8 pt-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <BurakLogo light />
+            <BurakLogo light className="h-24" />
             <p className="mt-5 max-w-sm leading-8 text-teal-100/85">
               مؤسسة إنسانية تأسست عام 2011 للتعريف بالمسجد الأقصى المبارك والقدس الشريف، وإعمارها، ودعم صمود المقدسيين.
             </p>
@@ -49,6 +60,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <a href={contact.phoneTrHref} className="flex items-center gap-2 hover:text-gold-300">
+                  <IconPhone size={18} /> <span dir="ltr">{contact.phoneTr}</span> <span className="text-xs text-teal-100/60">(Türkçe)</span>
+                </a>
+              </li>
+              <li>
                 <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-gold-300">
                   <IconMail size={18} /> {contact.email}
                 </a>
@@ -59,11 +75,17 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-            <div className="mt-5 flex gap-2">
-              <a aria-label="فيسبوك" href={contact.facebook} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300"><IconFacebook size={19} /></a>
-              <a aria-label="يوتيوب" href={contact.youtube} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300"><IconYoutube size={19} /></a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {socials(contact.handles.ar).map((x) => (
+                <a key={x.key} aria-label={x.label} href={x.href} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
+                  {sIcon[x.key]}
+                </a>
+              ))}
               <a aria-label="واتساب" href={contact.whatsapp} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300"><IconWhatsapp size={19} /></a>
             </div>
+            <p className="mt-3 text-xs leading-6 text-teal-100/60" dir="ltr">
+              AR @{contact.handles.ar} · TR @{contact.handles.tr} · EN @{contact.handles.en}
+            </p>
           </div>
         </div>
 

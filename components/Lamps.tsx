@@ -20,7 +20,7 @@ function Lamp({ lit, onClick, i }: { lit: boolean; onClick: () => void; i: numbe
       <svg viewBox="0 0 40 70" className={`h-20 w-12 transition-transform duration-500 group-hover:rotate-3 ${lit ? "drop-shadow-[0_0_22px_rgba(235,205,122,.95)]" : ""}`} aria-hidden="true">
         <path d="M20 0v6" stroke="#c99a2e" strokeWidth="2" />
         <path d="M12 6h16l-3 6H15Z" fill="#9a7214" />
-        <path d="M10 12h20l4 22c0 10-6 18-14 22-8-4-14-12-14-22Z" fill={lit ? "#ebcd7a" : "#0b3f4a"} stroke="#c99a2e" strokeWidth="1.6" className="transition-colors duration-700" />
+        <path d="M10 12h20l4 22c0 10-6 18-14 22-8-4-14-12-14-22Z" fill={lit ? "#ebcd7a" : "#0a3a4f"} stroke="#c99a2e" strokeWidth="1.6" className="transition-colors duration-700" />
         <path d="M14 18h12M12 26h16M12 34h16" stroke="#c99a2e" strokeOpacity=".6" strokeWidth="1" />
         <path d="M20 14v34M14 16l-1 26M26 16l1 26" stroke="#c99a2e" strokeOpacity=".45" strokeWidth="1" />
         {lit && <ellipse cx="20" cy="32" rx="5" ry="8" fill="#fff6d8" className="twinkle" />}

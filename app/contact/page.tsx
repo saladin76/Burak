@@ -18,9 +18,10 @@ export default function Contact() {
       <PageHero title="تواصل معنا" kicker="يسعدنا تواصلك">
         للاستفسار عن المشاريع أو التبرعات أو التطوّع، تواصل معنا عبر القنوات التالية.
       </PageHero>
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 pt-14 md:grid-cols-3">
+      <section className="mx-auto grid max-w-7xl gap-6 px-5 pt-14 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { icon: <IconPhone size={26} />, t: "اتصل بنا", v: contact.phone, href: contact.phoneHref, ltr: true },
+          { icon: <IconPhone size={26} />, t: "Türkçe destek", v: contact.phoneTr, href: contact.phoneTrHref, ltr: true },
           { icon: <IconWhatsapp size={26} />, t: "واتساب", v: "راسلنا مباشرة", href: contact.whatsapp },
           { icon: <IconMail size={26} />, t: "البريد الإلكتروني", v: contact.email, href: `mailto:${contact.email}` },
         ].map((c) => (

@@ -104,6 +104,24 @@ export const IconYoutube = ({ size, ...p }: P) => (
     <path d="m10 9.5 5 2.5-5 2.5v-5Z" />
   </svg>
 );
+export const IconInstagram = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.2" cy="6.8" r=".8" fill="currentColor" />
+  </svg>
+);
+export const IconX = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M4 4l16 16M20 4 4 20" />
+  </svg>
+);
+export const IconTiktok = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
+    <path d="M14 3c.5 2.8 2.3 4.4 5 4.6" />
+  </svg>
+);
 export const IconPlay = ({ size, ...p }: P) => (
   <svg {...base(size)} {...p}>
     <circle cx="12" cy="12" r="9" />

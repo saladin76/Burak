@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fmt, kindLabel, regionLabel, type Project } from "@/lib/data";
 import { IconArrow, IconRepeat, KindIcon } from "./Icons";
+import { GivingWaves } from "./Motifs";
 
 const coverTone = (p: Project) =>
   p.kind === "zakat"
@@ -13,9 +14,17 @@ export function ProjectCover({ p, tall = false }: { p: Project; tall?: boolean }
   return (
     <div className={`relative overflow-hidden ${coverTone(p)} ${tall ? "h-72" : "h-44"}`}>
       <div className="pattern-khatam absolute inset-0 opacity-60" />
-      {/* نافذة قوسية تحمل أيقونة المجال */}
-      <div className="absolute bottom-0 left-1/2 grid h-[78%] w-36 -translate-x-1/2 place-items-center rounded-t-full border-2 border-b-0 border-gold-300/70 bg-black/15">
-        <KindIcon kind={p.kind} size={tall ? 64 : 46} className="text-gold-300" />
+      {/* موجات العطاء تحمل أيقونة المجال */}
+      <GivingWaves
+        className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${tall ? "h-64" : "h-40"}`}
+        rings={5}
+        stroke={6}
+        gap={7}
+        palette={p.kind === "zakat" ? ["#f8edcf", "#ebcd7a", "#dcb24b", "#f8edcf", "#ebcd7a"] : ["#c5e5f1", "#8acbda", "#64b6d0", "#3aafc9", "#ebcd7a"]}
+        opacity={0.9}
+      />
+      <div className={`absolute bottom-0 left-1/2 grid -translate-x-1/2 place-items-center ${tall ? "h-28 w-20" : "h-16 w-14"}`}>
+        <KindIcon kind={p.kind} size={tall ? 48 : 30} className="text-gold-300" />
       </div>
       <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
         <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-teal-900">{regionLabel[p.region]}</span>

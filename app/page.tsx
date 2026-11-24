@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
-import { DomeOfTheRock, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { DomeOfTheRock, GivingWaves, Khatam, OrnamentDivider } from "@/components/Motifs";
 import { IconArrow, IconBook, IconHeart, IconPlay, IconRepeat, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import StoriesBar from "@/components/StoriesBar";
@@ -75,7 +75,15 @@ export default function Home() {
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[640px] self-end">
-            <DomeOfTheRock className="block w-full" />
+            <GivingWaves
+              className="pointer-events-none absolute bottom-[8%] left-1/2 w-[135%] -translate-x-1/2"
+              rings={8}
+              stroke={3}
+              gap={9}
+              palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]}
+              opacity={0.28}
+            />
+            <DomeOfTheRock className="relative block w-full" />
           </div>
         </div>
       </section>
@@ -156,6 +164,7 @@ export default function Home() {
       {/* ========== الأثر ========== */}
       <section className="relative mt-24 overflow-hidden bg-teal-900 text-white">
         <div className="pattern-khatam absolute inset-0 opacity-[.12]" />
+        <GivingWaves className="pointer-events-none absolute -bottom-6 start-[-40px] h-[340px] w-auto" rings={8} opacity={0.18} palette={["#c5e5f1", "#8acbda", "#64b6d0", "#3aafc9"]} />
         <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1fr_2fr] lg:items-center">
           <div>
             <p className="mb-3 text-sm font-bold text-gold-300">أثرٌ يبقى</p>
@@ -255,7 +264,7 @@ export default function Home() {
                 "تثبيت المقدسيين في البلدة القديمة ورعاية احتياجاتهم اليومية.",
               ].map((t) => (
                 <li key={t} className="flex gap-3 leading-8">
-                  <Khatam className="mt-1.5 h-5 w-5 shrink-0" color="#04819c" />
+                  <Khatam className="mt-1.5 h-5 w-5 shrink-0" color="#007da5" />
                   {t}
                 </li>
               ))}
@@ -274,23 +283,23 @@ export default function Home() {
                   <path id="isra" d="M60 225 C 20 150, 230 120, 195 40" fill="none" stroke="#ebcd7a" strokeWidth="2" strokeDasharray="5 7" opacity=".8" />
                   {/* المسجد الحرام */}
                   <g transform="translate(60 225)">
-                    <circle r="20" fill="#07313b" stroke="#ebcd7a" />
+                    <circle r="20" fill="#032c3d" stroke="#ebcd7a" />
                     <rect x="-8" y="-8" width="16" height="16" fill="#10222a" stroke="#ebcd7a" strokeWidth="1.2" />
                     <path d="M-8 -3h16" stroke="#ebcd7a" strokeWidth="1.5" />
                   </g>
                   {/* المسجد الأقصى */}
                   <g transform="translate(195 40)">
-                    <circle r="22" fill="#07313b" stroke="#ebcd7a" />
+                    <circle r="22" fill="#032c3d" stroke="#ebcd7a" />
                     <path d="M-11 6c0-8 5-13 11-14 6 1 11 6 11 14Z" fill="#c99a2e" />
-                    <rect x="-13" y="6" width="26" height="7" fill="#1597a8" />
+                    <rect x="-13" y="6" width="26" height="7" fill="#3aafc9" />
                   </g>
                   <circle r="5" fill="#fff6d8">
                     <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
                       <mpath href="#isra" />
                     </animateMotion>
                   </circle>
-                  <text x="60" y="258" textAnchor="middle" fill="#daf1f4" fontSize="12">المسجد الحرام</text>
-                  <text x="195" y="78" textAnchor="middle" fill="#daf1f4" fontSize="12">المسجد الأقصى</text>
+                  <text x="60" y="258" textAnchor="middle" fill="#c5e5f1" fontSize="12">المسجد الحرام</text>
+                  <text x="195" y="78" textAnchor="middle" fill="#c5e5f1" fontSize="12">المسجد الأقصى</text>
                 </svg>
                 <p className="mt-2 text-sm leading-7 text-gold-300">ونحن البراق الذي يحمل عطاءك إلى هناك</p>
               </div>

@@ -287,13 +287,24 @@ export const qudsLibrary = [
 ];
 
 export const contact = {
-  phone: "+90 531 280 02 17",
+  phone: "+90 531 280 02 17", // العربي والإنجليزي
   phoneHref: "tel:+905312800217",
+  phoneTr: "+90 507 460 18 41", // التركي
+  phoneTrHref: "tel:+905074601841",
   whatsapp: "https://api.whatsapp.com/send?phone=905312800217",
   email: "info@burakdernegi.org",
-  facebook: "https://www.facebook.com/alburakorg",
-  youtube: "https://www.youtube.com/burakdernegi",
+  website: "www.burakdernegi.org",
   legalName: "Burak Mukaddes Mekanları Tanıtma ve Kültür Derneği",
+  // الحسابات حسب اللغة (دليل التواصل الرسمي)
+  handles: { ar: "alburakorg", tr: "burakdernegi", en: "alburakorgen" },
 };
+
+export const socials = (h: string) => [
+  { key: "facebook", label: "فيسبوك", href: `https://www.facebook.com/${h}` },
+  { key: "instagram", label: "إنستغرام", href: `https://www.instagram.com/${h}` },
+  { key: "x", label: "إكس (تويتر)", href: `https://x.com/${h}` },
+  { key: "tiktok", label: "تيك توك", href: `https://www.tiktok.com/@${h}` },
+  { key: "youtube", label: "يوتيوب", href: `https://www.youtube.com/@${h}` },
+];
 
 export const fmt = (n: number) => new Intl.NumberFormat("en-US").format(n);

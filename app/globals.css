@@ -7,20 +7,29 @@
    ============================================================ */
 @theme {
   /* ليل القدس — خلفيات داكنة */
-  --color-night: #052229;
-  --color-night-2: #07313b;
+  --color-night: #011f2c;
+  --color-night-2: #032c3d;
 
   /* ألوان البراق الأصلية (من الموقع الحالي) */
-  --color-teal-950: #012f3a;
-  --color-teal-900: #01404e;
-  --color-teal-700: #036379;
-  --color-teal-500: #04819c;
-  --color-teal-300: #6cc3d3;
-  --color-teal-100: #daf1f4;
-  --color-teal-50: #eefdff;
+  --color-teal-950: #002a3b;
+  --color-teal-900: #003d55; /* لون الشعار الداكن */
+  --color-teal-700: #005f80;
+  --color-teal-500: #007da5; /* لون الشعار الأساسي */
+  --color-teal-300: #64b6d0;
+  --color-teal-100: #c5e5f1;
+  --color-teal-50: #eef8fb;
+
+  /* ألوان «موجات العطاء» — مأخوذة من دليل الهوية 2025 (ألوان القبة الخارجية) */
+  --color-wave-1: #399bb6;
+  --color-wave-2: #52a6c0;
+  --color-wave-3: #3aafc9;
+  --color-wave-4: #64b6d0;
+  --color-wave-5: #8acbda;
+  --color-wave-6: #aeddec;
+  --color-wave-7: #c5e5f1;
 
   /* بلاط قبة الصخرة */
-  --color-tile: #1597a8;
+  --color-tile: #3aafc9;
   --color-cobalt: #1d4f91;
 
   /* ذهب القبة */
@@ -44,11 +53,32 @@
   --color-ink: #10222a;
   --color-muted: #4a5b62;
 
-  --font-kufi: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --font-kufi: "AwanZaman", "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
   --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-naskh: "Amiri", "IBM Plex Sans Arabic", serif;
 
   --radius-arch: 999px 999px 18px 18px;
+}
+
+/* خط الهوية العربي الرسمي AwanZaman — ضع ملفات الخط في public/fonts
+   (إن لم تتوفر يُستخدم Reem Kufi تلقائياً) */
+@font-face {
+  font-family: "AwanZaman";
+  src: url("/fonts/AwanZaman-Bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "AwanZaman";
+  src: url("/fonts/AwanZaman-Black.woff2") format("woff2");
+  font-weight: 800 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "AwanZaman";
+  src: url("/fonts/AwanZaman-Regular.woff2") format("woff2");
+  font-weight: 400 500;
+  font-display: swap;
 }
 
 html {
@@ -56,6 +86,7 @@ html {
 }
 
 body {
+  overflow-x: clip;
   background: var(--color-stone-50);
   color: var(--color-ink);
   font-family: var(--font-sans);
@@ -83,7 +114,7 @@ body {
 }
 
 .pattern-khatam-teal {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%2304819c' stroke-width='1' opacity='.18'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23007da5' stroke-width='1' opacity='.18'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 72px 72px;
 }
 

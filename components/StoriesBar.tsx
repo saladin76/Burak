@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IconHeart, KindIcon } from "./Icons";
-import { BurakMark } from "./Motifs";
+import { GivingWaves } from "./Motifs";
 import type { Kind } from "@/lib/data";
 
 /* شريط «القصص» الدائري أسفل الترويسة — وصول سريع للحملات والأدوات */
@@ -18,7 +18,7 @@ const MapIcon = () => (
   </svg>
 );
 const icons: Record<string, React.ReactNode> = {
-  "القدس": <BurakMark className="h-8 w-8" tone="light" />,
+  "القدس": <GivingWaves className="h-8 w-8" rings={4} stroke={14} gap={10} palette={["#ebcd7a", "#8acbda", "#ebcd7a", "#8acbda"]} />,
   "خريطة الأقصى": <MapIcon />,
   "قناديل الأقصى": <Lantern />,
   "كن داعماً": <IconHeart size={26} />,

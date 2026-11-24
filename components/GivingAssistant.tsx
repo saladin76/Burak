@@ -181,7 +181,7 @@ export default function GivingAssistant() {
         className="flex h-14 items-center gap-2 rounded-full bg-teal-900 p-2 font-bold sm:pe-5 text-white shadow-[0_14px_40px_-12px_rgba(1,64,78,.9)] hover:bg-teal-700"
       >
         <span className="grid h-10 w-10 place-items-center rounded-full bg-gold-500 text-night">
-          <Khatam className="h-6 w-6" color="#052229" />
+          <Khatam className="h-6 w-6" color="#011f2c" />
         </span>
         <span className="hidden sm:inline">مساعد العطاء</span>
       </button>
