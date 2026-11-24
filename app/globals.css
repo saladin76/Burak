@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* ============================================================
+   هوية البراق المقدسية — Design Tokens
+   الأساس: ألوان الشعار الحالي (التركواز والأزرق البترولي)
+   + ذهب قبة الصخرة + حجر القدس الجيري + بلاط القبة العثماني
+   ============================================================ */
+@theme {
+  /* ليل القدس — خلفيات داكنة */
+  --color-night: #052229;
+  --color-night-2: #07313b;
+
+  /* ألوان البراق الأصلية (من الموقع الحالي) */
+  --color-teal-950: #012f3a;
+  --color-teal-900: #01404e;
+  --color-teal-700: #036379;
+  --color-teal-500: #04819c;
+  --color-teal-300: #6cc3d3;
+  --color-teal-100: #daf1f4;
+  --color-teal-50: #eefdff;
+
+  /* بلاط قبة الصخرة */
+  --color-tile: #1597a8;
+  --color-cobalt: #1d4f91;
+
+  /* ذهب القبة */
+  --color-gold-700: #7a5a0e;
+  --color-gold-600: #9a7214;
+  --color-gold-500: #c99a2e;
+  --color-gold-400: #dcb24b;
+  --color-gold-300: #ebcd7a;
+  --color-gold-100: #f8edcf;
+
+  /* حجر القدس */
+  --color-stone-50: #fbf8f2;
+  --color-stone-100: #f4eee2;
+  --color-stone-200: #e8decb;
+  --color-stone-300: #d6c7a8;
+  --color-stone-500: #9c8a66;
+
+  /* زيتون */
+  --color-olive: #56693a;
+
+  --color-ink: #10222a;
+  --color-muted: #4a5b62;
+
+  --font-kufi: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-naskh: "Amiri", "IBM Plex Sans Arabic", serif;
+
+  --radius-arch: 999px 999px 18px 18px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-stone-50);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-night);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold-400);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---------- زخارف ---------- */
+
+/* نجمة ثمانية (خاتم سليمان) — نمط خلفية */
+.pattern-khatam {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23ebcd7a' stroke-width='1' opacity='.55'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+.pattern-khatam-teal {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%2304819c' stroke-width='1' opacity='.18'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+/* نسيج حجر القدس — مداميك */
+.pattern-stone {
+  background-color: var(--color-stone-100);
+  background-image:
+    linear-gradient(var(--color-stone-200) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-stone-200) 1px, transparent 1px);
+  background-size: 120px 44px, 120px 88px;
+  background-position: 0 0, 60px 44px;
+}
+
+/* شريط شُرَف سور القدس */
+.crenellation {
+  height: 14px;
+  background:
+    linear-gradient(90deg, currentColor 0 55%, transparent 55% 100%) 0 0 / 28px 8px repeat-x,
+    linear-gradient(currentColor, currentColor) 0 8px / 100% 6px no-repeat;
+}
+
+/* قوس مدبب */
+.arch {
+  border-radius: 999px 999px 20px 20px;
+}
+.arch-pointed {
+  clip-path: polygon(0 100%, 0 38%, 6% 24%, 16% 12%, 30% 4%, 50% 0, 70% 4%, 84% 12%, 94% 24%, 100% 38%, 100% 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* أرقام بخط كوفي */
+.num {
+  font-family: var(--font-kufi);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .rise-2 {
+    animation: rise 0.8s 0.12s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .rise-3 {
+    animation: rise 0.8s 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .twinkle {
+    animation: twinkle 3.5s ease-in-out infinite;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
