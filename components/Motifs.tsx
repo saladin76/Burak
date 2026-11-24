@@ -18,24 +18,27 @@ export function GivingRings({
   palette = RING_COLORS,
   opacity = 1,
   spin = false,
+  live = false,
 }: {
   className?: string;
   rings?: number;
   palette?: string[];
   opacity?: number;
   spin?: boolean;
+  /** حلقات حيّة: كل حلقة تدور ببطء باتجاه وسرعة مختلفين */
+  live?: boolean;
 }) {
   const C = 200;
   // أنماط تقطيع ثابتة (حتى تتطابق بين الخادم والمتصفح)
   const dashes = ["70 18 40 22", "120 26 60 30", "54 20 90 34", "160 30 44 24", "88 22 130 36", "200 40 70 28", "140 34 220 46", "260 44 90 30"];
   return (
     <svg viewBox="0 0 400 400" className={className} aria-hidden="true" style={{ opacity }}>
-      <g fill="none" strokeLinecap="round" className={spin ? "origin-center animate-[spin_90s_linear_infinite]" : undefined}>
+      <g fill="none" strokeLinecap="round" className={`${spin ? "origin-center animate-[spin_90s_linear_infinite]" : ""} ${live ? "ring-live" : ""}`}>
         {Array.from({ length: rings }, (_, i) => {
           const r = 34 + i * (160 / Math.max(1, rings - 1));
           const w = 7 + (i % 3) * 3;
           return (
-            <g key={i}>
+            <g key={i} style={live ? ({ "--d": `${60 + i * 22}s` } as React.CSSProperties) : undefined}>
               <circle cx={C} cy={C} r={r} stroke={palette[i % palette.length]} strokeWidth={w} strokeDasharray={dashes[i % dashes.length]} transform={`rotate(${i * 47} ${C} ${C})`} />
               {i % 2 === 1 && <circle cx={C} cy={C} r={r + w} stroke={palette[(i + 3) % palette.length]} strokeWidth="1" opacity=".5" />}
             </g>

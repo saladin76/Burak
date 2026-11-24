@@ -158,13 +158,24 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
 
       {/* الملخص */}
       <aside className="lg:sticky lg:top-28 lg:self-start">
-        <div className="overflow-hidden rounded-2xl bg-accent-700 text-white shadow-[0_30px_60px_-30px_rgba(0,61,85,.7)]">
+        <div className="grain relative overflow-hidden rounded-2xl bg-accent-700 text-white shadow-[0_30px_60px_-30px_rgba(0,61,85,.7)]">
           <div className="p-6">
             <p className="text-sm font-semibold text-accent-300">{G.summary}</p>
             <p className="num mt-2 font-kufi text-5xl font-extrabold">
               ${fmt(value)}
               {mode === "monthly" && <span className="ms-2 text-lg font-semibold text-accent-300">/ {G.perMonth}</span>}
             </p>
+            {mode === "monthly" && (
+              <div className="mt-5" aria-label={G.m.yearT}>
+                <p className="mb-2 text-xs font-semibold text-accent-300">{G.m.yearT}</p>
+                <div className="grid h-8 grid-cols-12 items-end gap-1">
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <span key={i} className={`h-8 rounded-sm transition-all duration-500 ${i < months ? "bg-accent-400" : "bg-white/10"}`}
+                      style={{ transitionDelay: `${i * 35}ms`, height: i < months ? `${18 + Math.min(14, (value / 200) * 14)}px` : "10px", alignSelf: "end" }} />
+                  ))}
+                </div>
+              </div>
+            )}
             <dl className="mt-5 grid gap-3 border-t border-white/15 pt-5 text-sm">
               <div className="flex justify-between gap-3">
                 <dt className="text-accent-300">{G.to}</dt>
@@ -193,7 +204,7 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
           <div className="grid gap-2 bg-accent-600/40 p-4">
             <button type="button" disabled={!value || !proj}
               onClick={() => { add(); router.push(href("/checkout")); }}
-              className="flex h-14 items-center justify-center gap-2 rounded-lg bg-white text-lg font-bold text-accent-700 transition hover:bg-accent-100 disabled:opacity-50">
+              className="btn-shine flex h-14 items-center justify-center gap-2 rounded-lg bg-white text-lg font-bold text-accent-700 transition hover:bg-accent-100 disabled:opacity-50">
               {mode === "monthly" ? G.giveMonthly : G.giveOnce} <IconArrow size={20} />
             </button>
             <button type="button" disabled={!value || !proj}

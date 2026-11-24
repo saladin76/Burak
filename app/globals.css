@@ -277,3 +277,55 @@ html, body { overflow-x: clip; }
   background: linear-gradient(to top, rgba(0,61,85,.85), rgba(0,125,165,.35) 55%, transparent);
   pointer-events: none;
 }
+
+/* ===================== طبقة الحركة — Motion layer ===================== */
+@keyframes ringturn { to { transform: rotate(360deg); } }
+@keyframes ripple { 0% { transform: scale(.35); opacity: .0; } 15% { opacity: .55; } 100% { transform: scale(1.45); opacity: 0; } }
+@keyframes floaty { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -14px, 0); } }
+@keyframes drift { from { transform: translate3d(0, 0, 0); opacity: 0; } 15% { opacity: .9; } to { transform: translate3d(var(--dx, 20px), -120vh, 0); opacity: 0; } }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+@keyframes marquee-rtl { to { transform: translate3d(50%, 0, 0); } }
+@keyframes shine { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(220%) skewX(-20deg); } }
+@keyframes draw { from { stroke-dashoffset: var(--len, 1000); } to { stroke-dashoffset: var(--to, 0); } }
+@keyframes pulse-node { 0%, 6% { fill: #ffffff; r: 9; } 14%, 100% { fill: #3aafc9; r: 6; } }
+@keyframes glow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ring-live > g { transform-origin: 200px 200px; animation: ringturn var(--d, 80s) linear infinite; }
+  .ring-live > g:nth-child(even) { animation-direction: reverse; }
+  .ripple > span { animation: ripple 4.8s cubic-bezier(.2,.6,.3,1) infinite; }
+  .ripple > span:nth-child(2) { animation-delay: 1.6s; }
+  .ripple > span:nth-child(3) { animation-delay: 3.2s; }
+  .floaty { animation: floaty 6s ease-in-out infinite; }
+  .particle { animation: drift var(--t, 14s) linear infinite; animation-delay: var(--delay, 0s); }
+  .marquee-track { animation: marquee 38s linear infinite; }
+  [dir="rtl"] .marquee-track { animation-name: marquee-rtl; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .draw { animation: draw 2.2s cubic-bezier(.2,.7,.2,1) .3s both; }
+  .orbit-comet { transform-origin: 200px 200px; animation: ringturn 12s linear infinite; }
+  [dir="rtl"] .orbit-comet { animation-direction: reverse; }
+  .orbit-node { animation: pulse-node 12s linear infinite; }
+  .glow { animation: glow 3.5s ease-in-out infinite; }
+  .lift { transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; }
+  .lift:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -32px rgba(0, 61, 85, .55); }
+}
+
+/* لمعة تمرّ على الأزرار الرئيسية */
+.btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+.btn-shine::after {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 40%; z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn-shine:hover::after { animation: shine .9s ease; }
+}
+
+/* قناع حواف للشريط المتحرك */
+.marquee { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+
+/* تحبيب خفيف للخلفيات الداكنة */
+.grain::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}

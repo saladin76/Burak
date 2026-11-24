@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
 import { DomeOfTheRock, GivingRings, GivingWaves, Khatam } from "@/components/Motifs";
-import { IconArrow, IconBank, IconRepeat, IconShield } from "@/components/Icons";
+import { IconArrow, IconBank, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import StoriesBar from "@/components/StoriesBar";
 import JerusalemClock from "@/components/JerusalemClock";
@@ -11,6 +11,8 @@ import Lamps from "@/components/Lamps";
 import Reveal from "@/components/Reveal";
 import VideoCard from "@/components/VideoCard";
 import SmartImg from "@/components/SmartImg";
+import CountUp from "@/components/CountUp";
+import { Marquee } from "@/components/Fx";
 import { news, projectPath, projects, stats, videos } from "@/lib/data";
 import { fmt, getDict, isLang, lhref, tx, type Lang } from "@/lib/i18n";
 import { notFound } from "next/navigation";
@@ -47,7 +49,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#eef8fb] to-[#c5e5f1] text-teal-900">
-        <GivingRings className="pointer-events-none absolute -top-40 -end-40 w-[560px] lg:-top-60 lg:end-auto lg:start-[-180px] lg:w-[760px]" rings={7} opacity={0.22} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
+        <GivingRings live className="pointer-events-none absolute -top-40 -end-40 w-[560px] lg:-top-60 lg:end-auto lg:start-[-180px] lg:w-[760px]" rings={7} opacity={0.22} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
         <div className="relative mx-auto grid max-w-7xl items-end gap-8 px-5 pt-12 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
           <div className="pb-20 lg:pb-40">
             <p className="rise brand-tag mb-6">
@@ -59,7 +61,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </h1>
             <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-teal-700 md:text-xl">{t.hero.text}</p>
             <div className="rise-3 mt-9 flex flex-wrap gap-3">
-              <Link href="#donate" className="flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_14px_30px_-14px_rgba(0,125,165,.7)] hover:bg-accent-600">
+              <Link href="#donate" className="btn-shine flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_14px_30px_-14px_rgba(0,125,165,.7)] hover:bg-accent-600">
                 {t.common.donateNow} <IconArrow size={20} />
               </Link>
               <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-lg border-2 border-accent-700 px-7 text-lg font-bold text-accent-700 hover:bg-accent-700 hover:text-white">
@@ -71,7 +73,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           </div>
           <div className="relative mx-auto hidden w-full max-w-[640px] self-end lg:block">
-            <GivingRings className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.55} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
+            <GivingRings live className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.55} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
             <DomeOfTheRock className="relative block w-full" label={t.hero.domeAlt} />
           </div>
         </div>
@@ -106,6 +108,16 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
+      {/* ========== شريط المشاريع المتحرك ========== */}
+      <div className="mt-20 -rotate-1 bg-accent-500 py-4 text-white shadow-[0_20px_40px_-25px_rgba(0,61,85,.6)]">
+        <Marquee
+          className="font-kufi text-lg font-bold"
+          items={projects.map((p) => (
+            <Link key={p.slug} href={h(projectPath(p.slug))} className="flex items-center gap-2 hover:text-accent-100"><KindIcon kind={p.kind} size={20} /> {tx(p.title, lang)}</Link>
+          ))}
+        />
+      </div>
+
       {/* ========== المشاريع ========== */}
       <section className="mx-auto max-w-7xl px-5 pt-24">
         <SectionHead kicker={H.projectsKicker} title={H.projectsTitle} action={<Link href={h("/projects")} className={btnOutline}>{H.viewAll} <IconArrow size={18} /></Link>}>
@@ -138,8 +150,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {stats.annual.map((s) => (
-              <div key={s.value} className="arch border border-accent-300/30 bg-white/[.04] px-6 pb-8 pt-12 text-center">
-                <p className="num text-5xl font-bold text-white md:text-6xl">{fmt(s.value)}</p>
+              <div key={s.value} className="lift arch border border-accent-300/30 bg-white/[.04] px-6 pb-8 pt-12 text-center">
+                <p className="num text-5xl font-bold text-white md:text-6xl"><CountUp to={s.value} /></p>
                 <p className="mt-3 text-lg text-teal-100">{tx(s.label, lang)}</p>
               </div>
             ))}

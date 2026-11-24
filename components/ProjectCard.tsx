@@ -98,7 +98,7 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
             ))}
           </div>
           <button type="button" onClick={() => { add(); router.push(href("/checkout")); }}
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-accent-500 font-bold text-white transition hover:bg-accent-600">
+            className="btn-shine flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-accent-500 font-bold text-white transition hover:bg-accent-600">
             {t.common.donateNow} <span className="num">${fmt(amount)}</span> <IconArrow size={18} />
           </button>
           <button type="button" onClick={() => { add(); setAdded(true); setTimeout(() => setAdded(false), 1800); }}

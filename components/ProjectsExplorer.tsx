@@ -7,7 +7,7 @@ import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import ProjectCard from "./ProjectCard";
 import Link from "next/link";
-import { IconArrow, IconRepeat, IconSearch, KindIcon } from "./Icons";
+import { IconRepeat, IconSearch, KindIcon } from "./Icons";
 
 type Tab = "all" | Region | "zakat" | "monthly";
 type Sort = "featured" | "urgent" | "goal" | "low";
@@ -82,14 +82,24 @@ export default function ProjectsExplorer({ limit }: { limit?: number }) {
           {tabs.map((x) => {
             const n = projects.filter((p) => match(x.key, p)).length;
             const on = tab === x.key;
-            return (
-              <button key={x.key} role="tab" aria-selected={on} onClick={() => { setTab(x.key); setKind(""); }}
-                className={`relative flex h-14 shrink-0 items-center gap-2 whitespace-nowrap px-4 text-[15px] font-semibold lg:px-5 transition md:flex-1 md:justify-center ${on ? "text-accent-600" : "text-teal-700 hover:bg-stone-50 hover:text-teal-900"}`}>
+            const page = x.key === "monthly" ? "/monthly" : x.key === "zakat" ? "/zakat" : null;
+            const cls = `relative flex h-14 shrink-0 items-center gap-2 whitespace-nowrap px-4 text-[15px] font-semibold transition md:flex-1 md:justify-center lg:px-5 ${on ? "text-accent-600" : "text-teal-700 hover:bg-stone-50 hover:text-teal-900"}`;
+            const inner = (
+              <>
                 <span className={on ? "text-accent-500" : "text-teal-300"}>{tabIcon[x.key]}</span>
                 {x.label}
-                <span className={`num rounded px-1.5 py-0.5 text-xs ${on ? "bg-accent-500 text-white" : "bg-stone-100 text-teal-700"}`}>{n}</span>
+                {page ? (
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" className="text-accent-500 rtl:-scale-x-100" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+                ) : (
+                  <span className={`num rounded px-1.5 py-0.5 text-xs ${on ? "bg-accent-500 text-white" : "bg-stone-100 text-teal-700"}`}>{n}</span>
+                )}
                 {on && <span className="absolute inset-x-3 bottom-0 h-[3px] rounded-t bg-accent-500" />}
-              </button>
+              </>
+            );
+            return page ? (
+              <Link key={x.key} href={href(page)} className={cls}>{inner}</Link>
+            ) : (
+              <button key={x.key} role="tab" aria-selected={on} onClick={() => { setTab(x.key); setKind(""); }} className={cls}>{inner}</button>
             );
           })}
         </div>
@@ -138,22 +148,6 @@ export default function ProjectsExplorer({ limit }: { limit?: number }) {
           ))}
         </div>
       </div>
-
-      {(tab === "monthly" || tab === "zakat") && (
-        <Link href={href(tab === "monthly" ? "/monthly" : "/zakat")}
-          className="group mb-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl bg-accent-700 p-5 text-white transition hover:bg-accent-600 md:p-6">
-          <span className="flex items-center gap-4">
-            <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent-500">{tab === "monthly" ? <IconRepeat size={24} /> : <KindIcon kind="zakat" size={24} />}</span>
-            <span>
-              <b className="block font-kufi text-xl">{tab === "monthly" ? f.prog.m.title : f.prog.z.title}</b>
-              <span className="text-sm text-accent-100">{tab === "monthly" ? f.prog.m.text : f.prog.z.text}</span>
-            </span>
-          </span>
-          <span className="flex h-11 items-center gap-2 rounded-lg bg-white px-5 font-bold text-accent-700">
-            {tab === "monthly" ? f.prog.giveMonthly : f.prog.giveOnce} <IconArrow size={18} />
-          </span>
-        </Link>
-      )}
 
       <div className="mb-5 flex items-center justify-between gap-3">
         <p className="text-sm text-muted">

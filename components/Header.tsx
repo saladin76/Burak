@@ -131,7 +131,7 @@ export default function Header() {
             </Link>
             <Link
               href={href("/#donate")}
-              className="flex h-11 items-center gap-2 rounded-lg bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
+              className="btn-shine flex h-11 items-center gap-2 rounded-lg bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
             >
               {t.common.donateNow}
             </Link>

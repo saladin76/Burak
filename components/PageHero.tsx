@@ -25,7 +25,7 @@ export default function PageHero({
         <img src={image} alt="" className="absolute inset-y-0 end-0 h-full w-full object-cover opacity-90 lg:w-[58%]" />
       )}
       {image && <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/85 to-white rtl:bg-gradient-to-r" />}
-      <GivingRings className="pointer-events-none absolute -top-48 -start-48 w-[620px]" rings={7} opacity={0.3} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
+      <GivingRings live className="pointer-events-none absolute -top-48 -start-48 w-[620px]" rings={7} opacity={0.3} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
       <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-8 md:pb-24 md:pt-12">
         <nav aria-label="breadcrumb" className="mb-4 text-sm text-teal-700 md:mb-6">
           <ol className="flex flex-wrap items-center gap-2">

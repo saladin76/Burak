@@ -1,9 +1,12 @@
-import PageHero from "@/components/PageHero";
+import ImmersiveHero from "@/components/ImmersiveHero";
 import RegionGive from "@/components/RegionGive";
 import Faq from "@/components/Faq";
-import { IconRepeat } from "@/components/Icons";
+import Reveal from "@/components/Reveal";
+import { Marquee, MonthsOrbit } from "@/components/Fx";
+import { KindIcon } from "@/components/Icons";
+import { projects } from "@/lib/data";
 import { getF } from "@/lib/dict/features";
-import { getDict, isLang } from "@/lib/i18n";
+import { getDict, isLang, tx } from "@/lib/i18n";
 import { pageLang, type LangParams } from "@/lib/page";
 
 export const generateMetadata = async ({ params }: LangParams) => {
@@ -13,50 +16,78 @@ export const generateMetadata = async ({ params }: LangParams) => {
 
 export default async function MonthlyPage({ params }: LangParams) {
   const { lang } = await pageLang(params);
-  const M = getF(lang).prog.m;
+  const F = getF(lang);
+  const M = F.prog.m;
   const t = getDict(lang);
+  const monthly = projects.filter((p) => p.monthly);
   return (
     <>
-      <PageHero lang={lang} title={M.title} kicker={M.kicker} crumbs={[{ href: "/projects", label: t.projectsPage.title }]}>
-        {M.text}
-        <p className="mt-5 inline-flex flex-wrap items-baseline gap-2 rounded-lg border-s-4 border-accent-500 bg-white/80 px-4 py-3 font-naskh text-xl text-teal-900">
-          {M.hadith} <span className="font-sans text-xs text-muted">{M.hadithSrc}</span>
-        </p>
-      </PageHero>
+      <ImmersiveHero
+        lang={lang}
+        kicker={M.kicker}
+        title={M.title}
+        text={M.text}
+        quote={M.hadith}
+        quoteSrc={M.hadithSrc}
+        cta={{ href: "#give", label: M.start }}
+        chips={[...M.chips]}
+        crumbs={[{ href: "/projects", label: t.projectsPage.title }]}
+        visual={<MonthsOrbit label={M.orbitL} sub={M.orbitS} />}
+      />
 
-      <section className="mx-auto max-w-7xl px-5 pt-12">
+      <div className="relative z-10 -mt-px bg-accent-500 py-4 text-white">
+        <Marquee
+          className="font-kufi text-lg font-bold"
+          items={monthly.map((p) => (
+            <span key={p.slug} className="flex items-center gap-2"><KindIcon kind={p.kind} size={20} /> {tx(p.title, lang)}</span>
+          ))}
+        />
+      </div>
+
+      <section className="mx-auto max-w-7xl px-5 pt-14">
         <RegionGive mode="monthly" />
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 pt-20">
-        <h2 className="text-center font-kufi text-3xl font-extrabold text-teal-900">{M.whyT}</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+      <section className="mx-auto max-w-7xl px-5 pt-24">
+        <Reveal>
+          <p className="brand-tag mx-auto mb-4 !flex w-fit">{M.kicker}</p>
+          <h2 className="text-center font-kufi text-3xl font-extrabold text-teal-900 md:text-[42px]">{M.whyT}</h2>
+        </Reveal>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
           {M.why.map((w, i) => (
-            <div key={w.t} className="rounded-2xl border border-stone-200 bg-white p-6">
-              <span className="num grid h-11 w-11 place-items-center rounded-lg bg-accent-100 font-kufi text-lg font-extrabold text-accent-600">0{i + 1}</span>
-              <h3 className="mt-4 font-kufi text-xl font-bold text-teal-900">{w.t}</h3>
-              <p className="mt-2 leading-8 text-muted">{w.d}</p>
-            </div>
+            <Reveal key={w.t} delay={i * 120}>
+              <div className="lift group relative h-full overflow-hidden rounded-2xl border border-stone-200 bg-white p-7">
+                <span className="num pointer-events-none absolute end-5 -top-3 font-kufi text-[96px] font-extrabold leading-none text-accent-100 transition-colors group-hover:text-accent-300/40">{i + 1}</span>
+                <span className="relative grid h-12 w-12 place-items-center rounded-lg bg-accent-500 text-white">
+                  <KindIcon kind={(["support", "education", "zakat"] as const)[i]} size={26} />
+                </span>
+                <h3 className="relative mt-5 font-kufi text-xl font-bold text-teal-900">{w.t}</h3>
+                <p className="relative mt-2 leading-8 text-muted">{w.d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mt-20 bg-accent-700 py-16 text-white">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="flex items-center justify-center gap-3 text-center font-kufi text-3xl font-extrabold"><IconRepeat size={28} /> {M.howT}</h2>
-          <ol className="mt-10 grid gap-6 md:grid-cols-3">
+      <section className="grain relative mt-24 overflow-hidden bg-accent-700 py-20 text-white">
+        <div className="relative mx-auto max-w-7xl px-5">
+          <h2 className="text-center font-kufi text-3xl font-extrabold md:text-[42px]">{M.howT}</h2>
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-6">
+            <svg className="pointer-events-none absolute inset-x-[16%] top-7 hidden h-2 w-[68%] md:block" preserveAspectRatio="none" viewBox="0 0 100 2" aria-hidden="true">
+              <line x1="0" y1="1" x2="100" y2="1" stroke="#3aafc9" strokeWidth="2" strokeDasharray="3 3" vectorEffect="non-scaling-stroke" />
+            </svg>
             {M.how.map((s, i) => (
-              <li key={s.t} className="relative rounded-2xl border border-white/15 bg-white/5 p-6">
-                <span className="num absolute -top-4 start-6 grid h-9 w-9 place-items-center rounded-md bg-accent-500 font-bold">{i + 1}</span>
-                <h3 className="mt-2 font-kufi text-xl font-bold">{s.t}</h3>
-                <p className="mt-2 leading-8 text-accent-100/90">{s.d}</p>
-              </li>
+              <Reveal key={s.t} delay={i * 150} className="relative text-center">
+                <span className="num relative mx-auto grid h-14 w-14 place-items-center rounded-full bg-accent-500 font-kufi text-2xl font-extrabold ring-8 ring-accent-700">{i + 1}</span>
+                <h3 className="mt-5 font-kufi text-xl font-bold">{s.t}</h3>
+                <p className="mx-auto mt-2 max-w-xs leading-8 text-accent-100/90">{s.d}</p>
+              </Reveal>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      <Faq title={getF(lang).lamps.faqT} items={M.faq} />
+      <Faq title={F.lamps.faqT} items={M.faq} />
     </>
   );
 }
