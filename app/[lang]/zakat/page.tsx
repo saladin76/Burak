@@ -25,7 +25,6 @@ export default async function ZakatPage({ params }: LangParams) {
         quoteSrc={Z.ayahSrc}
         cta={{ href: "#give", label: F.prog.giveOnce }}
         cta2={{ href: "#calculator", label: Z.calcCta }}
-        chips={[...Z.chips]}
         visual={<ZakatGauge label={Z.gaugeL} sub={Z.gaugeS} />}
       />
 

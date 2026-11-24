@@ -41,7 +41,6 @@ export default function Lamps() {
 
   return (
     <section id="lamps" className="relative scroll-mt-28 overflow-hidden bg-night pb-20 text-white">
-      <div className="crenellation relative rotate-180 text-stone-50" />
       <div className="pattern-khatam absolute inset-0 opacity-[.06]" />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] transition-opacity duration-1000"

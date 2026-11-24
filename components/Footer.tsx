@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BurakLogo, GivingRings, OrnamentDivider, QudsSkyline } from "./Motifs";
+import { BurakLogo, GivingRings, QudsSkyline } from "./Motifs";
 import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube, IconPin } from "./Icons";
 import { contact, socials } from "@/lib/data";
 import { getDict, lhref, type Lang } from "@/lib/i18n";
@@ -100,8 +100,6 @@ export default function Footer({ lang }: { lang: Lang }) {
             </p>
           </div>
         </div>
-
-        <OrnamentDivider className="mx-auto my-10 h-5 w-64" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-teal-100/70 md:flex-row">
           <p>

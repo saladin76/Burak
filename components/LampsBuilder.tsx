@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Certificate from "./Certificate";
 import { IconArrow, IconBag, IconRepeat } from "./Icons";
-import { LAMP_GOAL, LAMP_PRICE, lampsLit } from "@/lib/data";
+import { LAMP_GOAL, LAMP_PRICE } from "@/lib/data";
 import { fmt } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
@@ -39,7 +39,6 @@ export default function LampsBuilder() {
   // مقياس متدرّج: الشبكة 50 فانوساً، وكل فانوس يمثّل 1 أو 10 أو 100 … حتى مليون قنديل
   const unit = n <= 50 ? 1 : Math.pow(10, Math.ceil(Math.log10(n / 50)));
   const shown = Math.min(50, Math.ceil(n / unit));
-  const share = (n / LAMP_GOAL) * 100;
 
   const commit = () => {
     cart.add({ slug: SLUG, amount: total, freq: monthly ? "monthly" : "once" });
@@ -122,7 +121,7 @@ export default function LampsBuilder() {
 
       <div className="grid content-start gap-6">
         {/* نافذة القناديل الحيّة */}
-        <div className="arch relative overflow-hidden bg-night px-6 pb-8 pt-14 text-center">
+        <div className="relative overflow-hidden rounded-2xl bg-night px-6 pb-8 pt-10 text-center">
           <div className="pattern-khatam absolute inset-0 opacity-10" />
           <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 transition-opacity duration-700" style={{ background: "radial-gradient(60% 70% at 50% 25%, rgba(235,205,122,.28), transparent 70%)", opacity: Math.min(1, 0.25 + shown / 25) }} />
           <div className="relative mx-auto grid max-w-md grid-cols-10 gap-x-1.5 gap-y-3">
@@ -137,28 +136,6 @@ export default function LampsBuilder() {
           </p>
         </div>
 
-        {/* هدف المليون قنديل */}
-        <div className="rounded-2xl border border-stone-200 bg-white p-5">
-          <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 className="font-kufi text-lg font-bold text-teal-900">{L.goalT}</h3>
-            <span className="num text-2xl font-extrabold text-accent-500">{fmt(LAMP_GOAL)}</span>
-          </div>
-          <div className="relative mt-4 h-3 rounded-full bg-stone-100">
-            <div className="absolute inset-y-0 start-0 rounded-full bg-accent-500 transition-all duration-700" style={{ width: `${Math.max(0.6, Math.min(100, ((lampsLit ?? 0) + n) / LAMP_GOAL * 100))}%` }} />
-            {[10, 25, 50, 100].map((m) => (
-              <span key={m} className="absolute top-1/2 h-5 w-0.5 -translate-y-1/2 bg-stone-300" style={{ insetInlineStart: `${m}%` }} />
-            ))}
-          </div>
-          <div className="relative mt-2 h-4 text-[11px] font-semibold text-muted">
-            {L.milestones.map((m, i) =>
-              i === 3 ? <span key={m} className="absolute end-0">{m}</span>
-                : <span key={m} className="absolute -translate-x-1/2 whitespace-nowrap rtl:translate-x-1/2" style={{ insetInlineStart: `${[10, 25, 50][i]}%` }}>{m}</span>)}
-          </div>
-          <p className="mt-3 text-sm leading-7 text-muted">
-            {lampsLit != null && <>{L.litSoFar.replace("{n}", fmt(lampsLit))} · </>}
-            {L.yourShare.replace("{n}", fmt(n)).replace("{p}", share < 0.01 ? "<0.01" : String(Number(share.toFixed(share < 1 ? 2 : 1))))}
-          </p>
-        </div>
         <Certificate
           lang={lang}
           variant="lamp"

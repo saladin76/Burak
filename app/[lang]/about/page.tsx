@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import VideoCard from "@/components/VideoCard";
-import { GivingWaves, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { GivingWaves, Khatam} from "@/components/Motifs";
 import { IconArrow } from "@/components/Icons";
 import { introVideo, stats } from "@/lib/data";
 import { fmt, tx } from "@/lib/i18n";
@@ -50,7 +50,6 @@ export default async function About({ params }: LangParams) {
 
       <section className="mx-auto max-w-7xl px-5 pt-20">
         <h2 className="font-kufi text-3xl font-bold text-teal-900 md:text-4xl">{A.goalsT}</h2>
-        <OrnamentDivider className="my-6 h-5 w-56" />
         <ol className="grid gap-4 md:grid-cols-2">
           {A.goals.map((g, i) => (
             <li key={i} className="flex gap-4 rounded-2xl border border-stone-200 bg-white p-6">

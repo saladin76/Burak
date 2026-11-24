@@ -37,7 +37,7 @@ export function Ripple({ className = "", color = "#3aafc9" }: { className?: stri
 }
 
 /** شريط متحرك لا نهائي */
-export function Marquee({ items, className = "" }: { items: ReactNode[]; className?: string }) {
+export function Marquee({ items, className = "", seconds }: { items: ReactNode[]; className?: string; seconds?: number }) {
   const row = (k: string) => (
     <div className="flex shrink-0 items-center gap-10 pe-10" aria-hidden={k === "b"} {...(k === "b" ? { inert: true } : {})}>
       {items.map((it, i) => (
@@ -50,7 +50,7 @@ export function Marquee({ items, className = "" }: { items: ReactNode[]; classNa
   );
   return (
     <div className={`marquee overflow-hidden ${className}`}>
-      <div className="marquee-track flex w-max">
+      <div className="marquee-track flex w-max" style={{ "--dur": `${seconds ?? Math.max(60, items.length * 9)}s` } as CSSProperties}>
         {row("a")}
         {row("b")}
       </div>

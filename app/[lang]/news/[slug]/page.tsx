@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import SmartImg from "@/components/SmartImg";
 import ProjectCard from "@/components/ProjectCard";
-import { OrnamentDivider } from "@/components/Motifs";
 import { getNews, getProject, news } from "@/lib/data";
 import { isLang, locales, tx } from "@/lib/i18n";
 import { pageLang } from "@/lib/page";
@@ -40,7 +39,7 @@ export default async function NewsDetail({ params }: P) {
           <div className="mt-8 space-y-5 text-lg leading-9 text-ink/85">
             {tx(n.body, lang).split("\n\n").map((para, i) => <p key={i}>{para}</p>)}
           </div>
-          <OrnamentDivider className="my-10 h-5 w-56" />
+        <hr className="my-8 border-stone-200" />
         </div>
         <aside className="space-y-8 lg:sticky lg:top-28 lg:self-start">
           {proj && (

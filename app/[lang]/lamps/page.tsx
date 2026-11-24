@@ -1,6 +1,6 @@
 import Link from "next/link";
 import LampsBuilder from "@/components/LampsBuilder";
-import { GivingRings, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { GivingRings, Khatam} from "@/components/Motifs";
 import { IconArrow, KindIcon } from "@/components/Icons";
 import { getF } from "@/lib/dict/features";
 import { isLang } from "@/lib/i18n";
@@ -42,7 +42,6 @@ export default async function LampsPage({ params }: LangParams) {
           <p className="rise-3 mx-auto mt-6 max-w-2xl text-lg leading-9 text-teal-100/90">{L.text}</p>
           <a href="#light" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_0_50px_-6px_rgba(0,125,165,.9)] hover:bg-accent-600">{L.cta} <IconArrow size={20} /></a>
         </div>
-        <div className="crenellation text-stone-50" />
       </section>
 
       <section id="light" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-16">
@@ -51,11 +50,10 @@ export default async function LampsPage({ params }: LangParams) {
 
       <section className="mx-auto max-w-7xl px-5 pt-20">
         <h2 className="text-center font-kufi text-3xl font-bold text-teal-900 md:text-4xl">{L.whereT}</h2>
-        <OrnamentDivider className="mx-auto my-6 h-5 w-56" />
         <div className="grid gap-5 md:grid-cols-3">
           {L.where.map((w, i) => (
-            <div key={w.t} className="arch border border-stone-200 bg-white px-6 pb-8 pt-12 text-center">
-              <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-accent-100 text-accent-700"><KindIcon kind={icons[i]} size={30} /></span>
+            <div key={w.t} className="rounded-2xl border border-stone-200 bg-white p-7 text-start">
+              <span className="grid h-12 w-12 place-items-center rounded-lg bg-accent-500 text-white"><KindIcon kind={icons[i]} size={26} /></span>
               <h3 className="mt-4 font-kufi text-xl font-bold text-teal-900">{w.t}</h3>
               <p className="mt-2 leading-8 text-muted">{w.d}</p>
             </div>

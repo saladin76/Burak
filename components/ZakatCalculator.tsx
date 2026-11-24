@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { fmt } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { IconArrow } from "./Icons";
-import { OrnamentDivider } from "./Motifs";
 
 /* حاسبة زكاة المال — نصاب الذهب 85 غراماً، والمقدار ربع العشر (2.5%) */
 const NISAB_GOLD_G = 85;
@@ -71,8 +70,7 @@ export default function ZakatCalculator() {
             ))}
           </div>
         </fieldset>
-
-        <OrnamentDivider className="my-8 h-5 w-48" />
+        <hr className="my-8 border-stone-200" />
 
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s2}</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">

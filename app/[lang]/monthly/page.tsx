@@ -30,7 +30,6 @@ export default async function MonthlyPage({ params }: LangParams) {
         quote={M.hadith}
         quoteSrc={M.hadithSrc}
         cta={{ href: "#give", label: M.start }}
-        chips={[...M.chips]}
         crumbs={[{ href: "/projects", label: t.projectsPage.title }]}
         visual={<MonthsOrbit label={M.orbitL} sub={M.orbitS} />}
       />

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
-import { DomeOfTheRock, GivingRings, GivingWaves, Khatam } from "@/components/Motifs";
-import { IconArrow, IconBank, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
+import { DomeOfTheRock, GivingRings, Khatam } from "@/components/Motifs";
+import { IconArrow, IconBank, IconCheck, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import StoriesBar from "@/components/StoriesBar";
 import JerusalemClock from "@/components/JerusalemClock";
@@ -14,7 +14,7 @@ import SmartImg from "@/components/SmartImg";
 import CountUp from "@/components/CountUp";
 import { Marquee } from "@/components/Fx";
 import { news, projectPath, projects, stats, videos } from "@/lib/data";
-import { fmt, getDict, isLang, lhref, tx, type Lang } from "@/lib/i18n";
+import { getDict, isLang, lhref, tx, type Lang } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
 
@@ -129,41 +129,32 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
       </section>
 
       {/* ========== الأثر ========== */}
-      <section className="relative mt-24 overflow-hidden bg-teal-900 text-white">
-        <div className="pattern-khatam absolute inset-0 opacity-[.12]" />
-        <GivingWaves className="pointer-events-none absolute -bottom-6 start-[-40px] h-[340px] w-auto" rings={8} opacity={0.18} palette={["#c5e5f1", "#8acbda", "#64b6d0", "#3aafc9"]} />
-        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1fr_2fr] lg:items-center">
-          <div>
-            <p className="mb-3 text-sm font-bold text-accent-300">{H.impactKicker}</p>
-            <h2 className="font-kufi text-3xl font-bold leading-tight md:text-4xl">{H.impactTitle}</h2>
-            <div className="mt-6 grid grid-cols-3 gap-4 border-t border-white/15 pt-6">
-              {stats.lifetime.map((s) => (
-                <div key={s.value}>
-                  <p className="num text-2xl font-bold text-accent-300 md:text-3xl" dir="ltr">{s.value}</p>
-                  <p className="mt-1 text-sm text-teal-100">{tx(s.label, lang)}</p>
-                </div>
-              ))}
+      <section className="mt-24 bg-teal-900 text-white">
+        <div className="mx-auto max-w-7xl px-5 py-16">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="mb-2 text-sm font-bold text-accent-300">{H.impactKicker}</p>
+              <h2 className="font-kufi text-3xl font-bold leading-tight md:text-4xl">{H.impactTitle}</h2>
             </div>
-            <Link href={h("/reports")} className="mt-6 inline-flex items-center gap-1.5 font-bold text-accent-300 hover:underline">
+            <Link href={h("/reports")} className="inline-flex items-center gap-1.5 font-bold text-accent-300 hover:text-white">
               {t.nav.reports} <IconArrow size={18} />
             </Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {stats.annual.map((s) => (
-              <div key={s.value} className="lift arch border border-accent-300/30 bg-white/[.04] px-6 pb-8 pt-12 text-center">
-                <p className="num text-5xl font-bold text-white md:text-6xl"><CountUp to={s.value} /></p>
-                <p className="mt-3 text-lg text-teal-100">{tx(s.label, lang)}</p>
+          <dl className="mt-10 grid grid-cols-2 border-t border-white/15 md:grid-cols-3">
+            {[...stats.annual.map((s) => ({ k: String(s.value), v: <CountUp to={s.value} />, l: tx(s.label, lang) })), ...stats.lifetime.map((s) => ({ k: s.value, v: <span dir="ltr">{s.value}</span>, l: tx(s.label, lang) }))].map((s) => (
+              <div key={s.k} className="border-b border-white/15 py-7 pe-4 md:[&:not(:nth-child(3n+1))]:border-s md:[&:not(:nth-child(3n+1))]:ps-8">
+                <dt className="sr-only">{s.l}</dt>
+                <dd className="num text-4xl font-bold md:text-5xl">{s.v}</dd>
+                <dd className="mt-2 text-[15px] text-teal-100">{s.l}</dd>
               </div>
             ))}
+          </dl>
+          <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-2 text-[15px] font-semibold text-teal-100">
+            <span className="flex items-center gap-2"><IconShield size={20} /> {H.trust1}</span>
+            <span className="flex items-center gap-2"><IconBank size={20} /> {H.trust2}</span>
+            <span className="flex items-center gap-2"><IconCheck size={20} /> {H.trust3}</span>
           </div>
         </div>
-        <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-2 border-t border-white/10 px-5 py-5 text-[15px] font-semibold text-teal-100">
-          <span className="flex items-center gap-2"><IconShield size={20} /> {H.trust1}</span>
-          <span className="flex items-center gap-2"><IconBank size={20} /> {H.trust2}</span>
-          <span className="flex items-center gap-2"><Khatam className="h-5 w-5" color="#8acbda" /> {H.trust3}</span>
-          <Link href={h("/reports")} className="flex items-center gap-1.5 text-accent-300 hover:underline">{H.howCta} <IconArrow size={16} /></Link>
-        </div>
-        <div className="crenellation text-stone-50" />
       </section>
 
       {/* ========== قناديل الأقصى ========== */}

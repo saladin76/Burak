@@ -298,7 +298,7 @@ html, body { overflow-x: clip; }
   .ripple > span:nth-child(3) { animation-delay: 3.2s; }
   .floaty { animation: floaty 6s ease-in-out infinite; }
   .particle { animation: drift var(--t, 14s) linear infinite; animation-delay: var(--delay, 0s); }
-  .marquee-track { animation: marquee 38s linear infinite; }
+  .marquee-track { animation: marquee var(--dur, 90s) linear infinite; }
   [dir="rtl"] .marquee-track { animation-name: marquee-rtl; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
   .draw { animation: draw 2.2s cubic-bezier(.2,.7,.2,1) .3s both; }
@@ -329,3 +329,7 @@ html, body { overflow-x: clip; }
   content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: no-preference) { .slide-progress { animation: grow 6s linear both; } }
+@media (prefers-reduced-motion: reduce) { .slide-progress { display: none; } }

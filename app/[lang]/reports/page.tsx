@@ -25,7 +25,7 @@ export default async function Reports({ params }: LangParams) {
       <section className="mx-auto max-w-7xl px-5 pt-14">
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {[...stats.lifetime.map((s) => ({ v: s.value, l: tx(s.label, lang) })), ...stats.annual.map((s) => ({ v: fmt(s.value), l: tx(s.label, lang) }))].map((s, i) => (
-            <div key={i} className={`arch border px-4 pb-6 pt-10 text-center ${i < 3 ? "border-teal-900 bg-teal-900 text-white" : "border-stone-200 bg-white"}`}>
+            <div key={i} className={`rounded-2xl border p-5 text-start ${i < 3 ? "border-teal-900 bg-teal-900 text-white" : "border-stone-200 bg-white"}`}>
               <p className={`num text-3xl font-bold ${i < 3 ? "text-accent-300" : "text-teal-900"}`} dir="ltr">{s.v}</p>
               <p className={`mt-2 text-sm ${i < 3 ? "text-teal-100" : "text-muted"}`}>{s.l}</p>
             </div>

@@ -6,7 +6,6 @@ import PageHero from "@/components/PageHero";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectCard, { ProjectCover, Progress } from "@/components/ProjectCard";
 import { IconBank, IconGift, IconRepeat, IconShield } from "@/components/Icons";
-import { OrnamentDivider } from "@/components/Motifs";
 import { getProject, kindLabel, projects, regionLabel } from "@/lib/data";
 import { isLang, locales, tx } from "@/lib/i18n";
 import { pageLang } from "@/lib/page";
@@ -47,7 +46,7 @@ export default async function ProjectPage({ params }: P) {
             <Progress p={p} lang={lang} />
             <h2 className="font-kufi text-2xl font-bold text-teal-900">{P.about}</h2>
             <p className="mt-4 text-lg leading-9 text-ink/85">{tx(p.summary, lang)}</p>
-            <OrnamentDivider className="my-8 h-5 w-56" />
+        <hr className="my-8 border-stone-200" />
             <div className="grid gap-4 sm:grid-cols-3">
               {[
                 { icon: <IconShield size={24} />, t: P.f1t, d: P.f1d },

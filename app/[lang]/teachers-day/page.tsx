@@ -1,5 +1,5 @@
 import TeacherGift from "@/components/TeacherGift";
-import { GivingRings, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { GivingRings, Khatam} from "@/components/Motifs";
 import { KindIcon } from "@/components/Icons";
 import { getF } from "@/lib/dict/features";
 import { isLang } from "@/lib/i18n";
@@ -46,7 +46,6 @@ export default async function TeachersDay({ params }: LangParams) {
             </li>
           ))}
         </ol>
-        <OrnamentDivider className="mx-auto my-12 h-5 w-64" />
       </section>
 
       <section id="gift" className="mx-auto max-w-7xl scroll-mt-28 px-5">

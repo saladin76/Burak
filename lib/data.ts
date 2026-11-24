@@ -749,3 +749,29 @@ export const socials = (h: string) => [
   { key: "tiktok", href: `https://www.tiktok.com/@${h}` },
   { key: "youtube", href: `https://www.youtube.com/@${h}` },
 ] as const;
+
+/** صور ميدانية حقيقية (بلا تصاميم) من أخبار وأنشطة الموقع الرسمي */
+export const fieldPhotos: string[] = [
+  U + "C8uaaoziX7wiQGq9ChEy_1742931017720.jpg",
+  U + "BMAu5LVi54IB4WAjUKr5_1742931041238.jpg",
+  U + "JG66yboItt2Elv4La1CN_1742931063921.jpg",
+  U + "8nNA3m0U9K5KPLakRRDm_1742931104943.jpg",
+  U + "ZkTqRd0lj32uXlvlCYdi_1742931186211.jpg",
+  U + "zZlcq4M76RMow9tksVp5_1742305734293.jpg",
+  U + "KjJS7PKAXvgvrpXy0M3D_1742215011837.jpg",
+  U + "JsZgHl6BgZhSDxeRbJZH_1742215035929.jpg",
+  U + "EzNj79jo3N8QFmOkgVnH_1742123716155.jpg",
+  U + "OYzo84BdFBibbFC5oy1D_1742123798010.jpg",
+  U + "TmFgOmilzwRKm8lMHO1S_1741905050982.jpg",
+  U + "kruymeBEpwQmHIIAvMzA_1741904907155.jpg",
+  U + "HlIZ8se7GCHfoswiGG9S_1741904999980.jpg",
+  U + "dHjl7He3CQCqMFUy2xOq_1741903769970.jpg",
+  U + "prLk8uW2VYjyX3pq79Xu_1741902822950.jpg",
+  U + "jKL2elxlHu53o0O56umw_1741546392849.jpg",
+  U + "tW7mJ2RzEkAALS3PKTZw_1741546426730.jpg",
+  U + "gWFGZCRsDjwtMWlxwmXm_1741546453258.jpg",
+  U + "JncLkuibukO5qCLtLzQX_1741546478287.jpg",
+  U + "jvzTH9SikTKONlbr0mRj_1741180866915.jpg",
+  U + "DXcN1lYzm0D3Lp2coojV_1741181112337.jpg",
+  U + "HRkUlJJhE19cb3C5LATS_1741181158487.jpg",
+];

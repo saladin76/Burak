@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AqsaMap from "@/components/AqsaMap";
-import { DomeOfTheRock, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { DomeOfTheRock, Khatam} from "@/components/Motifs";
 import { IconArrow, IconBook, IconPlay, KindIcon } from "@/components/Icons";
 import { landmarks, orgContent, qudsLibrary } from "@/lib/data";
 import { tx } from "@/lib/i18n";
@@ -19,12 +19,11 @@ export default async function Quds({ params }: LangParams) {
       <section id="history" className="mx-auto grid max-w-7xl scroll-mt-28 items-center gap-12 px-5 pt-14 lg:grid-cols-2">
         <div>
           <h2 className="font-kufi text-3xl font-bold text-teal-900 md:text-4xl">{Q.history}</h2>
-          <OrnamentDivider className="my-5 h-5 w-56" />
           <p className="font-naskh text-2xl leading-[2] text-teal-900" lang="ar" dir="rtl">{t.verse}</p>
           {t.verseTr && <p className="mt-3 italic leading-8 text-muted">{t.verseTr}</p>}
           {orgContent.history?.[lang] ? <p className="mt-5 text-lg leading-9 text-ink/85">{orgContent.history[lang]}</p> : <p className="mt-5 text-lg leading-9 text-ink/85">{t.about.p1}</p>}
         </div>
-        <div className="arch overflow-hidden bg-night p-6 pt-10">
+        <div className="overflow-hidden rounded-2xl bg-night p-6">
           <DomeOfTheRock className="w-full" label={t.hero.domeAlt} />
         </div>
       </section>
