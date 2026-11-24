@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { projects, fmt, type Project } from "@/lib/data";
 import { IconGift, IconRepeat, IconShield } from "./Icons";
 
@@ -13,6 +13,17 @@ export default function QuickDonate({ initial, lockProject = false, compact = fa
   const [freq, setFreq] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<number>(project.amounts[1] ?? project.amounts[0]);
   const [custom, setCustom] = useState("");
+
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    const a = Number(sp.get("amount"));
+    if (a > 0) {
+      if (project.amounts.includes(a)) setAmount(a);
+      else setCustom(String(a));
+    }
+    if (sp.get("freq") === "monthly" && project.monthly) setFreq("monthly");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const value = custom ? Number(custom) || 0 : amount;
   const popular = project.amounts[1] ?? project.amounts[0];

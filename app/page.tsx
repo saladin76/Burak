@@ -5,6 +5,12 @@ import ProjectsExplorer from "@/components/ProjectsExplorer";
 import { DomeOfTheRock, Khatam, OrnamentDivider } from "@/components/Motifs";
 import { IconArrow, IconBook, IconHeart, IconPlay, IconRepeat, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
+import StoriesBar from "@/components/StoriesBar";
+import JerusalemClock from "@/components/JerusalemClock";
+import AqsaMap from "@/components/AqsaMap";
+import Lamps from "@/components/Lamps";
+import Reveal from "@/components/Reveal";
+import { IconShield, IconBank } from "@/components/Icons";
 import { fmt, news, pillars, projects, qudsLibrary, stats } from "@/lib/data";
 
 const stars = [
@@ -31,6 +37,7 @@ export default function Home() {
 
   return (
     <>
+      <StoriesBar />
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden bg-night text-white">
         <div className="pattern-khatam absolute inset-0 opacity-[.09]" />
@@ -62,6 +69,9 @@ export default function Home() {
               <Link href="/projects?region=quds" className="flex h-14 items-center gap-2 rounded-full border border-white/25 px-7 text-lg font-semibold hover:border-gold-300 hover:text-gold-300">
                 مشاريع القدس
               </Link>
+            </div>
+            <div className="rise-3 mt-8">
+              <JerusalemClock />
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[640px] self-end">
@@ -99,9 +109,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ========== شريط الآية ========== */}
+      <section className="mx-auto mt-16 max-w-7xl px-5">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[28px] border border-gold-300/60 bg-gold-100/60 px-6 py-7 text-center">
+            <div className="pattern-khatam-teal absolute inset-0 opacity-50" />
+            <div className="relative flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <OrnamentDivider className="hidden h-5 w-32 2xl:block" />
+              <p className="font-naskh text-2xl leading-[1.9] text-teal-900 md:text-[30px]">
+                ﴿سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى الَّذِي بَارَكْنَا حَوْلَهُ﴾
+              </p>
+              <OrnamentDivider className="hidden h-5 w-32 2xl:block" />
+            </div>
+            <p className="relative mt-1 text-sm font-semibold text-gold-700">سورة الإسراء · الآية 1</p>
+          </div>
+        </Reveal>
+      </section>
+
       {/* ========== المحاور ========== */}
-      <section className="mx-auto max-w-7xl px-5 pt-24">
-        <SectionHead kicker="محاور عملنا" title="أربعة طرق تصل بها إلى القدس" />
+      <section className="mx-auto max-w-7xl px-5 pt-20">
+        <Reveal><SectionHead kicker="محاور عملنا" title="أربعة طرق تصل بها إلى القدس" /></Reveal>
         <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
           {pillars.map((p, i) => (
             <Link
@@ -172,6 +199,43 @@ export default function Home() {
         </Suspense>
       </section>
 
+      {/* ========== كيف يصل تبرعك ========== */}
+      <section className="mx-auto max-w-7xl px-5 pt-24">
+        <Reveal>
+          <SectionHead kicker="الشفافية" title="كيف يصل تبرعك إلى القدس؟" action={
+            <Link href="/about" className="flex h-12 items-center gap-2 rounded-full border border-teal-900/20 px-6 font-bold text-teal-900 hover:bg-teal-50">
+              تقاريرنا وإنجازاتنا <IconArrow size={18} />
+            </Link>
+          } />
+        </Reveal>
+        <ol className="relative grid gap-6 md:grid-cols-5">
+          <span aria-hidden="true" className="absolute inset-x-[10%] top-9 hidden border-t-2 border-dashed border-gold-400/60 md:block" />
+          {[
+            { t: "تختار وجهة عطائك", d: "مشروعاً محدداً في القدس أو غزة، أو زكاتك أو صدقتك." },
+            { t: "تحدّد المبلغ", d: "مرة واحدة أو شهرياً، ويمكنك إهداؤه لمن تحب." },
+            { t: "دفع آمن", d: "عبر بوابات دفع معتمدة أو تحويل بنكي مباشر." },
+            { t: "التنفيذ الميداني", d: "فرقنا وشركاؤنا في القدس وغزة يوصلون المساعدة لمستحقيها." },
+            { t: "التوثيق والتقرير", d: "نشارك صور ومقاطع التنفيذ وأثر المشروع." },
+          ].map((s, i) => (
+            <li key={s.t}>
+              <Reveal delay={i * 90} className="relative text-center">
+                <span className="relative mx-auto grid h-[72px] w-[72px] place-items-center">
+                  <Khatam className="absolute inset-0 h-full w-full text-gold-500" color="#c99a2e" />
+                  <span className="num relative grid h-10 w-10 place-items-center rounded-full bg-teal-900 text-lg font-bold text-gold-300">{i + 1}</span>
+                </span>
+                <h3 className="mt-4 font-kufi text-xl font-bold text-teal-900">{s.t}</h3>
+                <p className="mt-2 leading-7 text-muted">{s.d}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+        <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 rounded-2xl border border-stone-200 bg-white px-6 py-4 text-[15px] font-semibold text-teal-900">
+          <span className="flex items-center gap-2"><IconShield size={20} className="text-olive" /> مدفوعات مشفّرة وآمنة</span>
+          <span className="flex items-center gap-2"><IconBank size={20} className="text-teal-700" /> حسابات بنكية رسمية</span>
+          <span className="flex items-center gap-2"><Khatam className="h-5 w-5" color="#c99a2e" /> جمعية مسجّلة رسمياً في تركيا</span>
+        </Reveal>
+      </section>
+
       {/* ========== قصة الاسم ========== */}
       <section className="mx-auto mt-24 max-w-7xl px-5">
         <div className="pattern-stone grid overflow-hidden rounded-[32px] border border-stone-200 lg:grid-cols-2">
@@ -203,33 +267,51 @@ export default function Home() {
           <div className="relative flex min-h-[420px] items-center justify-center bg-teal-900 p-10">
             <div className="pattern-khatam absolute inset-0 opacity-20" />
             <div className="arch relative w-full max-w-sm border-2 border-gold-400/70 p-3">
-              <div className="arch grid aspect-[3/4] place-items-center bg-night p-8 text-center">
-                <div>
-                  <p className="font-kufi text-6xl font-bold text-gold-400 md:text-7xl">الإسراء</p>
-                  <OrnamentDivider className="mx-auto my-6 h-5 w-48" />
-                  <p className="font-naskh text-2xl leading-[1.9] text-teal-100">
-                    ﴿سُبْحَانَ الَّذِي أَسْرَىٰ بِعَبْدِهِ لَيْلًا مِّنَ الْمَسْجِدِ الْحَرَامِ إِلَى الْمَسْجِدِ الْأَقْصَى الَّذِي بَارَكْنَا حَوْلَهُ﴾
-                  </p>
-                  <p className="mt-3 text-sm text-gold-300">الإسراء: 1</p>
-                </div>
+              <div className="arch relative aspect-[3/4] overflow-hidden bg-night px-6 pb-6 pt-12 text-center">
+                <p className="font-kufi text-5xl font-bold text-gold-400 md:text-6xl">الإسراء</p>
+                <p className="mt-2 text-sm text-teal-100/80">رحلةٌ في ليلة… وطريقٌ لا ينقطع</p>
+                <svg viewBox="0 0 260 260" className="mx-auto mt-4 w-full max-w-[260px]" role="img" aria-label="مسار رحلة الإسراء من المسجد الحرام إلى المسجد الأقصى">
+                  <path id="isra" d="M60 225 C 20 150, 230 120, 195 40" fill="none" stroke="#ebcd7a" strokeWidth="2" strokeDasharray="5 7" opacity=".8" />
+                  {/* المسجد الحرام */}
+                  <g transform="translate(60 225)">
+                    <circle r="20" fill="#07313b" stroke="#ebcd7a" />
+                    <rect x="-8" y="-8" width="16" height="16" fill="#10222a" stroke="#ebcd7a" strokeWidth="1.2" />
+                    <path d="M-8 -3h16" stroke="#ebcd7a" strokeWidth="1.5" />
+                  </g>
+                  {/* المسجد الأقصى */}
+                  <g transform="translate(195 40)">
+                    <circle r="22" fill="#07313b" stroke="#ebcd7a" />
+                    <path d="M-11 6c0-8 5-13 11-14 6 1 11 6 11 14Z" fill="#c99a2e" />
+                    <rect x="-13" y="6" width="26" height="7" fill="#1597a8" />
+                  </g>
+                  <circle r="5" fill="#fff6d8">
+                    <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+                      <mpath href="#isra" />
+                    </animateMotion>
+                  </circle>
+                  <text x="60" y="258" textAnchor="middle" fill="#daf1f4" fontSize="12">المسجد الحرام</text>
+                  <text x="195" y="78" textAnchor="middle" fill="#daf1f4" fontSize="12">المسجد الأقصى</text>
+                </svg>
+                <p className="mt-2 text-sm leading-7 text-gold-300">ونحن البراق الذي يحمل عطاءك إلى هناك</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== الحديث ========== */}
-      <section className="mx-auto max-w-5xl px-5 pt-24 text-center">
-        <OrnamentDivider className="mx-auto mb-8 h-5 w-72" />
-        <p className="mb-6 text-sm font-bold text-gold-600">عن ميمونة مولاة النبي ﷺ قالت: يا رسول الله، أفتنا في بيت المقدس</p>
-        <blockquote className="font-naskh text-[26px] leading-[2] text-teal-900 md:text-[34px]">
-          «أرضُ المحشرِ والمنشرِ، ائتوه فصلّوا فيه، فإنّ صلاةً فيه كألفِ صلاةٍ في غيره»، قلت: أرأيت إن لم أستطع أن أتحمّل إليه؟ قال:
-          <span className="mt-2 block text-gold-600">«فتُهدي له زيتاً يُسرَج فيه، فمن فعل فهو كمن أتاه»</span>
-        </blockquote>
-        <p className="mt-6 text-muted">رواه أحمد وأبو داود وابن ماجه</p>
-        <Link href="/projects?region=quds" className="mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night hover:bg-gold-400">
-          أهدِ الأقصى سراجه <IconHeart size={20} />
-        </Link>
+      {/* ========== قناديل الأقصى ========== */}
+      <div className="mt-24">
+        <Lamps />
+      </div>
+
+      {/* ========== خريطة الأقصى ========== */}
+      <section id="aqsa-map" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-24">
+        <Reveal>
+          <SectionHead kicker="جولة تفاعلية" title="تجوّل في رحاب المسجد الأقصى">
+            اضغط على المعالم لتتعرف عليها، وعلى المشاريع التي تخدمها.
+          </SectionHead>
+        </Reveal>
+        <Reveal><AqsaMap /></Reveal>
       </section>
 
       {/* ========== مكتبة القدس ========== */}

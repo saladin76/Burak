@@ -12,6 +12,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { IconWhatsapp } from "@/components/Icons";
+import GivingAssistant from "@/components/GivingAssistant";
+import MobileDonateBar from "@/components/MobileDonateBar";
 import { contact } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -37,10 +39,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a
           href={contact.whatsapp}
           aria-label="تواصل عبر واتساب"
-          className="fixed bottom-5 start-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-[#1f9d55] text-white shadow-lg hover:scale-105"
+          className="fixed bottom-24 start-4 z-30 lg:bottom-5 lg:start-5 grid h-14 w-14 place-items-center rounded-full bg-[#1f9d55] text-white shadow-lg hover:scale-105"
         >
           <IconWhatsapp size={28} />
         </a>
+        <GivingAssistant />
+        <MobileDonateBar />
       </body>
     </html>
   );

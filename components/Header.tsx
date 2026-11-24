@@ -44,6 +44,10 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center gap-4">
+            <Link href="/zakat" className="hidden font-semibold text-gold-300 hover:text-gold-400 md:inline">
+              حاسبة الزكاة
+            </Link>
+            <span className="hidden h-3 w-px bg-teal-700 md:inline" />
             <Link href="/contact#bank" className="hidden hover:text-gold-300 md:inline">
               حساباتنا البنكية
             </Link>
