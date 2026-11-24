@@ -48,9 +48,9 @@ export const IconClose = ({ size, ...p }: P) => (
     <path d="M6 6l12 12M18 6 6 18" />
   </svg>
 );
-export const IconArrow = ({ size, ...p }: P) => (
-  // يشير لليسار (اتجاه التقدّم في RTL)
-  <svg {...base(size)} {...p}>
+export const IconArrow = ({ size, className = "", ...p }: P) => (
+  // يشير لليسار (اتجاه التقدّم في RTL) ويُقلب تلقائياً في LTR
+  <svg {...base(size)} {...p} className={`ltr:-scale-x-100 ${className}`}>
     <path d="M19 12H5M11 6l-6 6 6 6" />
   </svg>
 );

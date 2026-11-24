@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { fmt } from "@/lib/data";
+import { fmt } from "@/lib/i18n";
+import { useI18n } from "@/lib/lang-context";
 import { IconArrow } from "./Icons";
 import { OrnamentDivider } from "./Motifs";
 
@@ -11,17 +12,19 @@ const NISAB_GOLD_G = 85;
 const NISAB_SILVER_G = 595;
 
 const fields = [
-  { k: "cash", l: "النقد في اليد والحسابات البنكية", unit: "$" },
-  { k: "goldG", l: "الذهب المدّخر (بالغرام)", unit: "غ" },
-  { k: "silverG", l: "الفضة المدّخرة (بالغرام)", unit: "غ" },
-  { k: "trade", l: "عروض التجارة والأسهم المعدّة للبيع", unit: "$" },
-  { k: "receivable", l: "الديون المرجوّ تحصيلها لك", unit: "$" },
-  { k: "debts", l: "الديون الحالّة عليك (تُطرح)", unit: "$" },
+  { k: "cash", unit: "$" },
+  { k: "goldG", unit: "g" },
+  { k: "silverG", unit: "g" },
+  { k: "trade", unit: "$" },
+  { k: "receivable", unit: "$" },
+  { k: "debts", unit: "$" },
 ] as const;
 
 type K = (typeof fields)[number]["k"] | "goldPrice" | "silverPrice";
 
 export default function ZakatCalculator() {
+  const { t, href } = useI18n();
+  const Z = t.zakat;
   const [v, setV] = useState<Record<K, string>>({
     cash: "", goldG: "", silverG: "", trade: "", receivable: "", debts: "", goldPrice: "", silverPrice: "",
   });
@@ -53,18 +56,18 @@ export default function ZakatCalculator() {
   return (
     <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
       <div className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
-        <h2 className="font-kufi text-2xl font-bold text-teal-900">١. أسعار اليوم</h2>
-        <p className="mt-1 text-sm text-muted">أدخل سعر غرام الذهب (عيار 24) والفضة بالدولار وفق سوقك اليوم.</p>
+        <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s1}</h2>
+        <p className="mt-1 text-sm text-muted">{Z.s1d}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {Input({ k: "goldPrice", label: "سعر غرام الذهب", unit: "$" })}
-          {Input({ k: "silverPrice", label: "سعر غرام الفضة", unit: "$" })}
+          {Input({ k: "goldPrice", label: Z.goldPrice, unit: "$" })}
+          {Input({ k: "silverPrice", label: Z.silverPrice, unit: "$" })}
         </div>
         <fieldset className="mt-4">
-          <legend className="mb-2 text-sm font-semibold text-muted">احتساب النصاب على أساس</legend>
+          <legend className="mb-2 text-sm font-semibold text-muted">{Z.basis}</legend>
           <div className="inline-grid grid-cols-2 gap-1 rounded-2xl bg-stone-100 p-1">
             {(["gold", "silver"] as const).map((b) => (
               <button key={b} type="button" aria-pressed={basis === b} onClick={() => setBasis(b)} className={`h-10 rounded-xl px-5 text-sm font-semibold ${basis === b ? "bg-teal-900 text-white" : "text-teal-900"}`}>
-                {b === "gold" ? "الذهب (85 غ)" : "الفضة (595 غ)"}
+                {b === "gold" ? Z.gold : Z.silver}
               </button>
             ))}
           </div>
@@ -72,10 +75,10 @@ export default function ZakatCalculator() {
 
         <OrnamentDivider className="my-8 h-5 w-48" />
 
-        <h2 className="font-kufi text-2xl font-bold text-teal-900">٢. أموالك التي حال عليها الحول</h2>
+        <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s2}</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {fields.map((f) => (
-            <div key={f.k}>{Input({ k: f.k, label: f.l, unit: f.unit })}</div>
+            <div key={f.k}>{Input({ k: f.k, label: Z[f.k], unit: f.unit === "g" ? Z.g : "$" })}</div>
           ))}
         </div>
       </div>
@@ -84,34 +87,34 @@ export default function ZakatCalculator() {
         <div className="relative overflow-hidden rounded-[28px] bg-teal-900 p-6 text-white md:p-8">
           <div className="pattern-khatam absolute inset-0 opacity-15" />
           <div className="relative">
-            <p className="text-sm font-bold text-gold-300">زكاتك الواجبة</p>
+            <p className="text-sm font-bold text-gold-300">{Z.due}</p>
             <p className="num mt-2 text-6xl font-bold" aria-live="polite">${fmt(Math.round(r.due))}</p>
             <dl className="mt-6 grid gap-3 border-t border-white/15 pt-5 text-sm">
-              <div className="flex justify-between"><dt className="text-teal-100">مجموع الأموال</dt><dd className="num font-bold">${fmt(Math.round(r.assets))}</dd></div>
-              <div className="flex justify-between"><dt className="text-teal-100">صافي المال بعد الديون</dt><dd className="num font-bold">${fmt(Math.round(r.net))}</dd></div>
-              <div className="flex justify-between"><dt className="text-teal-100">النصاب</dt><dd className="num font-bold">{r.nisab ? `$${fmt(Math.round(r.nisab))}` : "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.assets}</dt><dd className="num font-bold">${fmt(Math.round(r.assets))}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.net}</dt><dd className="num font-bold">${fmt(Math.round(r.net))}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.nisab}</dt><dd className="num font-bold">{r.nisab ? `$${fmt(Math.round(r.nisab))}` : "—"}</dd></div>
             </dl>
             <p className="mt-5 rounded-xl bg-white/10 p-3 text-sm leading-7 text-teal-50">
               {priceMissing
-                ? "أدخل سعر الغرام لمعرفة النصاب."
+                ? Z.needPrice
                 : r.net >= r.nisab
-                  ? "بلغ مالك النصاب؛ الزكاة ربع العشر (2.5%) من صافي المال."
-                  : "لم يبلغ مالك النصاب، فلا زكاة عليك في هذا المال."}
+                  ? Z.reached
+                  : Z.notReached}
             </p>
             <Link
-              href={`/projects/alrka-alqds?amount=${Math.round(r.due)}`}
+              href={href(`/projects/alrka-alqds?amount=${Math.round(r.due)}`)}
               aria-disabled={!r.due}
               className={`mt-5 flex h-14 items-center justify-center gap-2 rounded-2xl text-lg font-bold ${r.due ? "bg-gold-500 text-night hover:bg-gold-400" : "pointer-events-none bg-white/10 text-white/50"}`}
             >
-              أخرج زكاتك للقدس <IconArrow size={20} />
+              {Z.payQuds} <IconArrow size={20} />
             </Link>
-            <Link href="/projects/zakat-gaza" className="mt-3 block text-center text-sm font-semibold text-gold-300 hover:underline">
-              أو أخرجها لأهل غزة
+            <Link href={href("/projects/zakat-gaza")} className="mt-3 block text-center text-sm font-semibold text-gold-300 hover:underline">
+              {Z.payGaza}
             </Link>
           </div>
         </div>
         <p className="mt-4 text-sm leading-7 text-muted">
-          الحاسبة للاستئناس. للحالات الخاصة (الذهب المستعمل للزينة، الأموال المشتركة، الديون المؤجلة) يُرجع إلى أهل العلم.
+          {Z.note}
         </p>
       </aside>
     </div>

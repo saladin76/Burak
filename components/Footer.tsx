@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BurakLogo, GivingWaves, OrnamentDivider, QudsSkyline } from "./Motifs";
 import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube } from "./Icons";
 import { contact, socials } from "@/lib/data";
+import { getDict, lhref, type Lang } from "@/lib/i18n";
 
 const sIcon: Record<string, React.ReactNode> = {
   facebook: <IconFacebook size={19} />,
@@ -11,7 +12,12 @@ const sIcon: Record<string, React.ReactNode> = {
   youtube: <IconYoutube size={19} />,
 };
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const t = getDict(lang);
+  const h = (p: string) => lhref(lang, p);
+  const handle = contact.handles[lang];
+  const linkCls = "hover:text-gold-300";
+
   return (
     <footer className="relative mt-24 bg-night text-teal-100">
       <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#011f2c" />
@@ -19,49 +25,50 @@ export default function Footer() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <GivingWaves className="absolute -bottom-10 end-[-60px] h-[420px] w-auto" opacity={0.1} rings={8} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
       </div>
-      <div className="relative mx-auto max-w-7xl px-5 pb-8 pt-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+      <div className="relative mx-auto max-w-7xl px-5 pb-28 pt-16 lg:pb-8">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           <div>
             <BurakLogo light className="h-24" />
-            <p className="mt-5 max-w-sm leading-8 text-teal-100/85">
-              مؤسسة إنسانية تأسست عام 2011 للتعريف بالمسجد الأقصى المبارك والقدس الشريف، وإعمارها، ودعم صمود المقدسيين.
-            </p>
-            <p className="mt-4 font-kufi text-xl text-gold-300">« البراق طريقك إلى القدس »</p>
+            <p className="mt-5 max-w-sm leading-8 text-teal-100/85">{t.footer.about}</p>
+            <p className="mt-4 font-kufi text-xl text-gold-300">{t.common.slogan}</p>
           </div>
 
-          <nav aria-label="روابط المؤسسة">
-            <h2 className="mb-4 font-kufi text-lg font-bold text-white">المؤسسة</h2>
+          <nav aria-label={t.footer.org}>
+            <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.org}</h2>
             <ul className="space-y-2.5">
-              <li><Link className="hover:text-gold-300" href="/about">من نحن</Link></li>
-              <li><Link className="hover:text-gold-300" href="/about#vision">رؤيتنا ورسالتنا</Link></li>
-              <li><Link className="hover:text-gold-300" href="/#news">الأنشطة والفعاليات</Link></li>
-              <li><Link className="hover:text-gold-300" href="/contact#volunteer">تطوّع معنا</Link></li>
-              <li><Link className="hover:text-gold-300" href="/contact#faq">الأسئلة المتكررة</Link></li>
+              <li><Link className={linkCls} href={h("/about")}>{t.nav.about}</Link></li>
+              <li><Link className={linkCls} href={h("/about#vision")}>{t.footer.vision}</Link></li>
+              <li><Link className={linkCls} href={h("/reports")}>{t.nav.reports}</Link></li>
+              <li><Link className={linkCls} href={h("/news")}>{t.nav.news}</Link></li>
+              <li><Link className={linkCls} href={h("/media")}>{t.nav.media}</Link></li>
+              <li><Link className={linkCls} href={h("/volunteer")}>{t.nav.volunteer}</Link></li>
+              <li><Link className={linkCls} href={h("/contact#faq")}>{t.footer.faq}</Link></li>
             </ul>
           </nav>
 
-          <nav aria-label="روابط التبرع">
-            <h2 className="mb-4 font-kufi text-lg font-bold text-white">تبرّع</h2>
+          <nav aria-label={t.footer.give}>
+            <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.give}</h2>
             <ul className="space-y-2.5">
-              <li><Link className="hover:text-gold-300" href="/projects?region=quds">مشاريع القدس</Link></li>
-              <li><Link className="hover:text-gold-300" href="/projects?region=gaza">إغاثة غزة</Link></li>
-              <li><Link className="hover:text-gold-300" href="/projects?kind=zakat">زكاة المال</Link></li>
-              <li><Link className="hover:text-gold-300" href="/projects?monthly=1">التبرع الشهري</Link></li>
-              <li><Link className="hover:text-gold-300" href="/contact#bank">حساباتنا البنكية</Link></li>
+              <li><Link className={linkCls} href={h("/projects?region=quds")}>{t.footer.qudsProjects}</Link></li>
+              <li><Link className={linkCls} href={h("/projects?region=gaza")}>{t.footer.gazaRelief}</Link></li>
+              <li><Link className={linkCls} href={h("/zakat")}>{t.common.zakatCalc}</Link></li>
+              <li><Link className={linkCls} href={h("/projects?monthly=1")}>{t.footer.monthly}</Link></li>
+              <li><Link className={linkCls} href={h("/cart")}>{t.common.cart}</Link></li>
+              <li><Link className={linkCls} href={h("/contact#bank")}>{t.common.bank}</Link></li>
             </ul>
           </nav>
 
           <div>
-            <h2 className="mb-4 font-kufi text-lg font-bold text-white">تواصل معنا</h2>
+            <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.contact}</h2>
             <ul className="space-y-3">
               <li>
-                <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-gold-300" dir="ltr">
-                  <IconPhone size={18} /> {contact.phone}
+                <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-gold-300">
+                  <IconPhone size={18} /> <span dir="ltr">{contact.phone}</span>
                 </a>
               </li>
               <li>
                 <a href={contact.phoneTrHref} className="flex items-center gap-2 hover:text-gold-300">
-                  <IconPhone size={18} /> <span dir="ltr">{contact.phoneTr}</span> <span className="text-xs text-teal-100/60">(Türkçe)</span>
+                  <IconPhone size={18} /> <span dir="ltr">{contact.phoneTr}</span> <span className="text-xs text-teal-100/60">{t.footer.trSupport}</span>
                 </a>
               </li>
               <li>
@@ -70,18 +77,20 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/contact#bank" className="flex items-center gap-2 hover:text-gold-300">
-                  <IconBank size={18} /> حساباتنا البنكية
+                <Link href={h("/contact#bank")} className="flex items-center gap-2 hover:text-gold-300">
+                  <IconBank size={18} /> {t.common.bank}
                 </Link>
               </li>
             </ul>
             <div className="mt-5 flex flex-wrap gap-2">
-              {socials(contact.handles.ar).map((x) => (
-                <a key={x.key} aria-label={x.label} href={x.href} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
+              {socials(handle).map((x) => (
+                <a key={x.key} aria-label={t.social[x.key]} href={x.href} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
                   {sIcon[x.key]}
                 </a>
               ))}
-              <a aria-label="واتساب" href={contact.whatsapp} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300"><IconWhatsapp size={19} /></a>
+              <a aria-label={t.social.whatsapp} href={contact.whatsapp} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
+                <IconWhatsapp size={19} />
+              </a>
             </div>
             <p className="mt-3 text-xs leading-6 text-teal-100/60" dir="ltr">
               AR @{contact.handles.ar} · TR @{contact.handles.tr} · EN @{contact.handles.en}
@@ -92,11 +101,13 @@ export default function Footer() {
         <OrnamentDivider className="mx-auto my-10 h-5 w-64" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-sm text-teal-100/70 md:flex-row">
-          <p>© {new Date().getFullYear()} مؤسسة البراق — <span lang="tr">{contact.legalName}</span>. جميع الحقوق محفوظة.</p>
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5"><IconShield size={16} /> مدفوعات آمنة</span>
-            <Link href="#" className="hover:text-gold-300">سياسة الخصوصية</Link>
-            <Link href="#" className="hover:text-gold-300">ملفات تعريف الارتباط</Link>
+          <p>
+            © {new Date().getFullYear()} {t.meta.org} — <span lang="tr">{contact.legalName}</span>. {t.footer.rights}
+          </p>
+          <div className="flex flex-wrap items-center gap-5">
+            <span className="flex items-center gap-1.5"><IconShield size={16} /> {t.footer.secure}</span>
+            <Link href="#" className="hover:text-gold-300">{t.footer.privacy}</Link>
+            <Link href="#" className="hover:text-gold-300">{t.footer.cookies}</Link>
           </div>
         </div>
       </div>

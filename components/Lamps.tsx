@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IconArrow } from "./Icons";
+import { useI18n } from "@/lib/lang-context";
 
 /* «فتُهدي له زيتاً يُسرج فيه» — قناديل الأقصى التفاعلية */
 const N = 11;
 const drops = [70, 110, 60, 130, 90, 150, 90, 130, 60, 110, 70];
 
 function Lamp({ lit, onClick, i }: { lit: boolean; onClick: () => void; i: number }) {
+  const { t } = useI18n();
   return (
     <button
       onClick={onClick}
       aria-pressed={lit}
-      aria-label={lit ? `القنديل ${i + 1} مُسرَج` : `أسرج القنديل ${i + 1}`}
+      aria-label={(lit ? t.lamps.lit : t.lamps.light).replace("{n}", String(i + 1))}
       className="group flex flex-col items-center focus-visible:outline-none"
     >
       <span className="w-px bg-gold-500/60" style={{ height: drops[i] }} />
@@ -31,6 +33,8 @@ function Lamp({ lit, onClick, i }: { lit: boolean; onClick: () => void; i: numbe
 }
 
 export default function Lamps() {
+  const { t, href } = useI18n();
+  const L = t.lamps;
   const [lit, setLit] = useState<boolean[]>(() => Array.from({ length: N }, (_, i) => i === 5));
   const count = lit.filter(Boolean).length;
   const toggle = (i: number) => setLit((l) => l.map((v, j) => (j === i ? !v : v)));
@@ -50,24 +54,24 @@ export default function Lamps() {
       </div>
 
       <div className="relative mx-auto mt-10 max-w-4xl px-5 text-center">
-        <p className="mb-5 text-sm font-bold text-gold-300">عن ميمونة مولاة النبي ﷺ قالت: يا رسول الله، أفتنا في بيت المقدس</p>
+        <p className="mb-5 text-sm font-bold text-gold-300">{L.intro}</p>
         <blockquote className="font-naskh text-[24px] leading-[2] text-teal-50 md:text-[32px]">
-          «أرضُ المحشرِ والمنشرِ، ائتوه فصلّوا فيه، فإنّ صلاةً فيه كألفِ صلاةٍ في غيره»، قلت: أرأيت إن لم أستطع أن أتحمّل إليه؟ قال:
-          <span className="mt-2 block text-gold-300">«فتُهدي له زيتاً يُسرَج فيه، فمن فعل فهو كمن أتاه»</span>
+          {L.hadith1}
+          <span className="mt-2 block text-gold-300">{L.hadith2}</span>
         </blockquote>
-        <p className="mt-4 text-sm text-teal-100/60">رواه أحمد وأبو داود وابن ماجه</p>
+        <p className="mt-4 text-sm text-teal-100/60">{L.source}</p>
 
         <p className="mt-8 text-teal-100/90" aria-live="polite">
-          {count === N ? (
-            <>أسرجتَ قناديل الأقصى كلّها — اجعلها حقيقةً بعطائك.</>
-          ) : (
+          {count === N ? L.all : (
             <>
-              اضغط على القناديل لتُسرجها… أسرجتَ <b className="num text-xl text-gold-300">{count}</b> من {N}
+              {L.hint.split("{n}")[0].replace("{t}", String(N))}
+              <b className="num text-xl text-gold-300">{count}</b>
+              {L.hint.split("{n}")[1].replace("{t}", String(N))}
             </>
           )}
         </p>
-        <Link href="/projects?region=quds" className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night shadow-[0_0_40px_-6px_rgba(235,205,122,.8)] hover:bg-gold-400">
-          أسرج قنديلك في الأقصى <IconArrow size={20} />
+        <Link href={href("/projects?region=quds")} className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night shadow-[0_0_40px_-6px_rgba(235,205,122,.8)] hover:bg-gold-400">
+          {L.cta} <IconArrow size={20} />
         </Link>
       </div>
     </section>

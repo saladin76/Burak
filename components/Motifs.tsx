@@ -53,7 +53,7 @@ export function GivingWaves({
 }
 
 /* قبة الصخرة — رسم توضيحي رئيسي */
-export function DomeOfTheRock({ className = "" }: { className?: string }) {
+export function DomeOfTheRock({ className = "", label = "" }: { className?: string; label?: string }) {
   const bodyArches = [132, 184, 236, 288, 340, 392, 444]
     .map((x) => `M${x} 342V306a12 12 0 0 1 24 0v36Z`)
     .join("");
@@ -62,7 +62,7 @@ export function DomeOfTheRock({ className = "" }: { className?: string }) {
     .join("");
   const merlons = Array.from({ length: 22 }, (_, i) => `M${i * 28} 372h16v-12h-16Z`).join("");
   return (
-    <svg viewBox="0 0 600 430" className={className} role="img" aria-label="رسم لقبة الصخرة المشرفة وسور القدس">
+    <svg viewBox="0 0 600 430" className={className} role="img" aria-label={label}>
       <defs>
         <linearGradient id="domeGold" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#a87b1c" />

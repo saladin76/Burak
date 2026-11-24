@@ -3,82 +3,24 @@
 import Link from "next/link";
 import { useState } from "react";
 import { IconArrow } from "./Icons";
+import { getProject, landmarks, type Landmark } from "@/lib/data";
+import { tx } from "@/lib/i18n";
+import { useI18n } from "@/lib/lang-context";
 
 /* خريطة تفاعلية مبسّطة للمسجد الأقصى المبارك (مخطط تقريبي، ليس بمقياس رسم) */
-type Spot = { id: string; x: number; y: number; title: string; text: string; cta?: { href: string; label: string } };
+type Spot = Landmark;
+const spots = landmarks;
 
-const spots: Spot[] = [
-  {
-    id: "dome",
-    x: 292,
-    y: 292,
-    title: "قبة الصخرة المشرفة",
-    text: "شيّدها الخليفة الأموي عبد الملك بن مروان نحو سنة 72هـ / 691م، وهي أقدم أثر معماري إسلامي قائم، تتوسط صحن الأقصى فوق مصطبة مرتفعة.",
-    cta: { href: "/projects?region=quds", label: "ادعم إعمار الأقصى" },
-  },
-  {
-    id: "chain",
-    x: 350,
-    y: 296,
-    title: "قبة السلسلة",
-    text: "قبة صغيرة مفتوحة إلى الشرق من قبة الصخرة، من أقدم قباب المسجد الأقصى.",
-  },
-  {
-    id: "qibli",
-    x: 330,
-    y: 595,
-    title: "المسجد القبلي",
-    text: "المصلى الجامع في الجهة الجنوبية بقبته الرصاصية، وفيه تُقام صلاة الجمعة والجماعات الكبرى.",
-    cta: { href: "/projects/sqya-alma-alqds", label: "سقيا روّاد الأقصى" },
-  },
-  {
-    id: "marwani",
-    x: 450,
-    y: 585,
-    title: "المصلى المرواني",
-    text: "مصلى واسع تحت مستوى الساحات في الزاوية الجنوبية الشرقية، أُعيد فتحه للصلاة عام 1996م.",
-  },
-  {
-    id: "rahma",
-    x: 484,
-    y: 330,
-    title: "باب الرحمة",
-    text: "باب في السور الشرقي، وإلى جواره مصلى باب الرحمة الذي أعاد المقدسيون فتحه للصلاة عام 2019م.",
-    cta: { href: "/projects?region=quds", label: "ثبّت المرابطين" },
-  },
-  {
-    id: "buraq",
-    x: 172,
-    y: 560,
-    title: "حائط البراق",
-    text: "الجزء الجنوبي من السور الغربي للأقصى، ارتبط اسمه بما ورد من ربط النبي ﷺ البراق عنده ليلة الإسراء — ومنه استلهمت المؤسسة اسمها.",
-    cta: { href: "/about", label: "قصة اسم البراق" },
-  },
-  {
-    id: "asbat",
-    x: 440,
-    y: 64,
-    title: "باب الأسباط",
-    text: "من أبواب الأقصى الشمالية، ويدخل منه كثير من المصلين القادمين من خارج البلدة القديمة.",
-  },
-  {
-    id: "quran",
-    x: 230,
-    y: 170,
-    title: "مصاطب العلم",
-    text: "تنتشر في ساحات الأقصى مصاطب وحلقات علم وقرآن، يرعى «جيل القرآن» طلابها وحفّاظها.",
-    cta: { href: "/projects/jyl-alqran-5", label: "ادعم حلقات القرآن" },
-  },
-];
-
-export default function AqsaMap() {
-  const [active, setActive] = useState<Spot>(spots[0]);
+export default function AqsaMap({ initial }: { initial?: string }) {
+  const { lang, t, href } = useI18n();
+  const [active, setActive] = useState<Spot>(spots.find((x) => x.id === initial) ?? spots[0]);
+  const proj = active.project ? getProject(active.project) : undefined;
 
   return (
     <div className="grid overflow-hidden rounded-[32px] bg-night text-white lg:grid-cols-[1.1fr_1fr]">
       <div className="relative p-6 md:p-10">
         <div className="pattern-khatam absolute inset-0 opacity-[.06]" />
-        <svg viewBox="0 0 620 700" className="relative mx-auto block w-full max-w-[520px]" role="group" aria-label="مخطط المسجد الأقصى المبارك">
+        <svg viewBox="0 0 620 700" className="relative mx-auto block w-full max-w-[520px]" role="group" aria-label={t.map.label}>
           {/* السور */}
           <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="#032c3d" stroke="#ebcd7a" strokeWidth="3" strokeLinejoin="round" />
           <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="none" stroke="#ebcd7a" strokeOpacity=".25" strokeWidth="14" strokeDasharray="4 10" />
@@ -100,7 +42,7 @@ export default function AqsaMap() {
           {/* الشمال */}
           <g transform="translate(560 80)" fill="#ebcd7a">
             <path d="M0 -26 L8 0 L0 -6 L-8 0 Z" />
-            <text y="20" textAnchor="middle" fontSize="16" fontFamily="var(--font-kufi)">ش</text>
+            <text y="20" textAnchor="middle" fontSize="16" fontFamily="var(--font-kufi)">{t.map.north}</text>
           </g>
 
           {spots.map((s) => {
@@ -115,7 +57,7 @@ export default function AqsaMap() {
                   strokeWidth="3"
                   tabIndex={0}
                   role="button"
-                  aria-label={s.title}
+                  aria-label={tx(s.title, lang)}
                   aria-pressed={on}
                   className="cursor-pointer outline-none transition-all focus-visible:stroke-white"
                   onClick={() => setActive(s)}
@@ -126,18 +68,23 @@ export default function AqsaMap() {
             );
           })}
         </svg>
-        <p className="relative mt-3 text-center text-xs text-teal-100/60">مخطط تقريبي للتعريف، ليس بمقياس رسم</p>
+        <p className="relative mt-3 text-center text-xs text-teal-100/60">{t.map.note}</p>
       </div>
 
       <div className="flex flex-col justify-center border-t border-white/10 bg-night-2 p-8 md:p-12 lg:border-s lg:border-t-0">
-        <p className="text-sm font-bold text-gold-300">اكتشف الأقصى</p>
-        <h3 key={active.id} className="rise mt-2 font-kufi text-3xl font-bold md:text-4xl">{active.title}</h3>
-        <p key={active.id + "t"} className="rise-2 mt-4 text-lg leading-9 text-teal-100/90">{active.text}</p>
-        {active.cta && (
-          <Link href={active.cta.href} className="rise-3 mt-6 inline-flex h-12 w-fit items-center gap-2 rounded-full bg-gold-500 px-6 font-bold text-night hover:bg-gold-400">
-            {active.cta.label} <IconArrow size={18} />
+        <p className="text-sm font-bold text-gold-300">{t.map.kicker}</p>
+        <h3 key={active.id} className="rise mt-2 font-kufi text-3xl font-bold md:text-4xl">{tx(active.title, lang)}</h3>
+        <p key={active.id + "t"} className="rise-2 mt-4 text-lg leading-9 text-teal-100/90">{tx(active.text, lang)}</p>
+        <div className="rise-3 mt-6 flex flex-wrap gap-3">
+          {proj && (
+            <Link href={href(`/projects/${proj.slug}`)} className="inline-flex h-12 items-center gap-2 rounded-full bg-gold-500 px-6 font-bold text-night hover:bg-gold-400">
+              {tx(proj.title, lang)} <IconArrow size={18} />
+            </Link>
+          )}
+          <Link href={href(`/quds/${active.id}`)} className="inline-flex h-12 items-center gap-2 rounded-full border border-white/20 px-6 font-semibold hover:border-gold-300 hover:text-gold-300">
+            {t.map.page}
           </Link>
-        )}
+        </div>
         <div className="mt-8 flex flex-wrap gap-2">
           {spots.map((s) => (
             <button
@@ -148,7 +95,7 @@ export default function AqsaMap() {
                 s.id === active.id ? "bg-white text-teal-900" : "border border-white/15 text-teal-100 hover:border-gold-300"
               }`}
             >
-              {s.title}
+              {tx(s.title, lang)}
             </button>
           ))}
         </div>

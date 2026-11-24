@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IconHeart } from "./Icons";
+import { useI18n } from "@/lib/lang-context";
 
 /* شريط تبرع ثابت أسفل الشاشة على الجوال، يظهر بعد التمرير */
 export default function MobileDonateBar() {
+  const { t, href } = useI18n();
   const [show, setShow] = useState(false);
   useEffect(() => {
     const on = () => setShow(window.scrollY > 500);
@@ -21,11 +23,11 @@ export default function MobileDonateBar() {
       }`}
     >
       <div className="flex gap-2">
-        <Link href="/#donate" className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-gold-500 font-bold text-night">
-          <IconHeart size={18} /> تبرع الآن
+        <Link href={href("/#donate")} className="flex h-12 flex-1 items-center justify-center gap-2 rounded-2xl bg-gold-500 font-bold text-night">
+          <IconHeart size={18} /> {t.mobileBar.donate}
         </Link>
-        <Link href="/zakat" className="flex h-12 items-center justify-center rounded-2xl border border-teal-900/20 px-4 font-bold text-teal-900">
-          حاسبة الزكاة
+        <Link href={href("/zakat")} className="flex h-12 items-center justify-center rounded-2xl border border-teal-900/20 px-4 font-bold text-teal-900">
+          {t.mobileBar.zakat}
         </Link>
       </div>
     </div>
