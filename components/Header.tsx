@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BurakLogo } from "./Motifs";
-import { IconBag, IconClose, IconGlobe, IconHeart, IconMail, IconMenu, IconPhone } from "./Icons";
+import { IconBag, IconClose, IconGlobe, IconHeart, IconMail, IconMenu, IconPhone, KindIcon } from "./Icons";
 import { contact } from "@/lib/data";
 import { locales, type Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
@@ -18,11 +18,12 @@ export default function Header() {
   const path = usePathname() || `/${lang}`;
   const rest = path.replace(/^\/(ar|tr|en)/, "") || "/";
 
-  const nav = [
+  const nav: { href: string; label: string; special?: boolean }[] = [
     { href: "/", label: t.nav.home },
     { href: "/about", label: t.nav.about },
     { href: "/projects", label: t.nav.projects },
     { href: "/quds", label: t.nav.quds },
+    { href: "/lamps", label: f.lamps.navLabel, special: true },
     { href: "/news", label: t.nav.news },
     { href: "/media", label: t.nav.media },
     { href: "/contact", label: t.nav.contact },
@@ -54,10 +55,6 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <Link href={href("/teachers-day")} className="hidden font-semibold text-gold-300 hover:text-gold-400 lg:inline">
               ✦ {f.teach.navLabel}
-            </Link>
-            <span className="hidden h-3 w-px bg-teal-700 lg:inline" />
-            <Link href={href("/lamps")} className="hidden hover:text-gold-300 lg:inline">
-              {f.lamps.navLabel}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 lg:inline" />
             <Link href={href("/zakat")} className="hidden hover:text-gold-300 md:inline">
@@ -105,8 +102,11 @@ export default function Header() {
                   <li key={n.href}>
                     <Link
                       href={href(n.href)}
-                      className={`relative rounded-full px-3 py-2 text-[15px] font-medium transition-colors ${active ? "text-teal-900" : "text-muted hover:text-teal-700"}`}
+                      className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[15px] ${
+                        n.special ? "bg-gold-100 font-bold text-gold-700 hover:bg-gold-300/50" : active ? "text-teal-900" : "text-muted hover:text-teal-700"
+                      }`}
                     >
+                      {n.special && <KindIcon kind="aqsa" size={17} />}
                       {n.label}
                       {active && <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-gold-500" />}
                     </Link>
@@ -149,7 +149,7 @@ export default function Header() {
         {open && (
           <nav className="border-t border-stone-200 bg-stone-50 xl:hidden">
             <ul className="mx-auto grid max-w-7xl gap-1 px-5 py-4 sm:grid-cols-2">
-              {[...nav, { href: "/lamps", label: f.lamps.navLabel }, { href: "/teachers-day", label: f.teach.navLabel }, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: f.vol.btn }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
+              {[...nav, { href: "/teachers-day", label: f.teach.navLabel }, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: f.vol.btn }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
                 <li key={n.href}>
                   <Link href={href(n.href)} className="block rounded-xl px-4 py-3 text-lg font-medium text-teal-900 hover:bg-teal-100">
                     {n.label}
