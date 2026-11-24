@@ -105,12 +105,12 @@ export default function DocsView() {
         <div role="tablist" className="flex flex-wrap gap-2">
           {docs.map((d, i) => (
             <button key={d.label} role="tab" aria-selected={tab === i} onClick={() => setTab(i)}
-              className={`flex h-11 items-center gap-2 rounded-full px-5 text-[15px] font-semibold ${tab === i ? "bg-teal-900 text-white" : "border border-stone-300 bg-white text-teal-900 hover:border-teal-500"}`}>
+              className={`flex h-11 items-center gap-2 rounded-lg px-5 text-[15px] font-semibold ${tab === i ? "bg-teal-900 text-white" : "border border-stone-300 bg-white text-teal-900 hover:border-teal-500"}`}>
               <IconAward size={18} /> {d.label}
             </button>
           ))}
         </div>
-        <button onClick={() => window.print()} className="flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
+        <button onClick={() => window.print()} className="flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
           <IconPrint size={20} /> {D.print}
         </button>
       </div>

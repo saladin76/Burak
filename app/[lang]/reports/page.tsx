@@ -99,7 +99,7 @@ export default async function Reports({ params }: LangParams) {
             </div>
           </>
         )}
-        <Link href={h("/projects")} className="inline-flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
+        <Link href={h("/projects")} className="inline-flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
           {t.about.contribute} <IconArrow size={18} />
         </Link>
       </section>

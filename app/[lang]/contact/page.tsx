@@ -69,7 +69,7 @@ export default async function Contact({ params }: LangParams) {
             <label className="grid gap-1.5 text-sm font-semibold text-muted">{C.email}<input type="email" className={input} /></label>
             <label className="grid gap-1.5 text-sm font-semibold text-muted md:col-span-2">{C.msg}<textarea rows={4} className="rounded-xl border border-stone-300 bg-stone-50 p-4 text-base text-ink" /></label>
           </div>
-          <button type="submit" className="mt-6 h-12 rounded-full bg-accent-500 px-8 font-bold text-white hover:bg-accent-600">{C.send}</button>
+          <button type="submit" className="mt-6 h-12 rounded-lg bg-accent-500 px-8 font-bold text-white hover:bg-accent-600">{C.send}</button>
         </form>
       </section>
     </>

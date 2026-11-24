@@ -40,7 +40,7 @@ export default async function LampsPage({ params }: LangParams) {
           <h1 className="rise-2 mt-6 font-kufi text-6xl font-bold text-accent-300 md:text-8xl">{L.title}</h1>
           <p className="rise-2 mt-6 font-naskh text-2xl leading-[1.9] text-teal-50 md:text-3xl">{L.hadith}</p>
           <p className="rise-3 mx-auto mt-6 max-w-2xl text-lg leading-9 text-teal-100/90">{L.text}</p>
-          <a href="#light" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_0_50px_-6px_rgba(0,125,165,.9)] hover:bg-accent-600">{L.cta} <IconArrow size={20} /></a>
+          <a href="#light" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_0_50px_-6px_rgba(0,125,165,.9)] hover:bg-accent-600">{L.cta} <IconArrow size={20} /></a>
         </div>
         <div className="crenellation text-stone-50" />
       </section>

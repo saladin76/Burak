@@ -48,7 +48,7 @@ export default function ThankYou() {
             ))}
           </ul>
         )}
-        <Link href={href(`/documents?ref=${o?.ref ?? ref}`)} className="mt-8 inline-flex h-14 items-center gap-2 rounded-full border-2 border-accent-300 px-7 text-lg font-bold text-accent-300 hover:bg-accent-300 hover:text-night">
+        <Link href={href(`/documents?ref=${o?.ref ?? ref}`)} className="mt-8 inline-flex h-14 items-center gap-2 rounded-lg border-2 border-accent-300 px-7 text-lg font-bold text-accent-300 hover:bg-accent-300 hover:text-night">
           <IconAward size={22} /> {f.docs.view}
         </Link>
         <p className="mt-8 font-semibold">{T.share}</p>
@@ -57,7 +57,7 @@ export default function ThankYou() {
           <a aria-label="X" href={`https://x.com/intent/post?text=${msg}`} className="grid h-12 w-12 place-items-center rounded-full bg-white/10"><IconX size={18} /></a>
           <a aria-label="Facebook" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`} className="grid h-12 w-12 place-items-center rounded-full bg-white/10"><IconFacebook size={20} /></a>
         </div>
-        <Link href={href("/projects")} className="mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-accent-500 px-8 text-lg font-bold text-white hover:bg-accent-600">
+        <Link href={href("/projects")} className="mt-8 inline-flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white hover:bg-accent-600">
           {T.more} <IconArrow size={20} />
         </Link>
       </div>

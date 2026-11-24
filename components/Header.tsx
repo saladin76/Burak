@@ -120,18 +120,18 @@ export default function Header() {
             <Link href={href("/cart")} aria-label={t.common.cart} className="relative grid h-11 w-11 place-items-center rounded-full text-teal-900 hover:bg-teal-100">
               <IconBag />
               {count > 0 && (
-                <span className="absolute end-1 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-accent-500 px-1 text-[10px] font-bold text-white">{count}</span>
+                <span className="absolute end-1 top-1 grid h-4 min-w-4 place-items-center rounded-lg bg-accent-500 px-1 text-[10px] font-bold text-white">{count}</span>
               )}
             </Link>
             <Link
               href={href("/volunteer#form")}
-              className="hidden h-11 items-center gap-2 rounded-full border border-teal-500/40 bg-teal-50 px-4 text-[15px] font-semibold text-teal-900 hover:border-teal-500 hover:bg-teal-100 md:flex"
+              className="hidden h-11 items-center gap-2 rounded-lg border border-teal-500/40 bg-teal-50 px-4 text-[15px] font-semibold text-teal-900 hover:border-teal-500 hover:bg-teal-100 md:flex"
             >
               <IconHeart size={18} /> {f.vol.btn}
             </Link>
             <Link
               href={href("/#donate")}
-              className="flex h-11 items-center gap-2 rounded-full bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
+              className="flex h-11 items-center gap-2 rounded-lg bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
             >
               {t.common.donateNow}
             </Link>

@@ -63,12 +63,12 @@ export default function ProjectsExplorer({ limit }: { limit?: number }) {
         {!limit && (
           <div className="ms-auto flex flex-wrap items-center gap-2">
             <label className="sr-only" htmlFor="kind">{P.kind}</label>
-            <select id="kind" value={kind} onChange={(e) => setKind(e.target.value as Kind | "")} className="h-11 rounded-full border border-stone-300 bg-white px-4 text-[15px] text-teal-900">
+            <select id="kind" value={kind} onChange={(e) => setKind(e.target.value as Kind | "")} className="h-11 rounded-lg border border-stone-300 bg-white px-4 text-[15px] text-teal-900">
               <option value="">{P.allKinds}</option>
               {(Object.keys(kindLabel) as Kind[]).map((k) => <option key={k} value={k}>{tx(kindLabel[k], lang)}</option>)}
             </select>
             <label className="sr-only" htmlFor="sort">{C.sort}</label>
-            <select id="sort" value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="h-11 rounded-full border border-stone-300 bg-white px-4 text-[15px] text-teal-900">
+            <select id="sort" value={sort} onChange={(e) => setSort(e.target.value as Sort)} className="h-11 rounded-lg border border-stone-300 bg-white px-4 text-[15px] text-teal-900">
               {(Object.keys(C.sortOpts) as Sort[]).map((k) => <option key={k} value={k}>{C.sort}: {C.sortOpts[k]}</option>)}
             </select>
             <div className="relative">

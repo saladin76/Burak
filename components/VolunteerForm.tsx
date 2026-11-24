@@ -96,8 +96,8 @@ export default function VolunteerForm() {
             {F.doneNext.map((x) => <li key={x} className="flex items-center gap-3"><Khatam className="h-5 w-5 shrink-0" color="#8acbda" /> {x}</li>)}
           </ul>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href={href("/projects?region=quds")} className="inline-flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white">{t.hero.cta2} <IconArrow size={18} /></Link>
-            <button onClick={() => { setDone(""); setV(empty); setStep(0); }} className="h-12 rounded-full border border-white/25 px-6 font-semibold">{F.newForm}</button>
+            <Link href={href("/projects?region=quds")} className="inline-flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-6 font-bold text-white">{t.hero.cta2} <IconArrow size={18} /></Link>
+            <button onClick={() => { setDone(""); setV(empty); setStep(0); }} className="h-12 rounded-lg border border-white/25 px-6 font-semibold">{F.newForm}</button>
           </div>
         </div>
       </div>
@@ -246,8 +246,8 @@ export default function VolunteerForm() {
         <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-stone-100 pt-6">
           <p className="text-xs text-muted">✦ {F.draft}</p>
           <div className="flex gap-2">
-            {step > 0 && <button type="button" onClick={() => go(step - 1)} className="h-12 rounded-full border border-stone-300 px-6 font-semibold text-teal-900 hover:border-teal-500">{F.back}</button>}
-            <button type="submit" className="flex h-12 items-center gap-2 rounded-full bg-accent-500 px-7 font-bold text-white hover:bg-accent-600">
+            {step > 0 && <button type="button" onClick={() => go(step - 1)} className="h-12 rounded-lg border border-stone-300 px-6 font-semibold text-teal-900 hover:border-teal-500">{F.back}</button>}
+            <button type="submit" className="flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-7 font-bold text-white hover:bg-accent-600">
               {step < 3 ? F.next : F.submit} <IconArrow size={18} />
             </button>
           </div>

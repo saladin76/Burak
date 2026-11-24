@@ -30,15 +30,17 @@ export function ProjectCover({ p, lang, tall = false, className = "" }: { p: Pro
         <KindIcon kind={p.kind} size={tall ? 48 : 30} className="text-accent-300" />
       </div>
       <SmartImg src={p.image} alt={tx(p.title, lang)} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-night/0 to-night/20" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-accent-700/90 via-accent-500/35 to-transparent" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/burak-logo-white.svg" alt="" aria-hidden="true" className={`pointer-events-none absolute bottom-2.5 end-3 w-auto opacity-95 ${tall ? "h-12" : "h-9"}`} />
       <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
-        <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-teal-900 shadow">{tx(regionLabel[p.region], lang)}</span>
+        <span className="rounded bg-accent-500 px-2.5 py-1 text-xs font-bold text-white shadow">{tx(regionLabel[p.region], lang)}</span>
         <span className="flex gap-1.5">
-          {p.monthly && <span className="flex items-center gap-1 rounded-full bg-teal-900/85 px-2.5 py-1 text-xs font-bold text-white backdrop-blur"><IconRepeat size={12} /> {t.common.regular}</span>}
-          {p.urgent && <span className="rounded-full bg-accent-400 px-3 py-1 text-xs font-bold text-night shadow">{t.common.urgent}</span>}
+          {p.monthly && <span className="flex items-center gap-1 rounded bg-accent-700 px-2.5 py-1 text-xs font-bold text-white"><IconRepeat size={12} /> {t.common.regular}</span>}
+          {p.urgent && <span className="rounded bg-sun px-2.5 py-1 text-xs font-bold text-accent-700 shadow">{t.common.urgent}</span>}
         </span>
       </div>
-      <span className="absolute bottom-3 start-3 rounded-full bg-night/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">{tx(kindLabel[p.kind], lang)}</span>
+      <span className="absolute bottom-3 start-3 rounded bg-white px-2.5 py-1 text-xs font-bold text-accent-700">{tx(kindLabel[p.kind], lang)}</span>
     </div>
   );
 }

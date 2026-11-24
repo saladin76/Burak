@@ -19,7 +19,7 @@ export default async function Media({ params }: LangParams) {
       <section className="mx-auto max-w-7xl px-5 pt-14">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <h2 className="font-kufi text-3xl font-bold text-teal-900">{M.field}</h2>
-          <a href={`https://www.youtube.com/@${contact.handles[lang]}`} className="flex h-11 items-center gap-2 rounded-full border border-teal-900/20 px-5 font-bold text-teal-900 hover:bg-teal-50">
+          <a href={`https://www.youtube.com/@${contact.handles[lang]}`} className="flex h-11 items-center gap-2 rounded-lg border border-teal-900/20 px-5 font-bold text-teal-900 hover:bg-teal-50">
             <IconYoutube size={20} /> {M.youtube}
           </a>
         </div>

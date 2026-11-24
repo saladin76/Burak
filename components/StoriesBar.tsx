@@ -53,7 +53,7 @@ export default function StoriesBar({ lang }: { lang: Lang }) {
                   {icons[s.k] ?? <KindIcon kind={s.kind} size={28} />}
                 </span>
                 {s.isNew && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border-2 border-stone-50 bg-accent-500 px-1.5 text-[10px] font-bold leading-4 text-white">
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-lg border-2 border-stone-50 bg-accent-500 px-1.5 text-[10px] font-bold leading-4 text-white">
                     {t.isNew}
                   </span>
                 )}

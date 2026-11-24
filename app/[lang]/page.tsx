@@ -20,10 +20,10 @@ function SectionHead({ kicker, title, children, action }: { kicker: string; titl
   return (
     <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
       <div className="max-w-2xl">
-        <p className="mb-3 flex items-center gap-2 text-sm font-bold text-accent-600">
-          <Khatam className="h-5 w-5" color="#3aafc9" /> {kicker}
+        <p className="brand-tag mb-4">
+          <Khatam className="h-4 w-4" color="#ffffff" /> {kicker}
         </p>
-        <h2 className="text-balance font-kufi text-3xl font-bold leading-tight text-teal-900 md:text-[42px]">{title}</h2>
+        <h2 className="text-balance font-kufi text-3xl font-extrabold leading-tight text-teal-900 md:text-[42px]">{title}</h2>
         {children && <p className="mt-4 text-lg leading-8 text-muted">{children}</p>}
       </div>
       {action}
@@ -39,40 +39,39 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
   const H = t.home;
   const h = (p: string) => lhref(lang, p);
   const urgent = projects.filter((p) => p.urgent).slice(0, 2);
-  const btnOutline = "flex h-12 items-center gap-2 rounded-full border border-teal-900/20 px-6 font-bold text-teal-900 hover:bg-teal-50";
+  const btnOutline = "flex h-12 items-center gap-2 rounded-lg border-2 border-accent-700 px-6 font-bold text-teal-900 hover:bg-teal-50";
 
   return (
     <>
       <StoriesBar lang={lang} />
 
       {/* ========== HERO ========== */}
-      <section className="relative overflow-hidden bg-night text-white">
-        <div className="pattern-khatam absolute inset-0 opacity-[.09]" />
-        <GivingRings className="pointer-events-none absolute -bottom-40 -start-40 w-[520px] lg:hidden" rings={7} opacity={0.22} />
+      <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#eef8fb] to-[#c5e5f1] text-teal-900">
+        <GivingRings className="pointer-events-none absolute -top-40 -end-40 w-[560px] lg:-top-60 lg:end-auto lg:start-[-180px] lg:w-[760px]" rings={7} opacity={0.22} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
         <div className="relative mx-auto grid max-w-7xl items-end gap-8 px-5 pt-12 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
           <div className="pb-20 lg:pb-40">
-            <p className="rise mb-6 inline-flex items-center gap-2 rounded-full border border-accent-300/40 bg-white/5 px-4 py-2 text-sm font-semibold text-accent-300">
-              <Khatam className="h-4 w-4" color="#8acbda" /> {t.hero.since}
+            <p className="rise brand-tag mb-6">
+              <Khatam className="h-4 w-4" color="#ffffff" /> {t.hero.since}
             </p>
-            <h1 className="rise-2 text-balance font-kufi text-[40px] font-bold leading-[1.25] md:text-[60px]">
-              {t.hero.title1}
-              <span className="block text-accent-300">{t.hero.title2}</span>
+            <h1 className="rise-2 font-kufi text-[40px] font-extrabold leading-[1.35] md:text-[60px]">
+              <span className="block text-teal-900">{t.hero.title1}</span>
+              <span className="brand-label mt-2 inline-block">{t.hero.title2}</span>
             </h1>
-            <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-teal-100/90 md:text-xl">{t.hero.text}</p>
+            <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-teal-700 md:text-xl">{t.hero.text}</p>
             <div className="rise-3 mt-9 flex flex-wrap gap-3">
-              <Link href="#donate" className="flex h-14 items-center gap-2 rounded-full bg-accent-500 px-8 text-lg font-bold text-white hover:bg-accent-600">
+              <Link href="#donate" className="flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_14px_30px_-14px_rgba(0,125,165,.7)] hover:bg-accent-600">
                 {t.common.donateNow} <IconArrow size={20} />
               </Link>
-              <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-full border border-white/25 px-7 text-lg font-semibold hover:border-accent-300 hover:text-accent-300">
+              <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-lg border-2 border-accent-700 px-7 text-lg font-bold text-accent-700 hover:bg-accent-700 hover:text-white">
                 {t.hero.cta2}
               </Link>
             </div>
             <div className="rise-3 mt-8">
-              <JerusalemClock />
+              <JerusalemClock light />
             </div>
           </div>
           <div className="relative mx-auto hidden w-full max-w-[640px] self-end lg:block">
-            <GivingRings className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.32} />
+            <GivingRings className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.55} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
             <DomeOfTheRock className="relative block w-full" label={t.hero.domeAlt} />
           </div>
         </div>

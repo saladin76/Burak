@@ -77,11 +77,11 @@ export default function AqsaMap({ initial }: { initial?: string }) {
         <p key={active.id + "t"} className="rise-2 mt-4 text-lg leading-9 text-teal-100/90">{tx(active.text, lang)}</p>
         <div className="rise-3 mt-6 flex flex-wrap gap-3">
           {proj && (
-            <Link href={href(`/projects/${proj.slug}`)} className="inline-flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
+            <Link href={href(`/projects/${proj.slug}`)} className="inline-flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
               {tx(proj.title, lang)} <IconArrow size={18} />
             </Link>
           )}
-          <Link href={href(`/quds/${active.id}`)} className="inline-flex h-12 items-center gap-2 rounded-full border border-white/20 px-6 font-semibold hover:border-accent-300 hover:text-accent-300">
+          <Link href={href(`/quds/${active.id}`)} className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/20 px-6 font-semibold hover:border-accent-300 hover:text-accent-300">
             {t.map.page}
           </Link>
         </div>

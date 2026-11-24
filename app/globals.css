@@ -41,6 +41,7 @@
   --color-accent-100: #dff1f7;
 
   /* ألوان الأجسام الحقيقية فقط (قبة الصخرة، ضوء القناديل) — لا تُستخدم للواجهة */
+  --color-sun: #f6d03f; /* أصفر الحملات في منشورات البراق — للعاجل فقط */
   --color-flame: #ebcd7a;
   --color-brass: #c99a2e;
 
@@ -57,9 +58,9 @@
   --color-ink: #10222a;
   --color-muted: #4a5b62;
 
-  --font-kufi: "awanzaman", "AwanZaman", "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
-  --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
-  --font-naskh: "Amiri", "IBM Plex Sans Arabic", serif;
+  --font-kufi: "awanzaman", "AwanZaman", "Rubik Variable", "Rubik", sans-serif;
+  --font-sans: "Rubik Variable", "Rubik", system-ui, sans-serif;
+  --font-naskh: "Amiri", "Rubik Variable", serif;
 
   --radius-arch: 999px 999px 18px 18px;
 }
@@ -249,3 +250,30 @@ body {
 
 /* guard against horizontal overflow on mobile */
 html, body { overflow-x: clip; }
+
+/* ===== أسلوب منشورات البراق: عنوان على شريط لوني مصمت ===== */
+.brand-label {
+  display: inline;
+  background: var(--color-accent-500);
+  color: #fff;
+  padding: 0.04em 0.32em 0.1em;
+  line-height: 1.55;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  border-radius: 4px;
+}
+.brand-label-navy { background: var(--color-accent-700); color: #fff; }
+.brand-label-sun { background: var(--color-sun); color: var(--color-accent-700); }
+/* شارة صغيرة فوق العناوين */
+.brand-tag {
+  display: inline-flex; align-items: center; gap: .4em;
+  background: var(--color-accent-500); color: #fff;
+  font-weight: 600; font-size: 13px; line-height: 1;
+  padding: .5em .75em; border-radius: 4px;
+}
+/* شريط سفلي أزرق فوق الصور مع الشعار كما في منشورات المؤسسة */
+.photo-band::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 42%;
+  background: linear-gradient(to top, rgba(0,61,85,.85), rgba(0,125,165,.35) 55%, transparent);
+  pointer-events: none;
+}
