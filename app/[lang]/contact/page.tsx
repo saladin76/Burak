@@ -1,6 +1,6 @@
 import PageHero from "@/components/PageHero";
 import { IconBank, IconMail, IconPhone, IconWhatsapp } from "@/components/Icons";
-import { contact } from "@/lib/data";
+import { contact, orgContent } from "@/lib/data";
 import { metaTitle, pageLang, type LangParams } from "@/lib/page";
 
 export const generateMetadata = ({ params }: LangParams) => metaTitle(params, (t) => t.contact.title);
@@ -19,7 +19,7 @@ export default async function Contact({ params }: LangParams) {
           { icon: <IconWhatsapp size={26} />, t: C.wa, v: C.waText, href: contact.whatsapp },
           { icon: <IconMail size={26} />, t: C.mail, v: contact.email, href: `mailto:${contact.email}` },
         ].map((c) => (
-          <a key={c.t} href={c.href} className="rounded-[24px] border border-stone-200 bg-white p-6 hover:border-teal-500">
+          <a key={c.t} href={c.href} className="rounded-2xl border border-stone-200 bg-white p-6 hover:border-teal-500">
             <span className="grid h-14 w-14 place-items-center rounded-b-lg rounded-t-full bg-teal-100 text-teal-700">{c.icon}</span>
             <p className="mt-4 font-kufi text-xl font-bold text-teal-900">{c.t}</p>
             <p className="mt-1 text-muted" dir={c.ltr ? "ltr" : undefined}>{c.v}</p>
@@ -28,17 +28,24 @@ export default async function Contact({ params }: LangParams) {
       </section>
 
       <section id="bank" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-16">
-        <div className="rounded-[28px] bg-teal-900 p-8 text-white md:p-12">
-          <h2 className="flex items-center gap-3 font-kufi text-3xl font-bold"><IconBank size={30} className="text-gold-300" /> {t.common.bank}</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {["USD", "EUR", "TRY"].map((c) => (
-              <div key={c} className="rounded-2xl border border-white/15 bg-white/5 p-5">
-                <p className="font-bold text-gold-300">{C.bankAcc.replace("{c}", c)}</p>
-                <p className="mt-2 text-sm text-teal-100">{C.bankName}</p>
-                <p className="mt-1 font-mono text-sm" dir="ltr">[IBAN]</p>
-              </div>
-            ))}
-          </div>
+        <div className="rounded-2xl bg-teal-900 p-8 text-white md:p-12">
+          <h2 className="flex items-center gap-3 font-kufi text-3xl font-bold"><IconBank size={30} className="text-accent-300" /> {t.common.bank}</h2>
+          {orgContent.bankAccounts.length ? (
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {orgContent.bankAccounts.map((b) => (
+                <div key={b.iban} className="rounded-2xl border border-white/15 bg-white/5 p-5">
+                  <p className="font-bold text-accent-300">{C.bankAcc.replace("{c}", b.currency)}</p>
+                  <p className="mt-2 text-sm text-teal-100">{b.bank}</p>
+                  <p className="mt-1 font-mono text-sm" dir="ltr">{b.iban}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/15 bg-white/5 p-5">
+              <p className="text-teal-100">{C.bankAsk}</p>
+              <a href={contact.whatsapp} className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 font-bold text-teal-900 hover:bg-teal-50"><IconWhatsapp size={20} /> {C.wa}</a>
+            </div>
+          )}
         </div>
       </section>
 
@@ -55,14 +62,14 @@ export default async function Contact({ params }: LangParams) {
       </section>
 
       <section className="mx-auto max-w-4xl px-5 pt-16">
-        <form className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-10" aria-label={C.msgTitle}>
+        <form className="rounded-2xl border border-stone-200 bg-white p-6 md:p-10" aria-label={C.msgTitle}>
           <h2 className="font-kufi text-3xl font-bold text-teal-900">{C.msgTitle}</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <label className="grid gap-1.5 text-sm font-semibold text-muted">{C.name}<input className={input} /></label>
             <label className="grid gap-1.5 text-sm font-semibold text-muted">{C.email}<input type="email" className={input} /></label>
             <label className="grid gap-1.5 text-sm font-semibold text-muted md:col-span-2">{C.msg}<textarea rows={4} className="rounded-xl border border-stone-300 bg-stone-50 p-4 text-base text-ink" /></label>
           </div>
-          <button type="submit" className="mt-6 h-12 rounded-full bg-gold-500 px-8 font-bold text-night hover:bg-gold-400">{C.send}</button>
+          <button type="submit" className="mt-6 h-12 rounded-full bg-accent-500 px-8 font-bold text-white hover:bg-accent-600">{C.send}</button>
         </form>
       </section>
     </>

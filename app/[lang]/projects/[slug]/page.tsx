@@ -40,14 +40,13 @@ export default async function ProjectPage({ params }: P) {
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 pt-12 lg:grid-cols-[1fr_440px]">
         <div>
-          <div className="group overflow-hidden rounded-[28px] border border-stone-200">
+          <div className="group overflow-hidden rounded-2xl border border-stone-200">
             <ProjectCover p={p} lang={lang} tall />
           </div>
-          <div className="mt-8 rounded-[24px] border border-stone-200 bg-white p-6 md:p-8">
+          <div className="mt-8 rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
             <Progress p={p} lang={lang} />
             <h2 className="font-kufi text-2xl font-bold text-teal-900">{P.about}</h2>
             <p className="mt-4 text-lg leading-9 text-ink/85">{tx(p.summary, lang)}</p>
-            <p className="mt-4 text-lg leading-9 text-ink/60">{P.fullDesc}</p>
             <OrnamentDivider className="my-8 h-5 w-56" />
             <div className="grid gap-4 sm:grid-cols-3">
               {[

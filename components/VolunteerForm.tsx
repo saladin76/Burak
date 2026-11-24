@@ -85,18 +85,18 @@ export default function VolunteerForm() {
 
   if (done)
     return (
-      <div className="relative overflow-hidden rounded-[32px] bg-night p-10 text-center text-white md:p-16" role="status">
+      <div className="relative overflow-hidden rounded-3xl bg-night p-10 text-center text-white md:p-16" role="status">
         <GivingRings className="pointer-events-none absolute -bottom-1/2 left-1/2 w-[120%] -translate-x-1/2" opacity={0.25} />
         <div className="relative">
-          <span className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-gold-500 text-night"><IconCheck size={40} /></span>
-          <h2 className="mt-6 font-kufi text-4xl font-bold text-gold-300">{F.doneT}</h2>
+          <span className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-accent-500 text-white"><IconCheck size={40} /></span>
+          <h2 className="mt-6 font-kufi text-4xl font-bold text-accent-300">{F.doneT}</h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-9 text-teal-100">{F.doneD}</p>
-          <p className="mt-6 inline-flex rounded-full bg-white/10 px-5 py-2 text-sm">{F.doneRef}: <b className="ms-2 font-mono text-gold-300" dir="ltr">{done}</b></p>
+          <p className="mt-6 inline-flex rounded-full bg-white/10 px-5 py-2 text-sm">{F.doneRef}: <b className="ms-2 font-mono text-accent-300" dir="ltr">{done}</b></p>
           <ul className="mx-auto mt-8 grid max-w-xl gap-3 text-start">
-            {F.doneNext.map((x) => <li key={x} className="flex items-center gap-3"><Khatam className="h-5 w-5 shrink-0" color="#ebcd7a" /> {x}</li>)}
+            {F.doneNext.map((x) => <li key={x} className="flex items-center gap-3"><Khatam className="h-5 w-5 shrink-0" color="#8acbda" /> {x}</li>)}
           </ul>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href={href("/projects?region=quds")} className="inline-flex h-12 items-center gap-2 rounded-full bg-gold-500 px-6 font-bold text-night">{t.hero.cta2} <IconArrow size={18} /></Link>
+            <Link href={href("/projects?region=quds")} className="inline-flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white">{t.hero.cta2} <IconArrow size={18} /></Link>
             <button onClick={() => { setDone(""); setV(empty); setStep(0); }} className="h-12 rounded-full border border-white/25 px-6 font-semibold">{F.newForm}</button>
           </div>
         </div>
@@ -107,24 +107,24 @@ export default function VolunteerForm() {
     <div className="flex items-start justify-between gap-4 border-b border-stone-100 py-3">
       <span className="text-sm text-muted">{k}</span>
       <span className="flex items-center gap-3 text-end font-semibold text-teal-900">{val || "—"}
-        <button type="button" onClick={() => go(s)} className="text-xs font-bold text-teal-500 hover:underline">{F.edit}</button>
+        <button type="button" onClick={() => go(s)} className="text-xs font-bold text-white0 hover:underline">{F.edit}</button>
       </span>
     </div>
   );
 
   return (
-    <div ref={top} className="scroll-mt-28 overflow-hidden rounded-[32px] border border-stone-200 bg-white shadow-[0_30px_80px_-50px_rgba(0,61,85,.5)]">
+    <div ref={top} className="scroll-mt-28 overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-[0_30px_80px_-50px_rgba(0,61,85,.5)]">
       {/* شريط الخطوات */}
       <div className="relative overflow-hidden bg-teal-500 px-6 py-6 text-white md:px-10">
         <GivingRings className="pointer-events-none absolute -end-20 -top-24 w-80" opacity={0.35} palette={["#52a6c0", "#64b6d0", "#8acbda", "#aeddec", "#c5e5f1", "#ffffff"]} />
-        <p className="relative text-sm font-semibold text-teal-50">{F.stepOf.replace("{n}", String(step + 1)).replace("{t}", "4")}</p>
+        <p className="relative text-sm font-semibold text-white">{F.stepOf.replace("{n}", String(step + 1)).replace("{t}", "4")}</p>
         <ol className="relative mt-3 grid grid-cols-4 gap-2">
           {F.steps.map((s, i) => (
             <li key={s}>
               <button type="button" disabled={i > step} onClick={() => i < step && go(i)} className="w-full text-start disabled:cursor-default">
                 <span className={`block h-1.5 rounded-full ${i <= step ? "bg-white" : "bg-white/30"}`} />
                 <span className={`mt-2 flex items-center gap-1.5 text-sm font-bold ${i <= step ? "text-white" : "text-white/60"}`}>
-                  <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs ${i < step ? "bg-white text-teal-700" : i === step ? "bg-gold-400 text-night" : "bg-white/20"}`}>
+                  <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-full text-xs ${i < step ? "bg-white text-teal-700" : i === step ? "bg-accent-400 text-night" : "bg-white/20"}`}>
                     {i < step ? <IconCheck size={14} /> : i + 1}
                   </span>
                   <span className="hidden sm:inline">{s}</span>
@@ -181,7 +181,7 @@ export default function VolunteerForm() {
                   <button type="button" key={a.k} aria-pressed={on} onClick={() => toggle("areas", a.k as never)}
                     className={`relative rounded-2xl border p-4 text-start transition ${on ? "border-teal-500 bg-teal-50 ring-4 ring-teal-500/10" : "border-stone-200 hover:border-teal-500"}`}>
                     <span className={`absolute end-3 top-3 grid h-6 w-6 place-items-center rounded-full border ${on ? "border-teal-500 bg-teal-500 text-white" : "border-stone-300"}`}>{on && <IconCheck size={14} />}</span>
-                    <Khatam className="h-7 w-7" color={on ? "#007da5" : "#c99a2e"} />
+                    <Khatam className="h-7 w-7" color={on ? "#007da5" : "#3aafc9"} />
                     <span className="mt-2 block font-bold text-teal-900">{a.t}</span>
                     <span className="mt-1 block text-sm leading-6 text-muted">{a.d}</span>
                   </button>
@@ -247,7 +247,7 @@ export default function VolunteerForm() {
           <p className="text-xs text-muted">✦ {F.draft}</p>
           <div className="flex gap-2">
             {step > 0 && <button type="button" onClick={() => go(step - 1)} className="h-12 rounded-full border border-stone-300 px-6 font-semibold text-teal-900 hover:border-teal-500">{F.back}</button>}
-            <button type="submit" className="flex h-12 items-center gap-2 rounded-full bg-gold-500 px-7 font-bold text-night hover:bg-gold-400">
+            <button type="submit" className="flex h-12 items-center gap-2 rounded-full bg-accent-500 px-7 font-bold text-white hover:bg-accent-600">
               {step < 3 ? F.next : F.submit} <IconArrow size={18} />
             </button>
           </div>

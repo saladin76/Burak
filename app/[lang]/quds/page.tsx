@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import AqsaMap from "@/components/AqsaMap";
 import { DomeOfTheRock, Khatam, OrnamentDivider } from "@/components/Motifs";
 import { IconArrow, IconBook, IconPlay, KindIcon } from "@/components/Icons";
-import { landmarks, qudsLibrary } from "@/lib/data";
+import { landmarks, orgContent, qudsLibrary } from "@/lib/data";
 import { tx } from "@/lib/i18n";
 import { metaTitle, pageLang, type LangParams } from "@/lib/page";
 
@@ -22,7 +22,7 @@ export default async function Quds({ params }: LangParams) {
           <OrnamentDivider className="my-5 h-5 w-56" />
           <p className="font-naskh text-2xl leading-[2] text-teal-900" lang="ar" dir="rtl">{t.verse}</p>
           {t.verseTr && <p className="mt-3 italic leading-8 text-muted">{t.verseTr}</p>}
-          <p className="mt-5 text-lg leading-9 text-ink/60">{Q.historyPh}</p>
+          {orgContent.history?.[lang] ? <p className="mt-5 text-lg leading-9 text-ink/85">{orgContent.history[lang]}</p> : <p className="mt-5 text-lg leading-9 text-ink/85">{t.about.p1}</p>}
         </div>
         <div className="arch overflow-hidden bg-night p-6 pt-10">
           <DomeOfTheRock className="w-full" label={t.hero.domeAlt} />
@@ -34,8 +34,8 @@ export default async function Quds({ params }: LangParams) {
         <AqsaMap />
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {landmarks.map((l) => (
-            <Link key={l.id} href={h(`/quds/${l.id}`)} className="group flex gap-5 rounded-[24px] border border-stone-200 bg-white p-6 hover:border-teal-500">
-              <Khatam className="mt-1 h-8 w-8 shrink-0" color="#c99a2e" />
+            <Link key={l.id} href={h(`/quds/${l.id}`)} className="group flex gap-5 rounded-2xl border border-stone-200 bg-white p-6 hover:border-teal-500">
+              <Khatam className="mt-1 h-8 w-8 shrink-0" color="#3aafc9" />
               <div>
                 <h3 className="font-kufi text-2xl font-bold text-teal-900">{tx(l.title, lang)}</h3>
                 <p className="mt-2 line-clamp-2 leading-8 text-muted">{tx(l.text, lang)}</p>

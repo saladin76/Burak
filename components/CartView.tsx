@@ -13,10 +13,10 @@ export default function CartView() {
   const C = t.cart;
   const { items, remove, update, total, ready } = useCart();
 
-  if (!ready) return <div className="h-60 animate-pulse rounded-[28px] bg-stone-100" />;
+  if (!ready) return <div className="h-60 animate-pulse rounded-2xl bg-stone-100" />;
   if (!items.length)
     return (
-      <div className="rounded-[28px] border border-dashed border-stone-300 bg-white p-12 text-center">
+      <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center">
         <p className="text-lg text-muted">{C.empty}</p>
         <Link href={href("/projects")} className="mt-6 inline-flex h-12 items-center gap-2 rounded-full bg-teal-900 px-6 font-bold text-white">{C.browse} <IconArrow size={18} /></Link>
       </div>
@@ -29,8 +29,8 @@ export default function CartView() {
           const p = getProject(it.slug);
           if (!p) return null;
           return (
-            <li key={it.id} className="flex flex-wrap items-center gap-4 rounded-[22px] border border-stone-200 bg-white p-4">
-              <span className="relative grid h-20 w-24 shrink-0 place-items-center overflow-hidden rounded-xl bg-teal-700 text-gold-300">
+            <li key={it.id} className="flex flex-wrap items-center gap-4 rounded-2xl border border-stone-200 bg-white p-4">
+              <span className="relative grid h-20 w-24 shrink-0 place-items-center overflow-hidden rounded-xl bg-teal-700 text-accent-300">
                 <KindIcon kind={p.kind} size={30} />
                 <SmartImg src={p.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
               </span>
@@ -64,10 +64,10 @@ export default function CartView() {
           <Link href={href("/projects")} className="inline-flex items-center gap-2 font-semibold text-teal-700 hover:text-teal-900">+ {C.continue}</Link>
         </li>
       </ul>
-      <aside className="h-fit rounded-[28px] bg-teal-900 p-6 text-white lg:sticky lg:top-28">
-        <p className="text-sm font-bold text-gold-300">{C.total}</p>
+      <aside className="h-fit rounded-2xl bg-teal-900 p-6 text-white lg:sticky lg:top-28">
+        <p className="text-sm font-bold text-accent-300">{C.total}</p>
         <p className="num mt-1 text-5xl font-bold">${fmt(total)}</p>
-        <Link href={href("/checkout")} className="mt-6 flex h-14 items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night hover:bg-gold-400">
+        <Link href={href("/checkout")} className="mt-6 flex h-14 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600">
           {C.checkout} <IconArrow size={20} />
         </Link>
       </aside>

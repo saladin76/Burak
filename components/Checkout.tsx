@@ -9,6 +9,7 @@ import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/lang-context";
 import { IconBank, IconGift, IconRepeat, IconShield } from "./Icons";
 import GiftCard from "./GiftCard";
+import { DEMO } from "@/lib/site";
 import { newRef, peekDedications, saveOrder, takeDedications } from "@/lib/orders";
 
 export default function Checkout() {
@@ -33,7 +34,7 @@ export default function Checkout() {
 
   if (ready && !items.length)
     return (
-      <div className="rounded-[28px] border border-dashed border-stone-300 bg-white p-12 text-center">
+      <div className="rounded-2xl border border-dashed border-stone-300 bg-white p-12 text-center">
         <p className="text-lg text-muted">{t.cart.empty}</p>
         <Link href={href("/projects")} className="mt-6 inline-flex h-12 items-center rounded-full bg-teal-900 px-6 font-bold text-white">{t.cart.browse}</Link>
       </div>
@@ -63,7 +64,7 @@ export default function Checkout() {
       className="grid gap-8 lg:grid-cols-[1fr_400px]"
     >
       <div className="space-y-8">
-        <fieldset className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
+        <fieldset className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
           <legend className="sr-only">{K.donor}</legend>
           <h2 className="font-kufi text-2xl font-bold text-teal-900">1. {K.donor}</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -77,7 +78,7 @@ export default function Checkout() {
           </label>
         </fieldset>
 
-        <fieldset className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
+        <fieldset className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
           <legend className="sr-only">{K.gift}</legend>
           <h2 className="flex items-center gap-2 font-kufi text-2xl font-bold text-teal-900"><IconGift size={24} /> 2. {K.gift}</h2>
           <label className="mt-4 flex items-center gap-3 text-[15px] font-semibold text-teal-900">
@@ -107,7 +108,7 @@ export default function Checkout() {
           )}
         </fieldset>
 
-        <fieldset className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
+        <fieldset className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
           <legend className="sr-only">{K.payment}</legend>
           <h2 className="font-kufi text-2xl font-bold text-teal-900">3. {K.payment}</h2>
           <div className="mt-5 grid gap-3 md:grid-cols-2">
@@ -127,7 +128,7 @@ export default function Checkout() {
         </fieldset>
       </div>
 
-      <aside className="h-fit rounded-[28px] bg-teal-900 p-6 text-white lg:sticky lg:top-28">
+      <aside className="h-fit rounded-2xl bg-teal-900 p-6 text-white lg:sticky lg:top-28">
         <h2 className="font-kufi text-xl font-bold">{K.summary}</h2>
         <ul className="mt-4 space-y-3 border-b border-white/15 pb-4">
           {items.map((it) => {
@@ -136,7 +137,7 @@ export default function Checkout() {
               <li key={it.id} className="flex items-start justify-between gap-3 text-sm">
                 <span>
                   {p ? tx(p.title, lang) : it.slug}
-                  {it.freq === "monthly" && <span className="ms-1 inline-flex items-center gap-1 text-gold-300"><IconRepeat size={12} /> {t.common.monthly}</span>}
+                  {it.freq === "monthly" && <span className="ms-1 inline-flex items-center gap-1 text-accent-300"><IconRepeat size={12} /> {t.common.monthly}</span>}
                 </span>
                 <span className="num shrink-0 font-bold">${fmt(it.amount)}</span>
               </li>
@@ -147,10 +148,10 @@ export default function Checkout() {
           <span className="text-teal-100">{t.cart.total}</span>
           <span className="num text-4xl font-bold">${fmt(total)}</span>
         </div>
-        <button type="submit" disabled={busy || !total} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night hover:bg-gold-400 disabled:opacity-60">
-          <IconShield size={20} /> {K.confirm}
+        <button type="submit" disabled={busy || !total} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-60">
+          <IconShield size={20} /> {DEMO ? K.confirmDemo : K.confirm}
         </button>
-        {deds > 0 && <p className="mt-3 rounded-xl bg-white/10 p-3 text-sm text-gold-300">✦ {deds} × {f.docs.certificate}</p>}
+        {deds > 0 && <p className="mt-3 rounded-xl bg-white/10 p-3 text-sm text-accent-300">✦ {deds} × {f.docs.certificate}</p>}
         <p className="mt-3 text-xs leading-6 text-teal-100/70">{K.terms}</p>
       </aside>
     </form>

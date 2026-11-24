@@ -21,13 +21,13 @@ export default async function Volunteer({ params }: LangParams) {
             {i === 1 && <GivingRings className="pointer-events-none absolute -bottom-24 left-1/2 w-80 -translate-x-1/2" opacity={0.3} palette={["#8acbda", "#aeddec", "#c5e5f1", "#ffffff"]} />}
             <span className={`relative mx-auto grid h-16 w-16 place-items-center rounded-full ${i === 1 ? "bg-white/15 text-white" : "bg-teal-100 text-teal-700"}`}>{icons[i]}</span>
             <h2 className="relative mt-4 font-kufi text-2xl font-bold">{w.t}</h2>
-            <p className={`relative mt-3 leading-8 ${i === 1 ? "text-teal-50" : "text-muted"}`}>{w.d}</p>
+            <p className={`relative mt-3 leading-8 ${i === 1 ? "text-white" : "text-muted"}`}>{w.d}</p>
           </div>
         ))}
       </section>
       <section id="form" className="mx-auto max-w-5xl scroll-mt-28 px-5 pt-14">
         <ul className="mb-6 flex flex-wrap justify-center gap-x-8 gap-y-2 text-[15px] font-semibold text-teal-900">
-          {F.perks.map((p) => <li key={p} className="flex items-center gap-2"><Khatam className="h-5 w-5" color="#c99a2e" /> {p}</li>)}
+          {F.perks.map((p) => <li key={p} className="flex items-center gap-2"><Khatam className="h-5 w-5" color="#3aafc9" /> {p}</li>)}
         </ul>
         <VolunteerForm />
       </section>

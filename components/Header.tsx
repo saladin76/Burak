@@ -43,25 +43,25 @@ export default function Header() {
   return (
     <>
       <div className="bg-night text-[13px] text-teal-100">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-2">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-1 [&_a]:min-h-8">
           <div className="flex items-center gap-5">
-            <a href={phone.h} className="flex items-center gap-1.5 hover:text-gold-300" dir="ltr">
+            <a href={phone.h} className="flex items-center gap-1.5 hover:text-accent-300" dir="ltr">
               <IconPhone size={15} /> {phone.v}
             </a>
-            <a href={`mailto:${contact.email}`} className="hidden items-center gap-1.5 hover:text-gold-300 sm:flex">
+            <a href={`mailto:${contact.email}`} className="hidden items-center gap-1.5 hover:text-accent-300 sm:flex">
               <IconMail size={15} /> {contact.email}
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <Link href={href("/teachers-day")} className="hidden font-semibold text-gold-300 hover:text-gold-400 lg:inline">
+            <Link href={href("/teachers-day")} className="hidden items-center font-semibold text-accent-300 hover:text-accent-400 lg:inline-flex">
               ✦ {f.teach.navLabel}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 lg:inline" />
-            <Link href={href("/zakat")} className="hidden hover:text-gold-300 md:inline">
+            <Link href={href("/zakat")} className="hidden items-center hover:text-accent-300 md:inline-flex">
               {t.common.zakatCalc}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 md:inline" />
-            <Link href={href("/contact#bank")} className="hidden hover:text-gold-300 md:inline">
+            <Link href={href("/contact#bank")} className="hidden items-center hover:text-accent-300 md:inline-flex">
               {t.common.bank}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 md:inline" />
@@ -71,9 +71,9 @@ export default function Header() {
                 <span key={l} className="flex items-center gap-1.5">
                   {i > 0 && <span className="text-teal-300">·</span>}
                   {l === lang ? (
-                    <span className="font-semibold text-gold-300" aria-current="true">{l.toUpperCase()}</span>
+                    <span className="font-semibold text-accent-300" aria-current="true">{l.toUpperCase()}</span>
                   ) : (
-                    <Link href={langLink(l)} hrefLang={l} lang={l} className="hover:text-gold-300">
+                    <Link href={langLink(l)} hrefLang={l} lang={l} className="inline-flex min-w-8 items-center justify-center hover:text-accent-300">
                       {l.toUpperCase()}
                     </Link>
                   )}
@@ -103,12 +103,12 @@ export default function Header() {
                     <Link
                       href={href(n.href)}
                       className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[15px] ${
-                        n.special ? "bg-gold-100 font-bold text-gold-700 hover:bg-gold-300/50" : active ? "text-teal-900" : "text-muted hover:text-teal-700"
+                        n.special ? "bg-accent-100 font-bold text-accent-700 hover:bg-accent-300/50" : active ? "text-teal-900" : "text-muted hover:text-teal-700"
                       }`}
                     >
                       {n.special && <KindIcon kind="aqsa" size={17} />}
                       {n.label}
-                      {active && <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-gold-500" />}
+                      {active && <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-accent-500" />}
                     </Link>
                   </li>
                 );
@@ -120,7 +120,7 @@ export default function Header() {
             <Link href={href("/cart")} aria-label={t.common.cart} className="relative grid h-11 w-11 place-items-center rounded-full text-teal-900 hover:bg-teal-100">
               <IconBag />
               {count > 0 && (
-                <span className="absolute end-1 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-gold-500 px-1 text-[10px] font-bold text-night">{count}</span>
+                <span className="absolute end-1 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-accent-500 px-1 text-[10px] font-bold text-white">{count}</span>
               )}
             </Link>
             <Link
@@ -131,7 +131,7 @@ export default function Header() {
             </Link>
             <Link
               href={href("/#donate")}
-              className="flex h-11 items-center gap-2 rounded-full bg-gold-500 px-5 text-[15px] font-bold text-night shadow-[0_6px_20px_-8px_rgba(201,154,46,.9)] hover:bg-gold-400"
+              className="flex h-11 items-center gap-2 rounded-full bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
             >
               {t.common.donateNow}
             </Link>

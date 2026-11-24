@@ -51,16 +51,16 @@ export default function LampsBuilder() {
           commit();
           router.push(href("/checkout"));
         }}
-        className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8"
+        className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8"
       >
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{L.pkgT}</h2>
         <div className="mt-4 grid grid-cols-2 gap-3">
           {L.pkgs.map((p) => (
             <button type="button" key={p.n} aria-pressed={n === p.n} onClick={() => setN(p.n)}
-              className={`rounded-2xl border p-4 text-start transition ${n === p.n ? "border-gold-500 bg-gold-100 ring-4 ring-gold-400/20" : "border-stone-200 hover:border-teal-500"}`}>
+              className={`rounded-2xl border p-4 text-start transition ${n === p.n ? "border-accent-500 bg-accent-100 ring-4 ring-accent-400/20" : "border-stone-200 hover:border-teal-500"}`}>
               <span className="flex items-baseline justify-between">
                 <b className="font-kufi text-xl text-teal-900">{p.t}</b>
-                <span className="num font-bold text-gold-700">${fmt(p.n * LAMP_PRICE)}</span>
+                <span className="num font-bold text-accent-700">${fmt(p.n * LAMP_PRICE)}</span>
               </span>
               <span className="mt-1 block text-sm text-muted">{p.d}</span>
             </button>
@@ -98,7 +98,7 @@ export default function LampsBuilder() {
         </label>
 
         <div className="mt-6 flex gap-2">
-          <button type="submit" className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night shadow-[0_0_40px_-8px_rgba(235,205,122,.9)] hover:bg-gold-400">
+          <button type="submit" className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_0_40px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600">
             {L.btn.replace("{n}", String(n)).replace("{x}", fmt(total))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
           </button>
           <button type="button" aria-label={f.cards.quickAdd} title={f.cards.quickAdd} onClick={() => { commit(); setAdded(true); setTimeout(() => setAdded(false), 2200); }}
@@ -119,7 +119,7 @@ export default function LampsBuilder() {
               <div key={i} className="aspect-[4/7]"><Lantern lit={i < shown} i={i} /></div>
             ))}
           </div>
-          <p className="relative mt-6 font-kufi text-3xl font-bold text-gold-300"><span className="num">{fmt(n)}</span> {L.lit}</p>
+          <p className="relative mt-6 font-kufi text-3xl font-bold text-accent-300"><span className="num">{fmt(n)}</span> {L.lit}</p>
         </div>
         <Certificate
           lang={lang}

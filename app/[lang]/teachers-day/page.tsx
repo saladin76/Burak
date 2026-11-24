@@ -17,22 +17,22 @@ export default async function TeachersDay({ params }: LangParams) {
   return (
     <>
       <section data-hero className="relative overflow-hidden bg-teal-500 text-white">
-        <GivingRings className="pointer-events-none absolute -end-[12%] top-1/2 w-[680px] -translate-y-1/2" opacity={0.45} palette={["#52a6c0", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#c5e5f1", "#ffffff"]} spin />
+        <GivingRings className="pointer-events-none absolute -end-[12%] top-1/2 w-[680px] -translate-y-1/2" opacity={0.45} palette={["#52a6c0", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#c5e5f1", "#ffffff"]} />
         <div className="pattern-khatam absolute inset-0 opacity-10" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 lg:grid-cols-[1.2fr_1fr] lg:py-24">
           <div>
             <p className="rise inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm font-bold">
-              <Khatam className="h-4 w-4" color="#ebcd7a" /> {T.badge}
+              <Khatam className="h-4 w-4" color="#8acbda" /> {T.badge}
             </p>
             <h1 className="rise-2 mt-6 text-balance font-kufi text-5xl font-bold leading-[1.15] md:text-7xl">{T.title}</h1>
-            <p className="rise-2 mt-3 font-kufi text-2xl text-gold-300 md:text-3xl">{T.sub}</p>
-            <p className="rise-3 mt-6 max-w-2xl text-lg leading-9 text-teal-50">{T.text}</p>
-            <a href="#gift" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night hover:bg-gold-400">{T.cta}</a>
+            <p className="rise-2 mt-3 font-kufi text-2xl text-accent-300 md:text-3xl">{T.sub}</p>
+            <p className="rise-3 mt-6 max-w-2xl text-lg leading-9 text-white">{T.text}</p>
+            <a href="#gift" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-full bg-accent-500 px-8 text-lg font-bold text-white hover:bg-accent-600">{T.cta}</a>
           </div>
-          <figure className="rise-3 relative rounded-[28px] border border-white/20 bg-white/10 p-8 backdrop-blur">
-            <span className="absolute -top-6 start-8 grid h-12 w-12 place-items-center rounded-full bg-gold-500 text-night"><KindIcon kind="education" size={26} /></span>
+          <figure className="rise-3 relative rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur">
+            <span className="absolute -top-6 start-8 grid h-12 w-12 place-items-center rounded-full bg-accent-500 text-white"><KindIcon kind="education" size={26} /></span>
             <blockquote className="font-naskh text-2xl leading-[2] md:text-[26px]">{T.hadith}</blockquote>
-            <figcaption className="mt-3 text-sm text-teal-50">{T.hadithSrc}</figcaption>
+            <figcaption className="mt-3 text-sm text-white">{T.hadithSrc}</figcaption>
           </figure>
         </div>
       </section>

@@ -33,7 +33,7 @@ export default async function NewsDetail({ params }: P) {
       <PageHero lang={lang} title={tx(n.title, lang)} kicker={tx(n.tag, lang)} crumbs={[{ href: "/news", label: t.news.title }]} image={n.image} />
       <article className="mx-auto grid max-w-7xl gap-10 px-5 pt-12 lg:grid-cols-[1fr_380px]">
         <div>
-          <div className="relative aspect-[16/9] overflow-hidden rounded-[28px] bg-night-2">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-night-2">
             <div className="pattern-khatam absolute inset-0 opacity-40" />
             <SmartImg src={n.image} alt={tx(n.title, lang)} className="absolute inset-0 h-full w-full object-cover" />
           </div>

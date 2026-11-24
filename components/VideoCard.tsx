@@ -9,7 +9,7 @@ export default function VideoCard({ id, title, big = false }: { id: string; titl
   const { t } = useI18n();
   const [play, setPlay] = useState(false);
   return (
-    <figure className="group overflow-hidden rounded-[22px] border border-stone-200 bg-white">
+    <figure className="group overflow-hidden rounded-2xl border border-stone-200 bg-white">
       <div className={`relative overflow-hidden bg-night ${big ? "aspect-video" : "aspect-video"}`}>
         {play ? (
           <iframe
@@ -31,7 +31,7 @@ export default function VideoCard({ id, title, big = false }: { id: string; titl
               className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
             />
             <span className="absolute inset-0 bg-gradient-to-t from-night/70 via-night/10 to-transparent" />
-            <span className={`absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-gold-500 text-night shadow-[0_0_0_10px_rgba(235,205,122,.25)] transition group-hover:scale-110 ${big ? "h-20 w-20" : "h-14 w-14"}`}>
+            <span className={`absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-accent-500 text-white shadow-[0_0_0_10px_rgba(0,125,165,.25)] transition group-hover:scale-110 ${big ? "h-20 w-20" : "h-14 w-14"}`}>
               <svg viewBox="0 0 24 24" className={big ? "h-9 w-9" : "h-6 w-6"} fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
             </span>
           </button>

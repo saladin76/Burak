@@ -18,7 +18,7 @@ function Lamp({ lit, onClick, i }: { lit: boolean; onClick: () => void; i: numbe
       aria-label={(lit ? t.lamps.lit : t.lamps.light).replace("{n}", String(i + 1))}
       className="group flex flex-col items-center focus-visible:outline-none"
     >
-      <span className="w-px bg-gold-500/60" style={{ height: drops[i] }} />
+      <span className="w-px bg-brass/60" style={{ height: drops[i] }} />
       <svg viewBox="0 0 40 70" className={`h-20 w-12 transition-transform duration-500 group-hover:rotate-3 ${lit ? "drop-shadow-[0_0_22px_rgba(235,205,122,.95)]" : ""}`} aria-hidden="true">
         <path d="M20 0v6" stroke="#c99a2e" strokeWidth="2" />
         <path d="M12 6h16l-3 6H15Z" fill="#9a7214" />
@@ -54,10 +54,10 @@ export default function Lamps() {
       </div>
 
       <div className="relative mx-auto mt-10 max-w-4xl px-5 text-center">
-        <p className="mb-5 text-sm font-bold text-gold-300">{L.intro}</p>
+        <p className="mb-5 text-sm font-bold text-accent-300">{L.intro}</p>
         <blockquote className="font-naskh text-[24px] leading-[2] text-teal-50 md:text-[32px]">
           {L.hadith1}
-          <span className="mt-2 block text-gold-300">{L.hadith2}</span>
+          <span className="mt-2 block text-accent-300">{L.hadith2}</span>
         </blockquote>
         <p className="mt-4 text-sm text-teal-100/60">{L.source}</p>
 
@@ -65,12 +65,12 @@ export default function Lamps() {
           {count === N ? L.all : (
             <>
               {L.hint.split("{n}")[0].replace("{t}", String(N))}
-              <b className="num text-xl text-gold-300">{count}</b>
+              <b className="num text-xl text-accent-300">{count}</b>
               {L.hint.split("{n}")[1].replace("{t}", String(N))}
             </>
           )}
         </p>
-        <Link href={href("/lamps")} className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night shadow-[0_0_40px_-6px_rgba(235,205,122,.8)] hover:bg-gold-400">
+        <Link href={href("/lamps")} className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_0_40px_-6px_rgba(0,125,165,.8)] hover:bg-accent-600">
           {L.cta} <IconArrow size={20} />
         </Link>
       </div>

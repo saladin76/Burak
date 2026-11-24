@@ -42,7 +42,7 @@ export default function TeacherGift() {
           commit();
           router.push(href("/checkout"));
         }}
-        className="h-fit rounded-[28px] border border-stone-200 bg-white p-6 md:p-8"
+        className="h-fit rounded-2xl border border-stone-200 bg-white p-6 md:p-8"
       >
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{T.formT}</h2>
         <div className="mt-5 grid gap-4">
@@ -80,7 +80,7 @@ export default function TeacherGift() {
             <div className="grid grid-cols-4 gap-2">
               {AMOUNTS.map((a) => (
                 <button type="button" key={a} aria-pressed={!v.custom && v.amount === a} onClick={() => setV({ ...v, amount: a, custom: "" })}
-                  className={`num h-12 rounded-xl border text-lg font-bold ${!v.custom && v.amount === a ? "border-gold-500 bg-gold-100 text-gold-700" : "border-stone-300 text-teal-900"}`}>
+                  className={`num h-12 rounded-xl border text-lg font-bold ${!v.custom && v.amount === a ? "border-accent-500 bg-accent-100 text-accent-700" : "border-stone-300 text-teal-900"}`}>
                   ${a}
                 </button>
               ))}
@@ -89,7 +89,7 @@ export default function TeacherGift() {
           </fieldset>
         </div>
         <div className="mt-6 flex gap-2">
-          <button type="submit" disabled={!ok} className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night hover:bg-gold-400 disabled:opacity-50">
+          <button type="submit" disabled={!ok} className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-50">
             {T.cta} · <span className="num">${fmt(amount)}</span> <IconArrow size={20} />
           </button>
           <button type="button" disabled={!ok} aria-label={f.cards.quickAdd} title={f.cards.quickAdd}

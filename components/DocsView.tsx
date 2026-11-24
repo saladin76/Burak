@@ -96,11 +96,11 @@ export default function DocsView() {
     return list;
   }, [order, lang, D, f]);
 
-  if (!order) return <div className="h-96 animate-pulse rounded-[28px] bg-stone-100" />;
+  if (!order) return <div className="h-96 animate-pulse rounded-2xl bg-stone-100" />;
 
   return (
     <div>
-      {isSample && <p className="no-print mb-6 rounded-2xl border border-gold-300 bg-gold-100/70 p-4 text-center font-semibold text-gold-700">{D.noOrder}</p>}
+      {isSample && <p className="no-print mb-6 rounded-2xl border border-accent-300 bg-accent-100/70 p-4 text-center font-semibold text-accent-700">{D.noOrder}</p>}
       <div className="no-print mb-8 flex flex-wrap items-center justify-between gap-3">
         <div role="tablist" className="flex flex-wrap gap-2">
           {docs.map((d, i) => (
@@ -110,7 +110,7 @@ export default function DocsView() {
             </button>
           ))}
         </div>
-        <button onClick={() => window.print()} className="flex h-12 items-center gap-2 rounded-full bg-gold-500 px-6 font-bold text-night hover:bg-gold-400">
+        <button onClick={() => window.print()} className="flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
           <IconPrint size={20} /> {D.print}
         </button>
       </div>

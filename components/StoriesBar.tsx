@@ -20,7 +20,7 @@ const MapIcon = () => (
   </svg>
 );
 const icons: Record<string, React.ReactNode> = {
-  quds: <GivingWaves className="h-8 w-8" rings={4} stroke={14} gap={10} palette={["#ebcd7a", "#8acbda", "#ebcd7a", "#8acbda"]} />,
+  quds: <GivingWaves className="h-8 w-8" rings={4} stroke={14} gap={10} palette={["#8acbda", "#8acbda", "#8acbda", "#8acbda"]} />,
   map: <MapIcon />,
   lamps: <Lantern />,
   support: <IconHeart size={26} />,
@@ -28,16 +28,16 @@ const icons: Record<string, React.ReactNode> = {
 
 type SK = "teacher" | "quds" | "map" | "gaza" | "winter" | "lamps" | "zakat" | "quran" | "water" | "support";
 const items: { href: string; k: SK; kind: Kind; tone: string; isNew?: boolean }[] = [
-  { href: "/teachers-day", k: "teacher", kind: "education", tone: "from-gold-300 to-gold-700", isNew: true },
-  { href: "/projects?region=quds", k: "quds", kind: "support", tone: "from-teal-500 to-teal-900", isNew: true },
-  { href: "/quds#landmarks", k: "map", kind: "rebuild", tone: "from-gold-400 to-gold-700", isNew: true },
+  { href: "/teachers-day", k: "teacher", kind: "education", tone: "from-accent-300 to-accent-700" },
+  { href: "/projects?region=quds", k: "quds", kind: "support", tone: "from-teal-500 to-teal-900" },
+  { href: "/quds#landmarks", k: "map", kind: "rebuild", tone: "from-accent-400 to-accent-700" },
   { href: "/projects?region=gaza", k: "gaza", kind: "food", tone: "from-teal-300 to-teal-700" },
-  { href: "/projects/qudus-winter", k: "winter", kind: "winter", tone: "from-cobalt to-teal-900", isNew: true },
-  { href: "/lamps", k: "lamps", kind: "aqsa", tone: "from-gold-300 to-gold-600", isNew: true },
-  { href: "/zakat", k: "zakat", kind: "zakat", tone: "from-gold-500 to-teal-900" },
+  { href: "/projects/qudus-winter", k: "winter", kind: "winter", tone: "from-cobalt to-teal-900" },
+  { href: "/lamps", k: "lamps", kind: "aqsa", tone: "from-accent-300 to-accent-600", isNew: true },
+  { href: "/zakat", k: "zakat", kind: "zakat", tone: "from-accent-500 to-teal-900" },
   { href: "/projects?kind=quran", k: "quran", kind: "quran", tone: "from-tile to-teal-900" },
   { href: "/projects?kind=water", k: "water", kind: "water", tone: "from-teal-300 to-cobalt" },
-  { href: "/projects?monthly=1", k: "support", kind: "support", tone: "from-gold-400 to-teal-700" },
+  { href: "/projects?monthly=1", k: "support", kind: "support", tone: "from-accent-400 to-teal-700" },
 ];
 
 export default function StoriesBar({ lang }: { lang: Lang }) {
@@ -49,11 +49,11 @@ export default function StoriesBar({ lang }: { lang: Lang }) {
           <li key={s.k} className="shrink-0">
             <Link href={lhref(lang, s.href)} className="group flex w-[78px] flex-col items-center gap-2 text-center">
               <span className={`relative grid h-[70px] w-[70px] place-items-center rounded-full bg-gradient-to-br p-[3px] ${s.tone}`}>
-                <span className="grid h-full w-full place-items-center rounded-full border-[3px] border-stone-50 bg-teal-900 text-gold-300 transition group-hover:scale-95">
+                <span className="grid h-full w-full place-items-center rounded-full border-[3px] border-stone-50 bg-teal-900 text-accent-300 transition group-hover:scale-95">
                   {icons[s.k] ?? <KindIcon kind={s.kind} size={28} />}
                 </span>
                 {s.isNew && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border-2 border-stone-50 bg-gold-500 px-1.5 text-[10px] font-bold leading-4 text-night">
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 rounded-full border-2 border-stone-50 bg-accent-500 px-1.5 text-[10px] font-bold leading-4 text-white">
                     {t.isNew}
                   </span>
                 )}

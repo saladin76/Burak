@@ -32,13 +32,17 @@
   --color-tile: #3aafc9;
   --color-cobalt: #1d4f91;
 
-  /* ذهب القبة */
-  --color-gold-700: #7a5a0e;
-  --color-gold-600: #9a7214;
-  --color-gold-500: #c99a2e;
-  --color-gold-400: #dcb24b;
-  --color-gold-300: #ebcd7a;
-  --color-gold-100: #f8edcf;
+  /* لون الإجراء (Accent) = ألوان دليل الهوية 2025 فقط — لا ذهبي في الواجهة */
+  --color-accent-700: #003d55; /* لون الشعار الداكن */
+  --color-accent-600: #006a8c; /* حالة الضغط/التمرير */
+  --color-accent-500: #007da5; /* لون الشعار — أزرار التبرع */
+  --color-accent-400: #3aafc9; /* ألوان المفهوم */
+  --color-accent-300: #8acbda;
+  --color-accent-100: #dff1f7;
+
+  /* ألوان الأجسام الحقيقية فقط (قبة الصخرة، ضوء القناديل) — لا تُستخدم للواجهة */
+  --color-flame: #ebcd7a;
+  --color-brass: #c99a2e;
 
   /* حجر القدس */
   --color-stone-50: #fbf8f2;
@@ -53,15 +57,17 @@
   --color-ink: #10222a;
   --color-muted: #4a5b62;
 
-  --font-kufi: "AwanZaman", "Reem Kufi", "IBM Plex Sans Arabic", sans-serif;
+  --font-kufi: "awanzaman", "AwanZaman", "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
   --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-naskh: "Amiri", "IBM Plex Sans Arabic", serif;
 
   --radius-arch: 999px 999px 18px 18px;
 }
 
-/* خط الهوية العربي الرسمي AwanZaman — ضع ملفات الخط في public/fonts
-   (إن لم تتوفر يُستخدم Reem Kufi تلقائياً) */
+/* خط الهوية الرسمي AwanZaman (تجاري — TypeTogether / Adobe Fonts):
+   1) عبر Adobe Fonts: ضع معرّف المشروع في NEXT_PUBLIC_ADOBE_FONTS_KIT (العائلة "awanzaman")
+   2) أو ملفات مرخّصة woff2 في public/fonts
+   وإلا يُستخدم Noto Kufi Arabic بديلاً رسمياً */
 @font-face {
   font-family: "AwanZaman";
   src: url("/fonts/AwanZaman-Bold.woff2") format("woff2");
@@ -95,12 +101,12 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold-300);
+  background: var(--color-accent-300);
   color: var(--color-night);
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-gold-400);
+  outline: 3px solid var(--color-accent-400);
   outline-offset: 2px;
   border-radius: 6px;
 }
@@ -109,7 +115,7 @@ body {
 
 /* نجمة ثمانية (خاتم سليمان) — نمط خلفية */
 .pattern-khatam {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%23ebcd7a' stroke-width='1' opacity='.55'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%238acbda' stroke-width='1' opacity='.45'%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24' transform='rotate(45 36 36)'/%3E%3Ccircle cx='36' cy='36' r='5'/%3E%3Cpath d='M0 0l12 12M72 0L60 12M0 72l12-12M72 72L60 60'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 72px 72px;
 }
 
@@ -240,3 +246,6 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* guard against horizontal overflow on mobile */
+html, body { overflow-x: clip; }

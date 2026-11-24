@@ -2,7 +2,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { GivingWaves } from "@/components/Motifs";
 import { IconArrow, KindIcon } from "@/components/Icons";
-import { kindLabel, projects, regionLabel, stats, type Kind, type Region } from "@/lib/data";
+import { kindLabel, orgContent, projects, regionLabel, stats, type Kind, type Region } from "@/lib/data";
 import { fmt, tx } from "@/lib/i18n";
 import { metaTitle, pageLang, type LangParams } from "@/lib/page";
 
@@ -15,7 +15,7 @@ export default async function Reports({ params }: LangParams) {
   const byRegion = (Object.keys(regionLabel) as Region[]).map((r) => ({ r, n: projects.filter((p) => p.region === r).length }));
   const max = Math.max(...byKind.map((x) => x.n));
   const total = projects.length;
-  const regionColor: Record<Region, string> = { quds: "#007da5", gaza: "#003d55", palestine: "#c99a2e" };
+  const regionColor: Record<Region, string> = { quds: "#007da5", gaza: "#003d55", palestine: "#3aafc9" };
   let acc = 0;
 
   return (
@@ -26,15 +26,28 @@ export default async function Reports({ params }: LangParams) {
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {[...stats.lifetime.map((s) => ({ v: s.value, l: tx(s.label, lang) })), ...stats.annual.map((s) => ({ v: fmt(s.value), l: tx(s.label, lang) }))].map((s, i) => (
             <div key={i} className={`arch border px-4 pb-6 pt-10 text-center ${i < 3 ? "border-teal-900 bg-teal-900 text-white" : "border-stone-200 bg-white"}`}>
-              <p className={`num text-3xl font-bold ${i < 3 ? "text-gold-300" : "text-teal-900"}`} dir="ltr">{s.v}</p>
+              <p className={`num text-3xl font-bold ${i < 3 ? "text-accent-300" : "text-teal-900"}`} dir="ltr">{s.v}</p>
               <p className={`mt-2 text-sm ${i < 3 ? "text-teal-100" : "text-muted"}`}>{s.l}</p>
             </div>
           ))}
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-5 pt-16">
+        <h2 className="mb-8 font-kufi text-2xl font-bold text-teal-900 md:text-3xl">{t.home.howTitle}</h2>
+        <ol className="grid gap-4 md:grid-cols-5">
+          {t.home.steps.map((s, i) => (
+            <li key={s.t} className="rounded-2xl border border-stone-200 bg-white p-5">
+              <span className="num grid h-10 w-10 place-items-center rounded-full bg-teal-900 font-bold text-white">{i + 1}</span>
+              <h3 className="mt-3 font-kufi text-lg font-bold text-teal-900">{s.t}</h3>
+              <p className="mt-1 text-sm leading-7 text-muted">{s.d}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <section className="mx-auto grid max-w-7xl gap-8 px-5 pt-16 lg:grid-cols-[1.5fr_1fr]">
-        <div className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
+        <div className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
           <h2 className="mb-6 font-kufi text-2xl font-bold text-teal-900">{R.byKind}</h2>
           <ul className="space-y-4">
             {byKind.map(({ k, n }) => (
@@ -49,7 +62,7 @@ export default async function Reports({ params }: LangParams) {
             ))}
           </ul>
         </div>
-        <div className="relative overflow-hidden rounded-[28px] bg-night p-6 text-white md:p-8">
+        <div className="relative overflow-hidden rounded-2xl bg-night p-6 text-white md:p-8">
           <GivingWaves className="pointer-events-none absolute -bottom-6 end-[-30px] h-60 w-auto" opacity={0.15} />
           <h2 className="relative mb-6 font-kufi text-2xl font-bold">{R.byRegion}</h2>
           <svg viewBox="0 0 42 42" className="relative mx-auto h-48 w-48 -rotate-90" role="img" aria-label={R.byRegion}>
@@ -73,19 +86,20 @@ export default async function Reports({ params }: LangParams) {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 pt-16">
-        <h2 className="mb-6 font-kufi text-2xl font-bold text-teal-900">{R.annual}</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {["2025", "2024", "2023"].map((y) => (
-            <div key={y} className="flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5">
-              <span className="num grid h-16 w-14 place-items-center rounded-b-md rounded-t-full bg-gold-100 text-lg font-bold text-gold-700">{y}</span>
-              <div>
-                <p className="font-bold text-teal-900">{R.download}</p>
-                <p className="text-sm text-muted">{R.soon}</p>
-              </div>
+        {orgContent.annualReports.length > 0 && (
+          <>
+            <h2 className="mb-6 font-kufi text-2xl font-bold text-teal-900">{R.annual}</h2>
+            <div className="mb-10 grid gap-4 sm:grid-cols-3">
+              {orgContent.annualReports.map((r) => (
+                <a key={r.year} href={r.url} className="flex items-center gap-4 rounded-2xl border border-stone-200 bg-white p-5 hover:border-teal-500">
+                  <span className="num grid h-16 w-14 place-items-center rounded-b-md rounded-t-full bg-accent-100 text-lg font-bold text-accent-700">{r.year}</span>
+                  <p className="font-bold text-teal-900">{R.download}</p>
+                </a>
+              ))}
             </div>
-          ))}
-        </div>
-        <Link href={h("/projects")} className="mt-10 inline-flex h-12 items-center gap-2 rounded-full bg-gold-500 px-6 font-bold text-night hover:bg-gold-400">
+          </>
+        )}
+        <Link href={h("/projects")} className="inline-flex h-12 items-center gap-2 rounded-full bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
           {t.about.contribute} <IconArrow size={18} />
         </Link>
       </section>

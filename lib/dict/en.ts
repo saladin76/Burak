@@ -7,6 +7,8 @@ const en: typeof ar = {
     org: "Burak Foundation",
   },
   common: {
+    demo: "Preview version for review — donations and payments are not active yet.",
+    demoLink: "Donate now on our current website",
     donateNow: "Donate Now",
     beSupporter: "Become a Supporter",
     allProjects: "All Projects",
@@ -219,6 +221,7 @@ const en: typeof ar = {
     giftFor: "Gift for",
   },
   checkout: {
+    confirmDemo: "Confirm donation (preview)",
     title: "Complete Your Donation",
     kicker: "One last step",
     donor: "Donor details",
@@ -342,8 +345,8 @@ const en: typeof ar = {
     title: "Our Impact & Reports",
     kicker: "Transparency and impact",
     text: "Numbers made by your giving, our projects by cause, and annual reports.",
-    byKind: "Projects by cause",
-    byRegion: "Projects by region",
+    byKind: "Projects currently open for donations, by cause",
+    byRegion: "Projects currently open for donations, by region",
     projects: "projects",
     annual: "Annual reports",
     download: "Download report (PDF)",
@@ -366,6 +369,7 @@ const en: typeof ar = {
     sent: "Thank you! We've received your application and will be in touch soon.",
   },
   contact: {
+    bankAsk: "For our bank account numbers (USD, EUR, TRY), contact our donor care team.",
     title: "Contact Us",
     kicker: "We'd love to hear from you",
     text: "For questions about projects, donations or volunteering, reach us through the channels below.",

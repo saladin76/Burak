@@ -43,6 +43,18 @@ export const kindLabel: Record<Kind, L> = {
   support: { ar: "تثبيت المقدسيين", tr: "Kudüslülere destek", en: "Supporting Jerusalemites" },
 };
 
+/** محتوى تديره المؤسسة — الأقسام الفارغة تُخفى تلقائياً من الموقع */
+export const orgContent: {
+  bankAccounts: { currency: string; bank: string; iban: string; name?: string }[];
+  annualReports: { year: string; url: string }[];
+  /** نص «نبذة وتاريخ» لكل لغة */
+  history: Partial<L> | null;
+} = {
+  bankAccounts: [],
+  annualReports: [],
+  history: null,
+};
+
 /** سعر القنديل المقترح بالدولار — يُعتمد من إدارة المؤسسة */
 export const LAMP_PRICE = 10;
 
@@ -194,18 +206,6 @@ export const projects: Project[] = [
     },
     amounts: [100, 200, 500],
     image: U + "QjFvzgrxsEvbqLSeLuXs_1771495221952.jpg",
-  },
-  {
-    slug: "quds-homes-restoration",
-    title: { ar: "ترميم البيوت المقدسية", tr: "Kudüs Evleri Onarımı", en: "Restoring Jerusalem Homes" },
-    region: "quds",
-    kind: "rebuild",
-    summary: {
-      ar: "ترميم البيوت القديمة في محيط الأقصى لتثبيت أهلها أمام محاولات التهجير.",
-      tr: "Sahiplerini sürgüne karşı yerinde tutmak için Aksa çevresindeki eski evlerin onarımı.",
-      en: "Restoring old homes around Al-Aqsa so their families can remain despite displacement attempts.",
-    },
-    amounts: [500, 1000, 2000],
   },
   {
     slug: "mshrwa-dam-algharmyn-fy-alqds",

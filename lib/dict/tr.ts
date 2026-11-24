@@ -7,6 +7,8 @@ const tr: typeof ar = {
     org: "Burak Derneği",
   },
   common: {
+    demo: "İnceleme için deneme sürümü — bağış ve ödeme henüz aktif değil.",
+    demoLink: "Şimdi mevcut sitemizden bağış yapın",
     donateNow: "Bağış Yap",
     beSupporter: "Destekçi Ol",
     allProjects: "Tüm Projeler",
@@ -219,6 +221,7 @@ const tr: typeof ar = {
     giftFor: "Hediye:",
   },
   checkout: {
+    confirmDemo: "Bağışı onayla (deneme)",
     title: "Bağışı Tamamla",
     kicker: "Son adım",
     donor: "Bağışçı bilgileri",
@@ -342,8 +345,8 @@ const tr: typeof ar = {
     title: "Faaliyet ve Raporlar",
     kicker: "Şeffaflık ve etki",
     text: "Bağışlarınızla oluşan rakamlar, alanlara göre projelerimiz ve yıllık raporlar.",
-    byKind: "Alanlara göre projeler",
-    byRegion: "Bölgelere göre projeler",
+    byKind: "Bağışa açık projeler (alanlara göre)",
+    byRegion: "Bağışa açık projeler (bölgelere göre)",
     projects: "proje",
     annual: "Yıllık raporlar",
     download: "Raporu indir (PDF)",
@@ -366,6 +369,7 @@ const tr: typeof ar = {
     sent: "Teşekkürler! Başvurunuzu aldık, en kısa sürede sizinle iletişime geçeceğiz.",
   },
   contact: {
+    bankAsk: "Banka hesap numaralarımız (USD, EUR, TRY) için bağışçı hizmetleri ekibimizle iletişime geçin.",
     title: "İletişim",
     kicker: "Sizden haber almak isteriz",
     text: "Projeler, bağışlar veya gönüllülük hakkında sorularınız için bize ulaşın.",

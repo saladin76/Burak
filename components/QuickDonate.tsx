@@ -58,7 +58,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
         e.preventDefault();
         if (addToCart()) router.push(href("/checkout"));
       }}
-      className="relative scroll-mt-32 rounded-[28px] border border-stone-200 bg-white p-5 shadow-[0_30px_80px_-40px_rgba(0,61,85,.55)] sm:p-7"
+      className="relative scroll-mt-32 rounded-2xl border border-stone-200 bg-white p-5 shadow-[0_30px_80px_-40px_rgba(0,61,85,.55)] sm:p-7"
       aria-label={d.formLabel}
     >
       <div className="mb-5 flex items-center justify-between gap-3">
@@ -130,7 +130,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
                   setCustom("");
                 }}
                 className={`num relative h-14 rounded-xl border text-lg font-bold transition ${
-                  on ? "border-gold-500 bg-gold-100 text-gold-700 ring-2 ring-gold-400/40" : "border-stone-300 text-teal-900 hover:border-teal-500"
+                  on ? "border-accent-500 bg-accent-100 text-accent-700 ring-2 ring-accent-400/40" : "border-stone-300 text-teal-900 hover:border-teal-500"
                 }`}
               >
                 {a === popular && (
@@ -161,7 +161,7 @@ export default function QuickDonate({ initial, lockProject = false }: Props) {
         <button
           type="submit"
           disabled={!value}
-          className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night shadow-[0_12px_30px_-12px_rgba(201,154,46,1)] transition hover:bg-gold-400 disabled:opacity-50"
+          className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_12px_30px_-12px_rgba(0,125,165,1)] transition hover:bg-accent-600 disabled:opacity-50"
         >
           {d.donateWith} <span className="num">${fmt(value)}</span>
           {freq === "monthly" && <span className="text-base font-semibold">{t.common.monthly}</span>}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { projectPath, projects, regionLabel, type Kind } from "@/lib/data";
 import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
@@ -37,6 +37,12 @@ export default function GivingAssistant() {
   const { lang, t, href } = useI18n();
   const A = t.assistant;
   const [open, setOpen] = useState(false);
+  // يُفتح أيضاً من شريط الجوال
+  useEffect(() => {
+    const on = () => setOpen(true);
+    window.addEventListener("burak:assistant", on);
+    return () => window.removeEventListener("burak:assistant", on);
+  }, []);
   const [step, setStep] = useState(0);
   const [where, setWhere] = useState<Where>("any");
   const [what, setWhat] = useState<What>("any");
@@ -71,7 +77,7 @@ export default function GivingAssistant() {
       onClick={onClick}
       aria-pressed={on}
       className={`flex min-h-12 items-center gap-2 rounded-xl border px-3 py-2 text-start text-[15px] font-semibold transition ${
-        on ? "border-gold-500 bg-gold-100 text-gold-700" : "border-stone-200 bg-white text-teal-900 hover:border-teal-500"
+        on ? "border-accent-500 bg-accent-100 text-accent-700" : "border-stone-200 bg-white text-teal-900 hover:border-teal-500"
       }`}
     >
       {children}
@@ -79,9 +85,9 @@ export default function GivingAssistant() {
   );
 
   return (
-    <div className="fixed bottom-24 end-4 z-40 lg:bottom-5 lg:end-5">
+    <div className="fixed bottom-20 end-4 z-40 lg:bottom-5 lg:end-5">
       {open && (
-        <div role="dialog" aria-label={A.name} className="rise absolute bottom-16 end-0 w-[min(92vw,380px)] overflow-hidden rounded-[24px] border border-stone-200 bg-stone-50 shadow-[0_30px_80px_-20px_rgba(1,64,78,.6)]">
+        <div role="dialog" aria-label={A.name} className="rise absolute bottom-16 end-0 w-[min(92vw,380px)] overflow-hidden rounded-2xl border border-stone-200 bg-stone-50 shadow-[0_30px_80px_-20px_rgba(1,64,78,.6)]">
           <div className="relative bg-teal-900 px-5 py-4 text-white">
             <div className="pattern-khatam absolute inset-0 opacity-20" />
             <div className="relative flex items-center justify-between">
@@ -95,7 +101,7 @@ export default function GivingAssistant() {
             </div>
             <div className="relative mt-3 flex gap-1.5" aria-hidden="true">
               {[0, 1, 2, 3].map((i) => (
-                <span key={i} className={`h-1 flex-1 rounded-full ${i <= step ? "bg-gold-400" : "bg-white/15"}`} />
+                <span key={i} className={`h-1 flex-1 rounded-full ${i <= step ? "bg-accent-400" : "bg-white/15"}`} />
               ))}
             </div>
           </div>
@@ -107,7 +113,7 @@ export default function GivingAssistant() {
                 <div className="grid gap-2">
                   {whereKeys.map((v) => (
                     <Opt key={v} on={where === v} onClick={() => { setWhere(v); setStep(1); }}>
-                      <Khatam className="h-4 w-4" color="#c99a2e" /> {A.where[v]}
+                      <Khatam className="h-4 w-4" color="#3aafc9" /> {A.where[v]}
                     </Opt>
                   ))}
                 </div>
@@ -148,7 +154,7 @@ export default function GivingAssistant() {
                       onClick={() => setOpen(false)}
                       className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white p-3 hover:border-teal-500"
                     >
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-t-full rounded-b-md bg-teal-900 text-gold-300">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-t-full rounded-b-md bg-teal-900 text-accent-300">
                         <KindIcon kind={p.kind} size={22} />
                       </span>
                       <span className="min-w-0">
@@ -173,9 +179,9 @@ export default function GivingAssistant() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={A.name}
-        className="flex h-14 items-center gap-2 rounded-full bg-teal-900 p-2 font-bold sm:pe-5 text-white shadow-[0_14px_40px_-12px_rgba(1,64,78,.9)] hover:bg-teal-700"
+        className="hidden h-14 lg:flex items-center gap-2 rounded-full bg-teal-900 p-2 font-bold sm:pe-5 text-white shadow-[0_14px_40px_-12px_rgba(1,64,78,.9)] hover:bg-teal-700"
       >
-        <span className="grid h-10 w-10 place-items-center rounded-full bg-gold-500 text-night">
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-accent-500 text-white">
           <Khatam className="h-6 w-6" color="#011f2c" />
         </span>
         <span className="hidden sm:inline">{A.name}</span>

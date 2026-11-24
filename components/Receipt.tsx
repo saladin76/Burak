@@ -79,7 +79,7 @@ export default function Receipt({ order, lang, verifyUrl }: { order: Order; lang
 
           <div className="mt-[5cqw] flex items-end justify-between gap-[4cqw]">
             <div className="max-w-[60%] text-muted" style={{ fontSize: "1.7cqw", lineHeight: 1.7 }}>
-              <p className="flex items-center gap-[1cqw] font-bold text-teal-900"><Khatam className="h-[2.4cqw] w-[2.4cqw]" color="#c99a2e" /> {D.sign}</p>
+              <p className="flex items-center gap-[1cqw] font-bold text-teal-900"><Khatam className="h-[2.4cqw] w-[2.4cqw]" color="#3aafc9" /> {D.sign}</p>
               <p className="mt-[1cqw]">{D.issued}</p>
             </div>
             <div className="text-center">

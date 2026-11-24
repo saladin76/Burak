@@ -163,7 +163,7 @@ export function DomeOfTheRock({ className = "", label = "" }: { className?: stri
 }
 
 /* فاصل زخرفي: نجمة ثمانية بين خطين */
-export function OrnamentDivider({ className = "", color = "#c99a2e" }: { className?: string; color?: string }) {
+export function OrnamentDivider({ className = "", color = "#3aafc9" }: { className?: string; color?: string }) {
   return (
     <svg viewBox="0 0 200 20" className={className} aria-hidden="true">
       <path d="M0 10h78M122 10h78" stroke={color} strokeWidth="1.2" />

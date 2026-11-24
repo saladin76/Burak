@@ -55,7 +55,7 @@ export default function ZakatCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-      <div className="rounded-[28px] border border-stone-200 bg-white p-6 md:p-8">
+      <div className="rounded-2xl border border-stone-200 bg-white p-6 md:p-8">
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s1}</h2>
         <p className="mt-1 text-sm text-muted">{Z.s1d}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -84,10 +84,10 @@ export default function ZakatCalculator() {
       </div>
 
       <aside className="lg:sticky lg:top-28 lg:self-start">
-        <div className="relative overflow-hidden rounded-[28px] bg-teal-900 p-6 text-white md:p-8">
+        <div className="relative overflow-hidden rounded-2xl bg-teal-900 p-6 text-white md:p-8">
           <div className="pattern-khatam absolute inset-0 opacity-15" />
           <div className="relative">
-            <p className="text-sm font-bold text-gold-300">{Z.due}</p>
+            <p className="text-sm font-bold text-accent-300">{Z.due}</p>
             <p className="num mt-2 text-6xl font-bold" aria-live="polite">${fmt(Math.round(r.due))}</p>
             <dl className="mt-6 grid gap-3 border-t border-white/15 pt-5 text-sm">
               <div className="flex justify-between"><dt className="text-teal-100">{Z.assets}</dt><dd className="num font-bold">${fmt(Math.round(r.assets))}</dd></div>
@@ -104,11 +104,11 @@ export default function ZakatCalculator() {
             <Link
               href={href(`/projects/alrka-alqds?amount=${Math.round(r.due)}`)}
               aria-disabled={!r.due}
-              className={`mt-5 flex h-14 items-center justify-center gap-2 rounded-2xl text-lg font-bold ${r.due ? "bg-gold-500 text-night hover:bg-gold-400" : "pointer-events-none bg-white/10 text-white/50"}`}
+              className={`mt-5 flex h-14 items-center justify-center gap-2 rounded-2xl text-lg font-bold ${r.due ? "bg-accent-500 text-white hover:bg-accent-600" : "pointer-events-none bg-white/10 text-white/50"}`}
             >
               {Z.payQuds} <IconArrow size={20} />
             </Link>
-            <Link href={href("/projects/zakat-gaza")} className="mt-3 block text-center text-sm font-semibold text-gold-300 hover:underline">
+            <Link href={href("/projects/zakat-gaza")} className="mt-3 block text-center text-sm font-semibold text-accent-300 hover:underline">
               {Z.payGaza}
             </Link>
           </div>

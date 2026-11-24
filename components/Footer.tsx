@@ -16,7 +16,7 @@ export default function Footer({ lang }: { lang: Lang }) {
   const t = getDict(lang);
   const h = (p: string) => lhref(lang, p);
   const handle = contact.handles[lang];
-  const linkCls = "hover:text-gold-300";
+  const linkCls = "inline-block py-1 hover:text-accent-300";
 
   return (
     <footer className="relative mt-24 bg-night text-teal-100">
@@ -30,12 +30,12 @@ export default function Footer({ lang }: { lang: Lang }) {
           <div>
             <BurakLogo light latin={lang !== "ar"} className="h-24" />
             <p className="mt-5 max-w-sm leading-8 text-teal-100/85">{t.footer.about}</p>
-            <p className="mt-4 font-kufi text-xl text-gold-300">{t.common.slogan}</p>
+            <p className="mt-4 font-kufi text-xl text-accent-300">{t.common.slogan}</p>
           </div>
 
           <nav aria-label={t.footer.org}>
             <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.org}</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1">
               <li><Link className={linkCls} href={h("/about")}>{t.nav.about}</Link></li>
               <li><Link className={linkCls} href={h("/about#vision")}>{t.footer.vision}</Link></li>
               <li><Link className={linkCls} href={h("/reports")}>{t.nav.reports}</Link></li>
@@ -48,7 +48,7 @@ export default function Footer({ lang }: { lang: Lang }) {
 
           <nav aria-label={t.footer.give}>
             <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.give}</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1">
               <li><Link className={linkCls} href={h("/projects?region=quds")}>{t.footer.qudsProjects}</Link></li>
               <li><Link className={linkCls} href={h("/projects?region=gaza")}>{t.footer.gazaRelief}</Link></li>
               <li><Link className={linkCls} href={h("/zakat")}>{t.common.zakatCalc}</Link></li>
@@ -62,22 +62,22 @@ export default function Footer({ lang }: { lang: Lang }) {
             <h2 className="mb-4 font-kufi text-lg font-bold text-white">{t.footer.contact}</h2>
             <ul className="space-y-3">
               <li>
-                <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-gold-300">
+                <a href={contact.phoneHref} className="flex items-center gap-2 hover:text-accent-300">
                   <IconPhone size={18} /> <span dir="ltr">{contact.phone}</span>
                 </a>
               </li>
               <li>
-                <a href={contact.phoneTrHref} className="flex items-center gap-2 hover:text-gold-300">
+                <a href={contact.phoneTrHref} className="flex items-center gap-2 hover:text-accent-300">
                   <IconPhone size={18} /> <span dir="ltr">{contact.phoneTr}</span> <span className="text-xs text-teal-100/60">{t.footer.trSupport}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-gold-300">
+                <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:text-accent-300">
                   <IconMail size={18} /> {contact.email}
                 </a>
               </li>
               <li>
-                <Link href={h("/contact#bank")} className="flex items-center gap-2 hover:text-gold-300">
+                <Link href={h("/contact#bank")} className="flex items-center gap-2 hover:text-accent-300">
                   <IconBank size={18} /> {t.common.bank}
                 </Link>
               </li>
@@ -87,11 +87,11 @@ export default function Footer({ lang }: { lang: Lang }) {
             </ul>
             <div className="mt-5 flex flex-wrap gap-2">
               {socials(handle).map((x) => (
-                <a key={x.key} aria-label={t.social[x.key]} href={x.href} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
+                <a key={x.key} aria-label={t.social[x.key]} href={x.href} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-accent-300 hover:text-accent-300">
                   {sIcon[x.key]}
                 </a>
               ))}
-              <a aria-label={t.social.whatsapp} href={contact.whatsapp} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-gold-300 hover:text-gold-300">
+              <a aria-label={t.social.whatsapp} href={contact.whatsapp} className="grid h-11 w-11 place-items-center rounded-full border border-teal-700 hover:border-accent-300 hover:text-accent-300">
                 <IconWhatsapp size={19} />
               </a>
             </div>
@@ -109,8 +109,8 @@ export default function Footer({ lang }: { lang: Lang }) {
           </p>
           <div className="flex flex-wrap items-center gap-5">
             <span className="flex items-center gap-1.5"><IconShield size={16} /> {t.footer.secure}</span>
-            <Link href="#" className="hover:text-gold-300">{t.footer.privacy}</Link>
-            <Link href="#" className="hover:text-gold-300">{t.footer.cookies}</Link>
+            <Link href="#" className="inline-block py-1 hover:text-accent-300">{t.footer.privacy}</Link>
+            <Link href="#" className="inline-block py-1 hover:text-accent-300">{t.footer.cookies}</Link>
           </div>
         </div>
       </div>

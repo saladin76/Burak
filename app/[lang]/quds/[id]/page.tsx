@@ -48,7 +48,7 @@ export default async function LandmarkPage({ params }: P) {
         <div className="flex flex-wrap gap-2">
           {landmarks.filter((x) => x.id !== lm.id).map((x) => (
             <Link key={x.id} href={h(`/quds/${x.id}`)} className="flex h-11 items-center gap-2 rounded-full border border-stone-300 bg-white px-4 font-semibold text-teal-900 hover:border-teal-500">
-              <Khatam className="h-4 w-4" color="#c99a2e" /> {tx(x.title, lang)}
+              <Khatam className="h-4 w-4" color="#3aafc9" /> {tx(x.title, lang)}
             </Link>
           ))}
         </div>

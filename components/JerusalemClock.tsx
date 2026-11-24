@@ -30,8 +30,8 @@ export default function JerusalemClock() {
   return (
     <div className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 backdrop-blur">
       <span className="relative flex h-2.5 w-2.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-400 opacity-60" />
-        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gold-400" />
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-60" />
+        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-400" />
       </span>
       <span className="text-sm text-teal-100">
         {t.hero.nowIn} <b className="mx-1 font-kufi text-base text-white" suppressHydrationWarning>{time}</b>
