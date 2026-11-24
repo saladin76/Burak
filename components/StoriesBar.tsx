@@ -37,17 +37,17 @@ const items: { href: string; k: SK; kind: Kind; tone: string; isNew?: boolean }[
   { href: "/zakat", k: "zakat", kind: "zakat", tone: "from-accent-500 to-teal-900" },
   { href: "/projects?kind=quran", k: "quran", kind: "quran", tone: "from-tile to-teal-900" },
   { href: "/projects?kind=water", k: "water", kind: "water", tone: "from-teal-300 to-cobalt" },
-  { href: "/projects?monthly=1", k: "support", kind: "support", tone: "from-accent-400 to-teal-700" },
+  { href: "/monthly", k: "support", kind: "support", tone: "from-accent-400 to-teal-700" },
 ];
 
 export default function StoriesBar({ lang }: { lang: Lang }) {
   const t = { ...getDict(lang).stories, teacher: getF(lang).teach.navLabel };
   return (
     <nav aria-label={t.label} className="border-b border-stone-200 bg-stone-50">
-      <ul className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-4 [scrollbar-width:none] md:justify-center md:gap-7">
+      <ul className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-4 [scrollbar-width:none] md:gap-6 2xl:justify-center">
         {items.map((s) => (
           <li key={s.k} className="shrink-0">
-            <Link href={lhref(lang, s.href)} className="group flex w-[78px] flex-col items-center gap-2 text-center">
+            <Link href={lhref(lang, s.href)} className="group flex min-w-[78px] flex-col items-center gap-2 text-center">
               <span className={`relative grid h-[70px] w-[70px] place-items-center rounded-full bg-gradient-to-br p-[3px] ${s.tone}`}>
                 <span className="grid h-full w-full place-items-center rounded-full border-[3px] border-stone-50 bg-teal-900 text-accent-300 transition group-hover:scale-95">
                   {icons[s.k] ?? <KindIcon kind={s.kind} size={28} />}
@@ -58,7 +58,7 @@ export default function StoriesBar({ lang }: { lang: Lang }) {
                   </span>
                 )}
               </span>
-              <span className="text-[13px] font-semibold leading-tight text-teal-900">{t[s.k]}</span>
+              <span className="whitespace-nowrap text-[13px] font-semibold leading-tight text-teal-900">{t[s.k]}</span>
             </Link>
           </li>
         ))}

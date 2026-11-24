@@ -137,7 +137,7 @@ export default function Checkout() {
               <li key={it.id} className="flex items-start justify-between gap-3 text-sm">
                 <span>
                   {p ? tx(p.title, lang) : it.slug}
-                  {it.freq === "monthly" && <span className="ms-1 inline-flex items-center gap-1 text-accent-300"><IconRepeat size={12} /> {t.common.monthly}</span>}
+                  {it.freq === "monthly" && <span className="ms-1 inline-flex items-center gap-1 text-accent-300"><IconRepeat size={12} /> {t.common.monthly}{it.months ? ` · ${f.prog.monthsN.replace("{n}", String(it.months))}` : ""}</span>}
                 </span>
                 <span className="num shrink-0 font-bold">${fmt(it.amount)}</span>
               </li>

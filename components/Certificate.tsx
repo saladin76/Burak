@@ -46,7 +46,7 @@ export default function Certificate(p: CertProps) {
 
   return (
     <div className="cert-page @container w-full">
-      <div className={`relative aspect-[297/210] w-full overflow-hidden ${dark ? "bg-night" : "bg-[#fbf8f2]"} shadow-[0_30px_80px_-40px_rgba(0,61,85,.6)] print:shadow-none`}>
+      <div className={`relative aspect-[297/210] w-full overflow-hidden ${dark ? "bg-night" : "bg-[#f5f9fb]"} shadow-[0_30px_80px_-40px_rgba(0,61,85,.6)] print:shadow-none`}>
         {/* حلقات العطاء */}
         <GivingRings className="pointer-events-none absolute -bottom-[38%] -end-[18%] w-[62%]" palette={pal.ring} opacity={dark ? 0.35 : 0.28} />
         <GivingRings className="pointer-events-none absolute -start-[14%] -top-[30%] w-[36%]" palette={pal.ring} opacity={dark ? 0.2 : 0.14} rings={5} />
@@ -55,7 +55,7 @@ export default function Certificate(p: CertProps) {
         <div className="absolute inset-[2.2cqw] rounded-[1.4cqw] border-[0.35cqw]" style={{ borderColor: pal.accent }} />
         <div className="absolute inset-[3cqw] rounded-[1cqw] border-[0.12cqw] border-accent-500/70" />
         {["start-[1.55cqw] top-[1.55cqw]", "end-[1.55cqw] top-[1.55cqw]", "start-[1.55cqw] bottom-[1.55cqw]", "end-[1.55cqw] bottom-[1.55cqw]"].map((c) => (
-          <span key={c} className={`absolute ${c} grid h-[2.2cqw] w-[2.2cqw] place-items-center rounded-full ${dark ? "bg-night" : "bg-[#fbf8f2]"}`}>
+          <span key={c} className={`absolute ${c} grid h-[2.2cqw] w-[2.2cqw] place-items-center rounded-full ${dark ? "bg-night" : "bg-[#f5f9fb]"}`}>
             <Khatam className="h-[2cqw] w-[2cqw]" color="#3aafc9" />
           </span>
         ))}

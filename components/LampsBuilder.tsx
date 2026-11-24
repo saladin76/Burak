@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Certificate from "./Certificate";
 import { IconArrow, IconBag, IconRepeat } from "./Icons";
-import { LAMP_PRICE } from "@/lib/data";
+import { LAMP_GOAL, LAMP_PRICE, lampsLit } from "@/lib/data";
 import { fmt } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
@@ -36,7 +36,10 @@ export default function LampsBuilder() {
   const [monthly, setMonthly] = useState(false);
   const [added, setAdded] = useState(false);
   const total = n * LAMP_PRICE;
-  const shown = Math.min(n, 50);
+  // مقياس متدرّج: الشبكة 50 فانوساً، وكل فانوس يمثّل 1 أو 10 أو 100 … حتى مليون قنديل
+  const unit = n <= 50 ? 1 : Math.pow(10, Math.ceil(Math.log10(n / 50)));
+  const shown = Math.min(50, Math.ceil(n / unit));
+  const share = (n / LAMP_GOAL) * 100;
 
   const commit = () => {
     cart.add({ slug: SLUG, amount: total, freq: monthly ? "monthly" : "once" });
@@ -71,11 +74,19 @@ export default function LampsBuilder() {
           <span className="ps-2 text-sm font-semibold text-muted">{L.count}</span>
           <div className="flex items-center gap-2">
             <button type="button" aria-label="−" onClick={() => setN(Math.max(1, n - 1))} className="grid h-11 w-11 place-items-center rounded-xl bg-white text-xl font-bold text-teal-900">−</button>
-            <input inputMode="numeric" aria-label={L.count} value={n} onChange={(e) => setN(Math.min(999, Math.max(1, Number(e.target.value.replace(/[^\d]/g, "")) || 1)))} className="num h-11 w-20 rounded-xl border border-stone-300 bg-white text-center text-xl font-bold text-teal-900" />
-            <button type="button" aria-label="+" onClick={() => setN(Math.min(999, n + 1))} className="grid h-11 w-11 place-items-center rounded-xl bg-white text-xl font-bold text-teal-900">+</button>
+            <input inputMode="numeric" aria-label={L.count} value={n} onChange={(e) => setN(Math.min(LAMP_GOAL, Math.max(1, Number(e.target.value.replace(/[^\d]/g, "")) || 1)))} className="num h-11 w-28 rounded-xl border border-stone-300 bg-white text-center text-xl font-bold text-teal-900" />
+            <button type="button" aria-label="+" onClick={() => setN(Math.min(LAMP_GOAL, n + 1))} className="grid h-11 w-11 place-items-center rounded-xl bg-white text-xl font-bold text-teal-900">+</button>
           </div>
         </div>
-        <p className="mt-2 text-xs text-muted">{L.priceNote.replace("{p}", String(LAMP_PRICE))}</p>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {[100, 1000, 10000, 100000].map((v) => (
+            <button type="button" key={v} onClick={() => setN(v)} aria-pressed={n === v}
+              className={`num h-9 rounded-md px-3 text-sm font-bold transition ${n === v ? "bg-accent-700 text-white" : "bg-stone-100 text-teal-900 hover:bg-accent-100"}`}>
+              {fmt(v)}
+            </button>
+          ))}
+          <span className="ms-auto text-xs text-muted">{L.priceNote.replace("{p}", String(LAMP_PRICE))}</span>
+        </div>
 
         <fieldset className="mt-6">
           <legend className="mb-2 text-sm font-semibold text-muted">{L.forT}</legend>
@@ -99,7 +110,7 @@ export default function LampsBuilder() {
 
         <div className="mt-6 flex gap-2">
           <button type="submit" className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_0_40px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600">
-            {L.btn.replace("{n}", String(n)).replace("{x}", fmt(total))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
+            {(n === 1 ? L.btnOne : L.btn).replace("{n}", fmt(n)).replace("{x}", fmt(total))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
           </button>
           <button type="button" aria-label={f.cards.quickAdd} title={f.cards.quickAdd} onClick={() => { commit(); setAdded(true); setTimeout(() => setAdded(false), 2200); }}
             className={`grid h-14 w-14 place-items-center rounded-2xl border-2 ${added ? "border-olive bg-olive text-white" : "border-teal-900/15 text-teal-900"}`}>
@@ -120,12 +131,39 @@ export default function LampsBuilder() {
             ))}
           </div>
           <p className="relative mt-6 font-kufi text-3xl font-bold text-accent-300"><span className="num">{fmt(n)}</span> {L.lit}</p>
+          <p className="relative mt-2 inline-flex items-center gap-2 rounded bg-white/10 px-3 py-1 text-sm text-teal-100">
+            <span className="inline-block h-4 w-2.5 rounded-sm bg-flame" aria-hidden="true" />
+            {L.scale.replace("{u}", fmt(unit))}
+          </p>
+        </div>
+
+        {/* هدف المليون قنديل */}
+        <div className="rounded-2xl border border-stone-200 bg-white p-5">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 className="font-kufi text-lg font-bold text-teal-900">{L.goalT}</h3>
+            <span className="num text-2xl font-extrabold text-accent-500">{fmt(LAMP_GOAL)}</span>
+          </div>
+          <div className="relative mt-4 h-3 rounded-full bg-stone-100">
+            <div className="absolute inset-y-0 start-0 rounded-full bg-accent-500 transition-all duration-700" style={{ width: `${Math.max(0.6, Math.min(100, ((lampsLit ?? 0) + n) / LAMP_GOAL * 100))}%` }} />
+            {[10, 25, 50, 100].map((m) => (
+              <span key={m} className="absolute top-1/2 h-5 w-0.5 -translate-y-1/2 bg-stone-300" style={{ insetInlineStart: `${m}%` }} />
+            ))}
+          </div>
+          <div className="relative mt-2 h-4 text-[11px] font-semibold text-muted">
+            {L.milestones.map((m, i) =>
+              i === 3 ? <span key={m} className="absolute end-0">{m}</span>
+                : <span key={m} className="absolute -translate-x-1/2 whitespace-nowrap rtl:translate-x-1/2" style={{ insetInlineStart: `${[10, 25, 50][i]}%` }}>{m}</span>)}
+          </div>
+          <p className="mt-3 text-sm leading-7 text-muted">
+            {lampsLit != null && <>{L.litSoFar.replace("{n}", fmt(lampsLit))} · </>}
+            {L.yourShare.replace("{n}", fmt(n)).replace("{p}", share < 0.01 ? "<0.01" : String(Number(share.toFixed(share < 1 ? 2 : 1))))}
+          </p>
         </div>
         <Certificate
           lang={lang}
           variant="lamp"
           heading={L.certT}
-          toLabel={`${L.certLine.replace("{n}", String(n))} ${L.certFor[mode]}`}
+          toLabel={`${L.certLine.replace("{n}", fmt(n))} ${L.certFor[mode]}`}
           name={name || "…"}
           body={L.hadith}
           dua={D.dua}

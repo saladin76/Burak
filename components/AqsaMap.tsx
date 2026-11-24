@@ -22,7 +22,7 @@ export default function AqsaMap({ initial }: { initial?: string }) {
         <div className="pattern-khatam absolute inset-0 opacity-[.06]" />
         <svg viewBox="0 0 620 700" className="relative mx-auto block w-full max-w-[520px]" role="group" aria-label={t.map.label}>
           {/* السور */}
-          <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="#032c3d" stroke="#8acbda" strokeWidth="3" strokeLinejoin="round" />
+          <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="#004a66" stroke="#8acbda" strokeWidth="3" strokeLinejoin="round" />
           <path d="M150 50 L470 40 L505 650 L165 668 Z" fill="none" stroke="#8acbda" strokeOpacity=".25" strokeWidth="14" strokeDasharray="4 10" />
           {/* أشجار الزيتون */}
           {[
@@ -52,7 +52,7 @@ export default function AqsaMap({ initial }: { initial?: string }) {
                 {on && <circle r="26" fill="#8acbda" opacity=".18" className="animate-ping" style={{ transformOrigin: "center", transformBox: "fill-box" }} />}
                 <circle
                   r={on ? 15 : 12}
-                  fill={on ? "#8acbda" : "#011f2c"}
+                  fill={on ? "#8acbda" : "#003d55"}
                   stroke="#8acbda"
                   strokeWidth="3"
                   tabIndex={0}
@@ -63,7 +63,7 @@ export default function AqsaMap({ initial }: { initial?: string }) {
                   onClick={() => setActive(s)}
                   onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setActive(s))}
                 />
-                <circle r="4" fill={on ? "#011f2c" : "#8acbda"} pointerEvents="none" />
+                <circle r="4" fill={on ? "#003d55" : "#8acbda"} pointerEvents="none" />
               </g>
             );
           })}

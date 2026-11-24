@@ -106,7 +106,7 @@ export function DomeOfTheRock({ className = "", label = "" }: { className?: stri
         <pattern id="tiles" width="16" height="16" patternUnits="userSpaceOnUse">
           <rect width="16" height="16" fill="#3aafc9" />
           <path d="M8 1 15 8 8 15 1 8Z" fill="#1d4f91" opacity=".55" />
-          <circle cx="8" cy="8" r="1.6" fill="#f4eee2" opacity=".8" />
+          <circle cx="8" cy="8" r="1.6" fill="#eaf3f7" opacity=".8" />
         </pattern>
       </defs>
 
@@ -126,21 +126,21 @@ export function DomeOfTheRock({ className = "", label = "" }: { className?: stri
 
       {/* الرقبة (الطبلة) */}
       <rect x="206" y="182" width="188" height="46" fill="url(#tiles)" />
-      <path d={drumWindows} fill="#011f2c" />
+      <path d={drumWindows} fill="#003d55" />
       <rect x="206" y="182" width="188" height="5" fill="#ebcd7a" opacity=".8" />
 
       {/* الإفريز */}
-      <rect x="98" y="228" width="404" height="10" rx="2" fill="#e8decb" />
+      <rect x="98" y="228" width="404" height="10" rx="2" fill="#d6e6ed" />
 
       {/* الجسم المثمن */}
       <rect x="106" y="238" width="388" height="116" fill="url(#tiles)" />
       <rect x="106" y="238" width="388" height="24" fill="#003d55" />
       <path d="M112 250h376" stroke="#ebcd7a" strokeWidth="2" strokeDasharray="10 6" />
-      <path d={bodyArches} fill="#011f2c" stroke="#ebcd7a" strokeWidth="1.5" />
+      <path d={bodyArches} fill="#003d55" stroke="#ebcd7a" strokeWidth="1.5" />
       <path d="M106 238v116M494 238v116" stroke="#ebcd7a" strokeWidth="2" opacity=".7" />
 
       {/* المصطبة */}
-      <rect x="52" y="354" width="496" height="14" rx="2" fill="#e8decb" />
+      <rect x="52" y="354" width="496" height="14" rx="2" fill="#d6e6ed" />
 
       {/* السرو */}
       <path d="M58 358c-10-30-6-74 10-112 16 38 20 82 10 112Z" fill="#0f3a2e" />
@@ -156,7 +156,7 @@ export function DomeOfTheRock({ className = "", label = "" }: { className?: stri
         strokeWidth="1.2"
       />
       {/* باب العامود (مبسّط) */}
-      <path d="M272 430v-34a28 28 0 0 1 56 0v34Z" fill="#011f2c" />
+      <path d="M272 430v-34a28 28 0 0 1 56 0v34Z" fill="#003d55" />
       <path d="M266 430v-36a34 34 0 0 1 68 0v36" fill="none" stroke="#9c8a66" strokeWidth="3" />
     </svg>
   );

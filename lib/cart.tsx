@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-export type CartItem = { id: string; slug: string; amount: number; freq: "once" | "monthly" };
+export type CartItem = { id: string; slug: string; amount: number; freq: "once" | "monthly"; months?: number; day?: number };
 type Ctx = {
   items: CartItem[];
   add: (i: Omit<CartItem, "id">) => void;

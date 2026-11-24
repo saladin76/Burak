@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import { fmt } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
@@ -23,7 +22,7 @@ const fields = [
 type K = (typeof fields)[number]["k"] | "goldPrice" | "silverPrice";
 
 export default function ZakatCalculator() {
-  const { t, href } = useI18n();
+  const { t, f } = useI18n();
   const Z = t.zakat;
   const [v, setV] = useState<Record<K, string>>({
     cash: "", goldG: "", silverG: "", trade: "", receivable: "", debts: "", goldPrice: "", silverPrice: "",
@@ -101,16 +100,14 @@ export default function ZakatCalculator() {
                   ? Z.reached
                   : Z.notReached}
             </p>
-            <Link
-              href={href(`/projects/alrka-alqds?amount=${Math.round(r.due)}`)}
-              aria-disabled={!r.due}
-              className={`mt-5 flex h-14 items-center justify-center gap-2 rounded-2xl text-lg font-bold ${r.due ? "bg-accent-500 text-white hover:bg-accent-600" : "pointer-events-none bg-white/10 text-white/50"}`}
+            <button
+              type="button"
+              disabled={!r.due}
+              onClick={() => window.dispatchEvent(new CustomEvent("burak:zakat-amount", { detail: r.due }))}
+              className={`mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-lg text-lg font-bold ${r.due ? "bg-accent-500 text-white hover:bg-accent-600" : "cursor-not-allowed bg-white/10 text-white/50"}`}
             >
-              {Z.payQuds} <IconArrow size={20} />
-            </Link>
-            <Link href={href("/projects/zakat-gaza")} className="mt-3 block text-center text-sm font-semibold text-accent-300 hover:underline">
-              {Z.payGaza}
-            </Link>
+              {f.prog.z.useAmount}{r.due ? <span className="num">· ${fmt(Math.round(r.due))}</span> : null} <IconArrow size={20} />
+            </button>
           </div>
         </div>
         <p className="mt-4 text-sm leading-7 text-muted">

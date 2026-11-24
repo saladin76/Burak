@@ -13,7 +13,7 @@ import { LangProvider } from "@/lib/lang-context";
 import { CartProvider } from "@/lib/cart";
 import { contact } from "@/lib/data";
 import { dirOf, getDict, isLang, locales } from "@/lib/i18n";
-import { ALLOW_INDEX, DEMO, LIVE_DONATE_URL } from "@/lib/site";
+import { ALLOW_INDEX } from "@/lib/site";
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
@@ -57,12 +57,6 @@ export default async function LangLayout({ children, params }: { children: React
             <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:p-3">
               {t.common.skip}
             </a>
-            {DEMO && (
-              <div className="no-print bg-accent-700 px-4 py-2 text-center text-[13px] text-white" role="note">
-                {t.common.demo}{" "}
-                <a href={LIVE_DONATE_URL} className="font-bold underline underline-offset-4 hover:text-accent-300">{t.common.demoLink}</a>
-              </div>
-            )}
             <Header />
             <main id="main">{children}</main>
             <Footer lang={lang} />

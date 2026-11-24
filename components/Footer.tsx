@@ -20,7 +20,7 @@ export default function Footer({ lang }: { lang: Lang }) {
 
   return (
     <footer className="relative mt-24 bg-night text-teal-100">
-      <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#011f2c" />
+      <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#003d55" />
       <div className="pattern-khatam absolute inset-0 opacity-[.07]" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <GivingRings className="absolute -bottom-40 end-[-140px] h-[560px] w-[560px]" opacity={0.14} rings={8} />
@@ -52,7 +52,7 @@ export default function Footer({ lang }: { lang: Lang }) {
               <li><Link className={linkCls} href={h("/projects?region=quds")}>{t.footer.qudsProjects}</Link></li>
               <li><Link className={linkCls} href={h("/projects?region=gaza")}>{t.footer.gazaRelief}</Link></li>
               <li><Link className={linkCls} href={h("/zakat")}>{t.common.zakatCalc}</Link></li>
-              <li><Link className={linkCls} href={h("/projects?monthly=1")}>{t.footer.monthly}</Link></li>
+              <li><Link className={linkCls} href={h("/monthly")}>{t.footer.monthly}</Link></li>
               <li><Link className={linkCls} href={h("/cart")}>{t.common.cart}</Link></li>
               <li><Link className={linkCls} href={h("/contact#bank")}>{t.common.bank}</Link></li>
             </ul>

@@ -53,9 +53,9 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             <p className="rise brand-tag mb-6">
               <Khatam className="h-4 w-4" color="#ffffff" /> {t.hero.since}
             </p>
-            <h1 className="rise-2 font-kufi text-[40px] font-extrabold leading-[1.35] md:text-[60px]">
+            <h1 className="rise-2 font-kufi text-[40px] font-extrabold leading-[1.35] md:text-[56px] xl:text-[60px]">
               <span className="block text-teal-900">{t.hero.title1}</span>
-              <span className="brand-label mt-2 inline-block">{t.hero.title2}</span>
+              <span className="brand-label mt-2 inline-block sm:whitespace-nowrap">{t.hero.title2}</span>
             </h1>
             <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-teal-700 md:text-xl">{t.hero.text}</p>
             <div className="rise-3 mt-9 flex flex-wrap gap-3">
@@ -205,7 +205,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
               <p className="mt-4 max-w-xl text-lg leading-8 text-night/80">{H.ctaText}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <Link href={h("/projects?monthly=1")} className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-teal-900 px-8 text-lg font-bold text-white hover:bg-teal-700">
+              <Link href={h("/monthly")} className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-teal-900 px-8 text-lg font-bold text-white hover:bg-teal-700">
                 {H.ctaMonthly} <IconArrow size={20} />
               </Link>
               <Link href={h("/volunteer")} className="flex h-14 items-center justify-center rounded-2xl border-2 border-night/20 px-8 text-lg font-bold hover:bg-white/30">

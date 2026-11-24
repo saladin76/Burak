@@ -45,18 +45,44 @@ export const kindLabel: Record<Kind, L> = {
 
 /** محتوى تديره المؤسسة — الأقسام الفارغة تُخفى تلقائياً من الموقع */
 export const orgContent: {
-  bankAccounts: { currency: string; bank: string; iban: string; name?: string }[];
+  banks: { bank: string; branch: string; swift: string; accounts: { currency: string; iban: string }[] }[];
   annualReports: { year: string; url: string }[];
   /** نص «نبذة وتاريخ» لكل لغة */
   history: Partial<L> | null;
 } = {
-  bankAccounts: [],
+  // من صفحة «حساباتنا البنكية» على الموقع الرسمي burakdernegi.org/ar/hesapnumaralarimiz
+  banks: [
+    {
+      bank: "Ziraat Katılım",
+      branch: "Üsküdar",
+      swift: "ZKBATRISXXX",
+      accounts: [
+        { currency: "TL", iban: "TR05 0020 9000 0002 1616 0000 09" },
+        { currency: "USD", iban: "TR75 0020 9000 0002 1616 0000 10" },
+        { currency: "EUR", iban: "TR48 0020 9000 0002 1616 0000 11" },
+      ],
+    },
+    {
+      bank: "Kuveyt Türk",
+      branch: "Üsküdar",
+      swift: "KTEFTRISXXX",
+      accounts: [
+        { currency: "TL", iban: "TR15 0020 5000 0936 5579 3000 10" },
+        { currency: "USD", iban: "TR15 0020 5000 0936 5579 3001 07" },
+        { currency: "EUR", iban: "TR85 0020 5000 0936 5579 3001 08" },
+      ],
+    },
+  ],
   annualReports: [],
   history: null,
 };
 
 /** سعر القنديل المقترح بالدولار — يُعتمد من إدارة المؤسسة */
 export const LAMP_PRICE = 10;
+/** هدف حملة القناديل — مليون قنديل */
+export const LAMP_GOAL = 1_000_000;
+/** عدد القناديل المُسرَجة فعلياً (تُحدّثه الإدارة؛ null = يُخفى العدّاد) */
+export const lampsLit: number | null = null;
 
 export const projects: Project[] = [
   {
@@ -116,8 +142,8 @@ export const projects: Project[] = [
     amounts: [300, 500, 700],
     image: U + "UKWn6JFNW9PLW8MDh92Q_1750769530404.jpg",
     monthly: true,
-    raised: 19779,
-    donors: 895,
+    raised: 19809,
+    donors: 897,
     featured: true,
   },
   {
@@ -192,7 +218,6 @@ export const projects: Project[] = [
     },
     amounts: [80, 160, 320],
     image: U + "J4aNrqssOtxVlcxX8pHL_1751026461749.jpg",
-    monthly: true,
   },
   {
     slug: "sqya-alma-alqds",
@@ -312,6 +337,138 @@ export const projects: Project[] = [
     },
     amounts: [100, 200, 500],
     image: U + "kXG5YejPIdaSU0lA8bft_1772150003270.jpg",
+  },
+  {
+    slug: "httpsexamplecomgaza-wells-project",
+    title: { ar: "حفر الآبار", tr: "Su Kuyusu Açma", en: "Well Drilling" },
+    region: "gaza",
+    kind: "water",
+    summary: {
+      ar: "حفر آبار مياه توفّر مصدراً دائماً للماء للأسر المتضررة.",
+      tr: "Mağdur ailelere kalıcı su kaynağı sağlayan kuyular açılması.",
+      en: "Drilling wells that provide a lasting water source for affected families.",
+    },
+    amounts: [50, 100, 200],
+    image: U + "7FYw2KnPAmNK8f29HGF8_1778937683106.jpg",
+    monthly: true,
+  },
+  {
+    slug: "altrwd-alghdayy-ghr-3",
+    title: { ar: "الطرود الغذائية — غزة", tr: "Gıda Kolisi — Gazze", en: "Food Parcels — Gaza" },
+    region: "gaza",
+    kind: "food",
+    summary: {
+      ar: "طرود غذائية شهرية للعائلات المحتاجة في قطاع غزة.",
+      tr: "Gazze'deki ihtiyaç sahibi ailelere aylık gıda kolileri.",
+      en: "Monthly food parcels for families in need in the Gaza Strip.",
+    },
+    amounts: [80, 160, 320],
+    image: U + "Mwq7PwPCkNkVaTgmQ5Xj_1771500103829.jpg",
+    monthly: true,
+  },
+  {
+    slug: "hlqat-alqran-ghr",
+    title: { ar: "حلقات القرآن — غزة", tr: "Kur'an Halkaları — Gazze", en: "Quran Circles — Gaza" },
+    region: "gaza",
+    kind: "quran",
+    summary: {
+      ar: "دعم حلقات تحفيظ القرآن الكريم للأطفال في قطاع غزة.",
+      tr: "Gazze'deki çocuklar için Kur'an hafızlık halkalarına destek.",
+      en: "Supporting Quran memorisation circles for children in Gaza.",
+    },
+    amounts: [5, 20, 50, 100],
+    image: U + "SrDEw31RjWbXDtaZ8rnn_1772443329923.jpg",
+  },
+  {
+    slug: "httpsburakdernegiorggazze-cadir",
+    title: { ar: "تعزيز الخيام وتركيب العوازل", tr: "Çadır Güçlendirme ve Yalıtım", en: "Tent Reinforcement & Insulation" },
+    region: "gaza",
+    kind: "winter",
+    summary: {
+      ar: "تعزيز خيام النازحين وتركيب العوازل لحمايتهم من المطر والبرد.",
+      tr: "Yerinden edilmişlerin çadırlarını güçlendirme ve yağmur ile soğuğa karşı yalıtım.",
+      en: "Reinforcing displaced families' tents and insulating them against rain and cold.",
+    },
+    amounts: [1000, 2000, 5000],
+    image: U + "68QLyifrJLARnsz3sWwt_1750925391074.jpg",
+  },
+  {
+    slug: "tashgheel-afran-tawzee3-khobz",
+    title: { ar: "تشغيل الأفران وتوزيع الخبز", tr: "Fırın Çalıştırma ve Ekmek Dağıtımı", en: "Running Bakeries & Bread Distribution" },
+    region: "gaza",
+    kind: "food",
+    summary: {
+      ar: "دعم تشغيل الأفران وتوزيع الخبز على الأسر في قطاع غزة.",
+      tr: "Gazze'de fırınların çalıştırılması ve ailelere ekmek dağıtımı.",
+      en: "Keeping bakeries running and distributing bread to families in Gaza.",
+    },
+    amounts: [100, 200, 500],
+    image: U + "wghXSvtE3KPRIaUpT1z8_1750771589496.jpg",
+  },
+  {
+    slug: "elmosa3dat-eltebeya-gaza-2",
+    title: { ar: "المساعدات الطبية", tr: "Tıbbi Yardım", en: "Medical Aid" },
+    region: "gaza",
+    kind: "medical",
+    summary: {
+      ar: "توفير الأدوية والمستلزمات الطبية للمرضى والمصابين.",
+      tr: "Hasta ve yaralılara ilaç ve tıbbi malzeme temini.",
+      en: "Providing medicines and medical supplies to the sick and injured.",
+    },
+    amounts: [100, 200, 500],
+    image: U + "dXiW4xx7fdx34S4wqeIk_1750770707580.jpg",
+  },
+  {
+    slug: "httpsburakdernegiorgev-onarim",
+    title: { ar: "دعم المنازل المتضررة", tr: "Hasarlı Evlere Destek", en: "Supporting Damaged Homes" },
+    region: "gaza",
+    kind: "rebuild",
+    summary: {
+      ar: "المساهمة في إصلاح المنازل المتضررة لتعود صالحة للسكن.",
+      tr: "Hasar gören evlerin yeniden yaşanabilir hale getirilmesine katkı.",
+      en: "Helping repair damaged homes so families can live in them again.",
+    },
+    amounts: [1000, 2000, 5000],
+    image: U + "VUYnRGz0kxpKQaq0QOZ7_1750925875363.jpg",
+  },
+  {
+    slug: "orphans-quds",
+    title: { ar: "دعم ورعاية أيتام القدس", tr: "Kudüs Yetimlerine Destek", en: "Supporting Orphans in Al-Quds" },
+    region: "quds",
+    kind: "support",
+    summary: {
+      ar: "دعم شهري ورعاية للأيتام في القدس وتأمين احتياجاتهم المعيشية والتعليمية.",
+      tr: "Kudüs'teki yetimlere aylık destek; geçim ve eğitim ihtiyaçlarının karşılanması.",
+      en: "Monthly care for orphans in Al-Quds, covering their living and education needs.",
+    },
+    amounts: [20, 50, 100],
+    monthly: true,
+  },
+  {
+    slug: "orphans-gaza",
+    title: { ar: "دعم ورعاية أيتام غزة", tr: "Gazze Yetimlerine Destek", en: "Supporting Orphans in Gaza" },
+    region: "gaza",
+    kind: "support",
+    summary: {
+      ar: "دعم شهري ورعاية للأيتام في قطاع غزة وتأمين احتياجاتهم المعيشية والتعليمية.",
+      tr: "Gazze'deki yetimlere aylık destek; geçim ve eğitim ihtiyaçlarının karşılanması.",
+      en: "Monthly care for orphans in Gaza, covering their living and education needs.",
+    },
+    amounts: [20, 50, 100],
+    monthly: true,
+  },
+  {
+    slug: "urgent-relief-palestine",
+    title: { ar: "الإغاثة العاجلة لفلسطين", tr: "Filistin'e Acil Yardım", en: "Emergency Relief for Palestine" },
+    region: "gaza",
+    kind: "food",
+    summary: {
+      ar: "دعم شهري لبرامج الإغاثة العاجلة للأسر المتضررة في فلسطين.",
+      tr: "Filistin'deki mağdur ailelere yönelik acil yardım programlarına aylık destek.",
+      en: "Monthly support for emergency relief programmes for affected families in Palestine.",
+    },
+    amounts: [20, 50, 100],
+    monthly: true,
   },
 ];
 
@@ -581,7 +738,7 @@ export const contact = {
   email: "info@burakdernegi.org",
   website: "www.burakdernegi.org",
   legalName: "Burak Mukaddes Mekanları Tanıtma ve Kültür Derneği",
-  address: "Murat Reis Mah. Payanda Sk. No:23 Üsküdar / İstanbul",
+  address: "Murat Reis Mah. Payanda Sk. No:23, Bağlarbaşı, Üsküdar / İstanbul",
   handles: { ar: "alburakorg", tr: "burakdernegi", en: "alburakorgen" },
 };
 

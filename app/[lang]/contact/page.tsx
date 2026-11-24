@@ -1,3 +1,4 @@
+import BankAccounts from "@/components/BankAccounts";
 import PageHero from "@/components/PageHero";
 import { IconBank, IconMail, IconPhone, IconWhatsapp } from "@/components/Icons";
 import { contact, orgContent } from "@/lib/data";
@@ -30,22 +31,7 @@ export default async function Contact({ params }: LangParams) {
       <section id="bank" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-16">
         <div className="rounded-2xl bg-teal-900 p-8 text-white md:p-12">
           <h2 className="flex items-center gap-3 font-kufi text-3xl font-bold"><IconBank size={30} className="text-accent-300" /> {t.common.bank}</h2>
-          {orgContent.bankAccounts.length ? (
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {orgContent.bankAccounts.map((b) => (
-                <div key={b.iban} className="rounded-2xl border border-white/15 bg-white/5 p-5">
-                  <p className="font-bold text-accent-300">{C.bankAcc.replace("{c}", b.currency)}</p>
-                  <p className="mt-2 text-sm text-teal-100">{b.bank}</p>
-                  <p className="mt-1 font-mono text-sm" dir="ltr">{b.iban}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/15 bg-white/5 p-5">
-              <p className="text-teal-100">{C.bankAsk}</p>
-              <a href={contact.whatsapp} className="inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 font-bold text-teal-900 hover:bg-teal-50"><IconWhatsapp size={20} /> {C.wa}</a>
-            </div>
-          )}
+          <BankAccounts />
         </div>
       </section>
 

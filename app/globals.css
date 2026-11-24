@@ -7,8 +7,8 @@
    ============================================================ */
 @theme {
   /* ليل القدس — خلفيات داكنة */
-  --color-night: #011f2c;
-  --color-night-2: #032c3d;
+  --color-night: #003d55; /* = لون الشعار الداكن */
+  --color-night-2: #004a66;
 
   /* ألوان البراق الأصلية (من الموقع الحالي) */
   --color-teal-950: #002a3b;
@@ -45,18 +45,18 @@
   --color-flame: #ebcd7a;
   --color-brass: #c99a2e;
 
-  /* حجر القدس */
-  --color-stone-50: #fbf8f2;
-  --color-stone-100: #f4eee2;
-  --color-stone-200: #e8decb;
-  --color-stone-300: #d6c7a8;
-  --color-stone-500: #9c8a66;
+  /* محايدات باردة مشتقة من أزرق الهوية (بدل البيج) */
+  --color-stone-50: #f5f9fb;
+  --color-stone-100: #eaf3f7;
+  --color-stone-200: #d6e6ed;
+  --color-stone-300: #b5d2de;
+  --color-stone-500: #5f8494;
 
   /* زيتون */
   --color-olive: #56693a;
 
-  --color-ink: #10222a;
-  --color-muted: #4a5b62;
+  --color-ink: #0d2a36;
+  --color-muted: #48626d;
 
   --font-kufi: "awanzaman", "AwanZaman", "Rubik Variable", "Rubik", sans-serif;
   --font-sans: "Rubik Variable", "Rubik", system-ui, sans-serif;

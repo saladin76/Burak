@@ -149,7 +149,7 @@ export default function Header() {
         {open && (
           <nav className="border-t border-stone-200 bg-stone-50 xl:hidden">
             <ul className="mx-auto grid max-w-7xl gap-1 px-5 py-4 sm:grid-cols-2">
-              {[...nav, { href: "/teachers-day", label: f.teach.navLabel }, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: f.vol.btn }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
+              {[...nav, { href: "/teachers-day", label: f.teach.navLabel }, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: f.vol.btn }, { href: "/monthly", label: t.footer.monthly }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
                 <li key={n.href}>
                   <Link href={href(n.href)} className="block rounded-xl px-4 py-3 text-lg font-medium text-teal-900 hover:bg-teal-100">
                     {n.label}

@@ -26,8 +26,8 @@ export default function PageHero({
       )}
       {image && <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/85 to-white rtl:bg-gradient-to-r" />}
       <GivingRings className="pointer-events-none absolute -top-48 -start-48 w-[620px]" rings={7} opacity={0.3} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
-      <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12">
-        <nav aria-label="breadcrumb" className="mb-6 text-sm text-teal-700">
+      <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-8 md:pb-24 md:pt-12">
+        <nav aria-label="breadcrumb" className="mb-4 text-sm text-teal-700 md:mb-6">
           <ol className="flex flex-wrap items-center gap-2">
             <li><Link href={lhref(lang, "/")} className="hover:text-accent-500">{t.common.home}</Link></li>
             {crumbs.map((c) => (
@@ -42,10 +42,10 @@ export default function PageHero({
         {kicker && (
           <p className="brand-tag mb-5"><Khatam className="h-4 w-4" color="#ffffff" />{kicker}</p>
         )}
-        <h1 className="max-w-4xl font-kufi text-4xl font-extrabold leading-[1.45] md:text-6xl"><span className="brand-label">{title}</span></h1>
-        {children && <div className="mt-5 max-w-2xl text-lg leading-9 text-teal-700">{children}</div>}
+        <h1 className="max-w-4xl font-kufi text-[34px] font-extrabold leading-[1.45] md:text-6xl"><span className="brand-label">{title}</span></h1>
+        {children && <div className="mt-5 max-w-2xl text-base leading-8 text-teal-700 md:text-lg md:leading-9">{children}</div>}
       </div>
-      <QudsSkyline className="absolute inset-x-0 bottom-0 h-[50px] w-full" color="#fbf8f2" />
+      <QudsSkyline className="absolute inset-x-0 bottom-0 h-[50px] w-full" color="#f5f9fb" />
     </section>
   );
 }

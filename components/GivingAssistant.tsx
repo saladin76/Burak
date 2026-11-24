@@ -182,7 +182,7 @@ export default function GivingAssistant() {
         className="hidden h-14 lg:flex items-center gap-2 rounded-full bg-teal-900 p-2 font-bold sm:pe-5 text-white shadow-[0_14px_40px_-12px_rgba(1,64,78,.9)] hover:bg-teal-700"
       >
         <span className="grid h-10 w-10 place-items-center rounded-full bg-accent-500 text-white">
-          <Khatam className="h-6 w-6" color="#011f2c" />
+          <Khatam className="h-6 w-6" color="#003d55" />
         </span>
         <span className="hidden sm:inline">{A.name}</span>
       </button>

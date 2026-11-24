@@ -9,7 +9,7 @@ import { IconArrow, IconClose, IconRepeat, KindIcon } from "./Icons";
 import SmartImg from "./SmartImg";
 
 export default function CartView() {
-  const { lang, t, href } = useI18n();
+  const { lang, t, f, href } = useI18n();
   const C = t.cart;
   const { items, remove, update, total, ready } = useCart();
 
@@ -45,7 +45,7 @@ export default function CartView() {
                       </button>
                     ))}
                   </div>
-                  {it.freq === "monthly" && <span className="flex items-center gap-1 text-xs font-semibold text-teal-700"><IconRepeat size={13} /> {C.monthlyNote}</span>}
+                  {it.freq === "monthly" && <span className="flex items-center gap-1 text-xs font-semibold text-teal-700"><IconRepeat size={13} /> {C.monthlyNote}{it.months ? ` · ${f.prog.monthsN.replace("{n}", String(it.months))}` : ""}</span>}
                 </div>
               </div>
               <label className="relative">
