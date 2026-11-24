@@ -9,9 +9,10 @@ import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/lang-context";
 import { IconBank, IconGift, IconRepeat, IconShield } from "./Icons";
 import GiftCard from "./GiftCard";
+import { newRef, peekDedications, saveOrder, takeDedications } from "@/lib/orders";
 
 export default function Checkout() {
-  const { lang, t, href } = useI18n();
+  const { lang, t, f, href } = useI18n();
   const K = t.checkout;
   const { items, total, clear, ready } = useCart();
   const router = useRouter();
@@ -19,9 +20,11 @@ export default function Checkout() {
   const [g, setG] = useState({ to: "", from: "", email: "", msg: "", design: 0 });
   const [pay, setPay] = useState<"card" | "bank">("card");
   const [busy, setBusy] = useState(false);
+  const [deds, setDeds] = useState(0);
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("gift")) setGift(true);
+    setDeds(peekDedications().length);
   }, []);
 
   const input = "h-12 w-full rounded-xl border border-stone-300 bg-stone-50 px-4 text-base text-ink focus:border-teal-500 focus:outline-none";
@@ -41,10 +44,19 @@ export default function Checkout() {
       onSubmit={(e) => {
         e.preventDefault();
         setBusy(true);
-        const ref = "BRK-" + Date.now().toString(36).toUpperCase().slice(-6);
-        try {
-          sessionStorage.setItem("burak-last-order", JSON.stringify({ ref, items, total, pay, gift: gift ? g : null }));
-        } catch {}
+        const fd = new FormData(e.currentTarget);
+        const ref = newRef();
+        const slugs = new Set(items.map((i) => i.slug));
+        saveOrder({
+          ref,
+          date: new Date().toISOString(),
+          items,
+          total,
+          pay,
+          donor: { name: String(fd.get("name") || ""), email: String(fd.get("email") || ""), anon: fd.get("anon") === "on" },
+          gift: gift ? g : null,
+          dedications: takeDedications().filter((d) => slugs.has(d.slug)),
+        });
         clear();
         router.push(href(`/thank-you?ref=${ref}`));
       }}
@@ -55,13 +67,13 @@ export default function Checkout() {
           <legend className="sr-only">{K.donor}</legend>
           <h2 className="font-kufi text-2xl font-bold text-teal-900">1. {K.donor}</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <label className={label}>{K.name} *<input required autoComplete="name" className={input} /></label>
-            <label className={label}>{K.email} *<input required type="email" autoComplete="email" className={input} /></label>
+            <label className={label}>{K.name} *<input required name="name" autoComplete="name" className={input} /></label>
+            <label className={label}>{K.email} *<input required name="email" type="email" autoComplete="email" className={input} /></label>
             <label className={label}>{K.phone}<input type="tel" autoComplete="tel" dir="ltr" className={input} /></label>
             <label className={label}>{K.country}<input autoComplete="country-name" className={input} /></label>
           </div>
           <label className="mt-4 flex items-center gap-3 text-[15px] text-teal-900">
-            <input type="checkbox" className="h-5 w-5 accent-teal-700" /> {K.anon}
+            <input type="checkbox" name="anon" className="h-5 w-5 accent-teal-700" /> {K.anon}
           </label>
         </fieldset>
 
@@ -138,6 +150,7 @@ export default function Checkout() {
         <button type="submit" disabled={busy || !total} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-gold-500 text-lg font-bold text-night hover:bg-gold-400 disabled:opacity-60">
           <IconShield size={20} /> {K.confirm}
         </button>
+        {deds > 0 && <p className="mt-3 rounded-xl bg-white/10 p-3 text-sm text-gold-300">✦ {deds} × {f.docs.certificate}</p>}
         <p className="mt-3 text-xs leading-6 text-teal-100/70">{K.terms}</p>
       </aside>
     </form>

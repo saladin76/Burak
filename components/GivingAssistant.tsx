@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { projects, regionLabel, type Kind } from "@/lib/data";
+import { projectPath, projects, regionLabel, type Kind } from "@/lib/data";
 import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { IconArrow, IconClose, KindIcon } from "./Icons";
@@ -144,7 +144,7 @@ export default function GivingAssistant() {
                   {picks.map((p) => (
                     <Link
                       key={p.slug}
-                      href={href(`/projects/${p.slug}${how === "monthly" && p.monthly ? "?freq=monthly" : ""}`)}
+                      href={href(`${projectPath(p.slug)}${how === "monthly" && p.monthly ? "?freq=monthly" : ""}`)}
                       onClick={() => setOpen(false)}
                       className="flex items-center gap-3 rounded-xl border border-stone-200 bg-white p-3 hover:border-teal-500"
                     >

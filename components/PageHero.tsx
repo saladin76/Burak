@@ -19,7 +19,7 @@ export default function PageHero({
 }) {
   const t = getDict(lang);
   return (
-    <section className="relative overflow-hidden bg-night text-white">
+    <section data-hero className="relative overflow-hidden bg-night text-white">
       {image && (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-25" />

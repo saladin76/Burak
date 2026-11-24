@@ -11,7 +11,7 @@ import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
 
 export default function Header() {
-  const { lang, t, href } = useI18n();
+  const { lang, t, f, href } = useI18n();
   const { count } = useCart();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +52,15 @@ export default function Header() {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <Link href={href("/zakat")} className="hidden font-semibold text-gold-300 hover:text-gold-400 md:inline">
+            <Link href={href("/teachers-day")} className="hidden font-semibold text-gold-300 hover:text-gold-400 lg:inline">
+              ✦ {f.teach.navLabel}
+            </Link>
+            <span className="hidden h-3 w-px bg-teal-700 lg:inline" />
+            <Link href={href("/lamps")} className="hidden hover:text-gold-300 lg:inline">
+              {f.lamps.navLabel}
+            </Link>
+            <span className="hidden h-3 w-px bg-teal-700 lg:inline" />
+            <Link href={href("/zakat")} className="hidden hover:text-gold-300 md:inline">
               {t.common.zakatCalc}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 md:inline" />
@@ -86,7 +94,7 @@ export default function Header() {
       >
         <div className="mx-auto flex max-w-7xl items-center gap-5 px-5 py-2">
           <Link href={href("/")} aria-label={t.meta.org}>
-            <BurakLogo className="h-14 md:h-[68px]" />
+            <BurakLogo latin={lang !== "ar"} className="h-14 md:h-[68px]" />
           </Link>
 
           <nav aria-label={t.nav.home} className="hidden flex-1 xl:block">
@@ -116,10 +124,10 @@ export default function Header() {
               )}
             </Link>
             <Link
-              href={href("/projects?monthly=1")}
-              className="hidden h-11 items-center gap-2 rounded-full border border-teal-900/20 px-4 text-[15px] font-semibold text-teal-900 hover:border-teal-700 hover:bg-teal-50 md:flex"
+              href={href("/volunteer#form")}
+              className="hidden h-11 items-center gap-2 rounded-full border border-teal-500/40 bg-teal-50 px-4 text-[15px] font-semibold text-teal-900 hover:border-teal-500 hover:bg-teal-100 md:flex"
             >
-              <IconHeart size={18} /> {t.common.beSupporter}
+              <IconHeart size={18} /> {f.vol.btn}
             </Link>
             <Link
               href={href("/#donate")}
@@ -141,7 +149,7 @@ export default function Header() {
         {open && (
           <nav className="border-t border-stone-200 bg-stone-50 xl:hidden">
             <ul className="mx-auto grid max-w-7xl gap-1 px-5 py-4 sm:grid-cols-2">
-              {[...nav, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: t.nav.volunteer }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
+              {[...nav, { href: "/lamps", label: f.lamps.navLabel }, { href: "/teachers-day", label: f.teach.navLabel }, { href: "/reports", label: t.nav.reports }, { href: "/volunteer", label: f.vol.btn }, { href: "/zakat", label: t.common.zakatCalc }].map((n) => (
                 <li key={n.href}>
                   <Link href={href(n.href)} className="block rounded-xl px-4 py-3 text-lg font-medium text-teal-900 hover:bg-teal-100">
                     {n.label}

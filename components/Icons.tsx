@@ -122,6 +122,29 @@ export const IconTiktok = ({ size, ...p }: P) => (
     <path d="M14 3c.5 2.8 2.3 4.4 5 4.6" />
   </svg>
 );
+export const IconPin = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z" />
+    <circle cx="12" cy="9.5" r="2.5" />
+  </svg>
+);
+export const IconCheck = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="m5 12.5 4.5 4.5L19 7.5" />
+  </svg>
+);
+export const IconPrint = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <path d="M7 9V3h10v6M7 17H4v-6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6h-3" />
+    <rect x="7" y="14" width="10" height="7" />
+  </svg>
+);
+export const IconAward = ({ size, ...p }: P) => (
+  <svg {...base(size)} {...p}>
+    <circle cx="12" cy="9" r="6" />
+    <path d="m8.5 14-1.5 7 5-3 5 3-1.5-7" />
+  </svg>
+);
 export const IconPlay = ({ size, ...p }: P) => (
   <svg {...base(size)} {...p}>
     <circle cx="12" cy="12" r="9" />
@@ -137,6 +160,12 @@ export const IconBook = ({ size, ...p }: P) => (
 
 /* أيقونات المجالات */
 const kindPaths: Record<Kind, React.ReactNode> = {
+  aqsa: (
+    <>
+      <path d="M12 1.5v3M9 4.5h6l-1 2h-4ZM7 6.5h10l1.5 8c0 3.5-3 6-6.5 8-3.5-2-6.5-4.5-6.5-8Z" />
+      <path d="M12 10c1.4 1.6 1.6 3.2 0 5-1.6-1.8-1.4-3.4 0-5Z" />
+    </>
+  ),
   winter: (
     <>
       <path d="M12 2v20M4 7l16 10M20 7 4 17" />

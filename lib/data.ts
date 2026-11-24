@@ -4,7 +4,7 @@
 import type { L } from "./i18n";
 
 export type Region = "quds" | "gaza" | "palestine";
-export type Kind = "winter" | "food" | "water" | "quran" | "education" | "zakat" | "medical" | "rebuild" | "support";
+export type Kind = "aqsa" | "winter" | "food" | "water" | "quran" | "education" | "zakat" | "medical" | "rebuild" | "support";
 
 const U = "https://burakdernegi.org/uploads/";
 
@@ -31,6 +31,7 @@ export const regionLabel: Record<Region, L> = {
 };
 
 export const kindLabel: Record<Kind, L> = {
+  aqsa: { ar: "خدمة الأقصى", tr: "Aksa'ya hizmet", en: "Serving Al-Aqsa" },
   winter: { ar: "حملات الشتاء", tr: "Kış kampanyaları", en: "Winter appeals" },
   food: { ar: "إطعام", tr: "Gıda", en: "Food" },
   water: { ar: "سقيا الماء", tr: "Su", en: "Water" },
@@ -42,7 +43,24 @@ export const kindLabel: Record<Kind, L> = {
   support: { ar: "تثبيت المقدسيين", tr: "Kudüslülere destek", en: "Supporting Jerusalemites" },
 };
 
+/** سعر القنديل المقترح بالدولار — يُعتمد من إدارة المؤسسة */
+export const LAMP_PRICE = 10;
+
 export const projects: Project[] = [
+  {
+    slug: "qanadeel-al-aqsa",
+    title: { ar: "قناديل الأقصى", tr: "Aksa Kandilleri", en: "The Lamps of Al-Aqsa" },
+    region: "quds",
+    kind: "aqsa",
+    summary: {
+      ar: "«فتُهدي له زيتاً يُسرج فيه» — أسرج قنديلاً في الأقصى باسمك أو باسم من تحب، دعماً لخدمة المسجد وروّاده.",
+      tr: "«Kandillerinde yakılmak üzere zeytinyağı hediye et» — Aksa'da kendi adınıza veya sevdiğiniz biri adına bir kandil yakın.",
+      en: "“Send oil to light its lamps” — light a lamp in Al-Aqsa in your name or a loved one's, supporting the mosque and its worshippers.",
+    },
+    amounts: [10, 50, 200, 500],
+    monthly: true,
+    featured: true,
+  },
   {
     slug: "qudus-winter",
     title: { ar: "حملة شتاء القدس", tr: "Kudüs Kış Kampanyası", en: "Al-Quds Winter Appeal" },
@@ -298,6 +316,8 @@ export const projects: Project[] = [
 ];
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+/** صفحة المشروع (قناديل الأقصى لها صفحة حملة خاصة) */
+export const projectPath = (slug: string) => (slug === "qanadeel-al-aqsa" ? "/lamps" : `/projects/${slug}`);
 
 export const pillars: { key: string; kind: Kind; title: L; text: L; href: string }[] = [
   {
@@ -561,6 +581,7 @@ export const contact = {
   email: "info@burakdernegi.org",
   website: "www.burakdernegi.org",
   legalName: "Burak Mukaddes Mekanları Tanıtma ve Kültür Derneği",
+  address: "Murat Reis Mah. Payanda Sk. No:23 Üsküdar / İstanbul",
   handles: { ar: "alburakorg", tr: "burakdernegi", en: "alburakorgen" },
 };
 

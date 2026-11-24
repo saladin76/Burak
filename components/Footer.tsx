@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { BurakLogo, GivingWaves, OrnamentDivider, QudsSkyline } from "./Motifs";
-import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube } from "./Icons";
+import { BurakLogo, GivingRings, OrnamentDivider, QudsSkyline } from "./Motifs";
+import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube, IconPin } from "./Icons";
 import { contact, socials } from "@/lib/data";
 import { getDict, lhref, type Lang } from "@/lib/i18n";
 
@@ -23,12 +23,12 @@ export default function Footer({ lang }: { lang: Lang }) {
       <QudsSkyline className="absolute inset-x-0 -top-[59px] h-[60px] w-full" color="#011f2c" />
       <div className="pattern-khatam absolute inset-0 opacity-[.07]" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <GivingWaves className="absolute -bottom-10 end-[-60px] h-[420px] w-auto" opacity={0.1} rings={8} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
+        <GivingRings className="absolute -bottom-40 end-[-140px] h-[560px] w-[560px]" opacity={0.14} rings={8} />
       </div>
       <div className="relative mx-auto max-w-7xl px-5 pb-28 pt-16 lg:pb-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           <div>
-            <BurakLogo light className="h-24" />
+            <BurakLogo light latin={lang !== "ar"} className="h-24" />
             <p className="mt-5 max-w-sm leading-8 text-teal-100/85">{t.footer.about}</p>
             <p className="mt-4 font-kufi text-xl text-gold-300">{t.common.slogan}</p>
           </div>
@@ -80,6 +80,9 @@ export default function Footer({ lang }: { lang: Lang }) {
                 <Link href={h("/contact#bank")} className="flex items-center gap-2 hover:text-gold-300">
                   <IconBank size={18} /> {t.common.bank}
                 </Link>
+              </li>
+              <li className="flex items-start gap-2 text-sm leading-6 text-teal-100/80" lang="tr" dir="ltr">
+                <IconPin size={18} className="mt-0.5 shrink-0" /> {contact.address}
               </li>
             </ul>
             <div className="mt-5 flex flex-wrap gap-2">

@@ -3,6 +3,7 @@ import { IconHeart, KindIcon } from "./Icons";
 import { GivingWaves } from "./Motifs";
 import type { Kind } from "@/lib/data";
 import { getDict, lhref, type Lang } from "@/lib/i18n";
+import { getF } from "@/lib/dict/features";
 
 /* شريط «القصص» الدائري أسفل الترويسة — وصول سريع للحملات والأدوات */
 const Lantern = () => (
@@ -25,13 +26,14 @@ const icons: Record<string, React.ReactNode> = {
   support: <IconHeart size={26} />,
 };
 
-type SK = "quds" | "map" | "gaza" | "winter" | "lamps" | "zakat" | "quran" | "water" | "support";
+type SK = "teacher" | "quds" | "map" | "gaza" | "winter" | "lamps" | "zakat" | "quran" | "water" | "support";
 const items: { href: string; k: SK; kind: Kind; tone: string; isNew?: boolean }[] = [
+  { href: "/teachers-day", k: "teacher", kind: "education", tone: "from-gold-300 to-gold-700", isNew: true },
   { href: "/projects?region=quds", k: "quds", kind: "support", tone: "from-teal-500 to-teal-900", isNew: true },
   { href: "/quds#landmarks", k: "map", kind: "rebuild", tone: "from-gold-400 to-gold-700", isNew: true },
   { href: "/projects?region=gaza", k: "gaza", kind: "food", tone: "from-teal-300 to-teal-700" },
   { href: "/projects/qudus-winter", k: "winter", kind: "winter", tone: "from-cobalt to-teal-900", isNew: true },
-  { href: "/#lamps", k: "lamps", kind: "education", tone: "from-gold-300 to-gold-600" },
+  { href: "/lamps", k: "lamps", kind: "aqsa", tone: "from-gold-300 to-gold-600", isNew: true },
   { href: "/zakat", k: "zakat", kind: "zakat", tone: "from-gold-500 to-teal-900" },
   { href: "/projects?kind=quran", k: "quran", kind: "quran", tone: "from-tile to-teal-900" },
   { href: "/projects?kind=water", k: "water", kind: "water", tone: "from-teal-300 to-cobalt" },
@@ -39,7 +41,7 @@ const items: { href: string; k: SK; kind: Kind; tone: string; isNew?: boolean }[
 ];
 
 export default function StoriesBar({ lang }: { lang: Lang }) {
-  const t = getDict(lang).stories;
+  const t = { ...getDict(lang).stories, teacher: getF(lang).teach.navLabel };
   return (
     <nav aria-label={t.label} className="border-b border-stone-200 bg-stone-50">
       <ul className="mx-auto flex max-w-7xl gap-5 overflow-x-auto px-5 py-4 [scrollbar-width:none] md:justify-center md:gap-7">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
-import { DomeOfTheRock, GivingWaves, Khatam, OrnamentDivider } from "@/components/Motifs";
+import { DomeOfTheRock, GivingRings, GivingWaves, Khatam, OrnamentDivider } from "@/components/Motifs";
 import { IconArrow, IconBank, IconBook, IconPlay, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import StoriesBar from "@/components/StoriesBar";
@@ -12,7 +12,7 @@ import Lamps from "@/components/Lamps";
 import Reveal from "@/components/Reveal";
 import VideoCard from "@/components/VideoCard";
 import SmartImg from "@/components/SmartImg";
-import { news, pillars, projects, qudsLibrary, stats, videos } from "@/lib/data";
+import { news, pillars, projectPath, projects, qudsLibrary, stats, videos } from "@/lib/data";
 import { fmt, getDict, isLang, lhref, tx, type Lang } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
@@ -80,7 +80,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[640px] self-end">
-            <GivingWaves className="pointer-events-none absolute bottom-[8%] left-1/2 w-[135%] -translate-x-1/2" rings={8} stroke={3} gap={9} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} opacity={0.28} />
+            <GivingRings className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.32} spin />
             <DomeOfTheRock className="relative block w-full" label={t.hero.domeAlt} />
           </div>
         </div>
@@ -99,7 +99,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
               {urgent.map((p) => (
-                <Link key={p.slug} href={h(`/projects/${p.slug}`)} className="group overflow-hidden rounded-[24px] border border-stone-200 bg-white hover:shadow-[0_24px_60px_-30px_rgba(0,61,85,.5)]">
+                <Link key={p.slug} href={h(projectPath(p.slug))} className="group overflow-hidden rounded-[24px] border border-stone-200 bg-white hover:shadow-[0_24px_60px_-30px_rgba(0,61,85,.5)]">
                   <ProjectCover p={p} lang={lang} />
                   <div className="p-5">
                     <h3 className="font-kufi text-xl font-bold text-teal-900">{tx(p.title, lang)}</h3>

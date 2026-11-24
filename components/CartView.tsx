@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getProject } from "@/lib/data";
+import { getProject, projectPath } from "@/lib/data";
 import { fmt, tx } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/lang-context";
@@ -35,7 +35,7 @@ export default function CartView() {
                 <SmartImg src={p.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
               </span>
               <div className="min-w-0 flex-1">
-                <Link href={href(`/projects/${p.slug}`)} className="font-kufi text-lg font-bold text-teal-900 hover:text-teal-700">{tx(p.title, lang)}</Link>
+                <Link href={href(projectPath(p.slug))} className="font-kufi text-lg font-bold text-teal-900 hover:text-teal-700">{tx(p.title, lang)}</Link>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <div className="inline-grid grid-cols-2 gap-1 rounded-xl bg-stone-100 p-1 text-sm">
                     {(["once", "monthly"] as const).map((f) => (

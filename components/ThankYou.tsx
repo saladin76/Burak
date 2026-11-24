@@ -6,22 +6,21 @@ import { getProject } from "@/lib/data";
 import { fmt, tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import type { CartItem } from "@/lib/cart";
-import { IconArrow, IconFacebook, IconWhatsapp, IconX } from "./Icons";
+import { IconArrow, IconAward, IconFacebook, IconWhatsapp, IconX } from "./Icons";
+import { getOrder } from "@/lib/orders";
 import { GivingWaves, Khatam } from "./Motifs";
 
 type Order = { ref: string; items: CartItem[]; total: number; pay: string };
 
 export default function ThankYou() {
-  const { lang, t, href } = useI18n();
+  const { lang, t, f, href } = useI18n();
   const T = t.thanks;
   const [o, setO] = useState<Order | null>(null);
   const [ref, setRef] = useState("");
   useEffect(() => {
     setRef(new URLSearchParams(window.location.search).get("ref") ?? "");
-    try {
-      const raw = sessionStorage.getItem("burak-last-order");
-      if (raw) setO(JSON.parse(raw));
-    } catch {}
+    const r = new URLSearchParams(window.location.search).get("ref");
+    if (r) setO(getOrder(r) ?? null);
   }, []);
   const url = `https://burakdernegi.org/${lang}`;
   const msg = encodeURIComponent(`${T.shareText} ${url}`);
@@ -49,6 +48,9 @@ export default function ThankYou() {
             ))}
           </ul>
         )}
+        <Link href={href(`/documents?ref=${o?.ref ?? ref}`)} className="mt-8 inline-flex h-14 items-center gap-2 rounded-full border-2 border-gold-300 px-7 text-lg font-bold text-gold-300 hover:bg-gold-300 hover:text-night">
+          <IconAward size={22} /> {f.docs.view}
+        </Link>
         <p className="mt-8 font-semibold">{T.share}</p>
         <div className="mt-3 flex justify-center gap-2">
           <a aria-label="WhatsApp" href={`https://api.whatsapp.com/send?text=${msg}`} className="grid h-12 w-12 place-items-center rounded-full bg-[#1f9d55]"><IconWhatsapp size={22} /></a>

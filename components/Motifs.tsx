@@ -1,14 +1,48 @@
 /* زخارف وعناصر الهوية المقدسية — كلها SVG خفيفة بلا صور */
 
 /* الشعار الرسمي (من ملف Burak logo-Ar.pdf — دليل الهوية 2025). لا يُعاد رسمه ولا يُعدَّل. */
-export function BurakLogo({ light = false, className = "h-14" }: { light?: boolean; className?: string }) {
+export function BurakLogo({ light = false, className = "h-14", latin = false }: { light?: boolean; className?: string; latin?: boolean }) {
+  // النسخة العربية للموقع العربي، والنسخة التركية (Mukaddes Mekanları…) للتركي والإنجليزي — كلتاهما من دليل الهوية
+  const src = latin ? (light ? "/brand/burak-logo-tr-white.svg" : "/brand/burak-logo-tr.svg") : light ? "/brand/burak-logo-white.svg" : "/brand/burak-logo.svg";
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={light ? "/brand/burak-logo-white.svg" : "/brand/burak-logo.svg"}
-      alt="مؤسسة البراق للتعريف بالأماكن المقدسة والثقافة"
-      className={`${className} w-auto`}
-    />
+    <img src={src} alt={latin ? "Burak Mukaddes Mekanları Tanıtma ve Kültür Derneği" : "مؤسسة البراق للتعريف بالأماكن المقدسة والثقافة"} className={`${className} w-auto`} />
+  );
+}
+
+/* «حلقات العطاء» — المفهوم الرسمي في دليل الهوية (ص 18): حلقات دائرية متقطّعة تنطلق من قبة الصخرة كموجات العطاء */
+const RING_COLORS = ["#399bb6", "#52a6c0", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#c5e5f1"];
+export function GivingRings({
+  className = "",
+  rings = 7,
+  palette = RING_COLORS,
+  opacity = 1,
+  spin = false,
+}: {
+  className?: string;
+  rings?: number;
+  palette?: string[];
+  opacity?: number;
+  spin?: boolean;
+}) {
+  const C = 200;
+  // أنماط تقطيع ثابتة (حتى تتطابق بين الخادم والمتصفح)
+  const dashes = ["70 18 40 22", "120 26 60 30", "54 20 90 34", "160 30 44 24", "88 22 130 36", "200 40 70 28", "140 34 220 46", "260 44 90 30"];
+  return (
+    <svg viewBox="0 0 400 400" className={className} aria-hidden="true" style={{ opacity }}>
+      <g fill="none" strokeLinecap="round" className={spin ? "origin-center animate-[spin_90s_linear_infinite]" : undefined}>
+        {Array.from({ length: rings }, (_, i) => {
+          const r = 34 + i * (160 / Math.max(1, rings - 1));
+          const w = 7 + (i % 3) * 3;
+          return (
+            <g key={i}>
+              <circle cx={C} cy={C} r={r} stroke={palette[i % palette.length]} strokeWidth={w} strokeDasharray={dashes[i % dashes.length]} transform={`rotate(${i * 47} ${C} ${C})`} />
+              {i % 2 === 1 && <circle cx={C} cy={C} r={r + w} stroke={palette[(i + 3) % palette.length]} strokeWidth="1" opacity=".5" />}
+            </g>
+          );
+        })}
+      </g>
+    </svg>
   );
 }
 

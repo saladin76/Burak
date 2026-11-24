@@ -187,3 +187,56 @@ body {
     opacity: 1;
   }
 }
+
+/* ---------- الطباعة: الوصل والشهادات ---------- */
+@page cert {
+  size: A4 landscape;
+  margin: 0;
+}
+@page receipt {
+  size: A4 portrait;
+  margin: 0;
+}
+.cert-page {
+  page: cert;
+}
+.receipt-page {
+  page: receipt;
+}
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+  body > *:not(main),
+  header,
+  footer,
+  .no-print,
+  [data-hero] {
+    display: none !important;
+  }
+  main section {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+  .print-area {
+    display: block !important;
+  }
+  .cert-page > div {
+    aspect-ratio: auto !important;
+    height: 209mm !important;
+  }
+  .receipt-page > div {
+    aspect-ratio: auto !important;
+    height: 296mm !important;
+  }
+  .cert-page,
+  .receipt-page {
+    break-inside: avoid;
+    width: 100% !important;
+    max-width: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

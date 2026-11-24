@@ -1,35 +1,45 @@
+"use client";
+
 import Link from "next/link";
-import { kindLabel, regionLabel, type Project } from "@/lib/data";
-import { fmt, getDict, lhref, tx, type Lang } from "@/lib/i18n";
-import { IconArrow, IconRepeat, KindIcon } from "./Icons";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { kindLabel, projectPath, regionLabel, type Project } from "@/lib/data";
+import { fmt, getDict, tx, type Lang } from "@/lib/i18n";
+import { useI18n } from "@/lib/lang-context";
+import { useCart } from "@/lib/cart";
+import { IconArrow, IconBag, IconGift, IconRepeat, KindIcon } from "./Icons";
 import { GivingWaves } from "./Motifs";
 import SmartImg from "./SmartImg";
 
 const coverTone = (p: Project) =>
-  p.kind === "zakat" ? "bg-gold-600 text-gold-100" : p.region === "quds" ? "bg-teal-700 text-teal-50" : "bg-night-2 text-teal-100";
+  p.kind === "zakat" || p.kind === "aqsa" ? "bg-gold-600 text-gold-100" : p.region === "quds" ? "bg-teal-700 text-teal-50" : "bg-night-2 text-teal-100";
 
-export function ProjectCover({ p, lang, tall = false }: { p: Project; lang: Lang; tall?: boolean }) {
+export function ProjectCover({ p, lang, tall = false, className = "" }: { p: Project; lang: Lang; tall?: boolean; className?: string }) {
   const t = getDict(lang);
   return (
-    <div className={`relative overflow-hidden ${coverTone(p)} ${tall ? "h-80 md:h-96" : "h-48"}`}>
+    <div className={`relative overflow-hidden ${coverTone(p)} ${tall ? "h-80 md:h-96" : "h-52"} ${className}`}>
       <div className="pattern-khatam absolute inset-0 opacity-60" />
       <GivingWaves
         className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${tall ? "h-64" : "h-40"}`}
         rings={5}
         stroke={6}
         gap={7}
-        palette={p.kind === "zakat" ? ["#f8edcf", "#ebcd7a", "#dcb24b", "#f8edcf", "#ebcd7a"] : ["#c5e5f1", "#8acbda", "#64b6d0", "#3aafc9", "#ebcd7a"]}
+        palette={p.kind === "zakat" || p.kind === "aqsa" ? ["#f8edcf", "#ebcd7a", "#dcb24b", "#f8edcf", "#ebcd7a"] : ["#c5e5f1", "#8acbda", "#64b6d0", "#3aafc9", "#ebcd7a"]}
         opacity={0.9}
       />
       <div className={`absolute bottom-0 left-1/2 grid -translate-x-1/2 place-items-center ${tall ? "h-28 w-20" : "h-16 w-14"}`}>
         <KindIcon kind={p.kind} size={tall ? 48 : 30} className="text-gold-300" />
       </div>
       <SmartImg src={p.image} alt={tx(p.title, lang)} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-      {p.image && <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/50 via-transparent to-transparent" />}
-      <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3">
-        <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-teal-900">{tx(regionLabel[p.region], lang)}</span>
-        {p.urgent && <span className="rounded-full bg-gold-400 px-3 py-1 text-xs font-bold text-night">{t.common.urgent}</span>}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/70 via-night/0 to-night/20" />
+      <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
+        <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-bold text-teal-900 shadow">{tx(regionLabel[p.region], lang)}</span>
+        <span className="flex gap-1.5">
+          {p.monthly && <span className="flex items-center gap-1 rounded-full bg-teal-900/85 px-2.5 py-1 text-xs font-bold text-white backdrop-blur"><IconRepeat size={12} /> {t.common.regular}</span>}
+          {p.urgent && <span className="rounded-full bg-gold-400 px-3 py-1 text-xs font-bold text-night shadow">{t.common.urgent}</span>}
+        </span>
       </div>
+      <span className="absolute bottom-3 start-3 rounded-full bg-night/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur">{tx(kindLabel[p.kind], lang)}</span>
     </div>
   );
 }
@@ -45,11 +55,9 @@ export function Progress({ p, lang }: { p: Project; lang: Lang }) {
           <span className="num text-lg font-bold text-teal-900">${fmt(p.raised)}</span>
           {p.goal && <span className="text-muted"> {t.common.of} ${fmt(p.goal)}</span>}
         </span>
-        <span className="text-muted">
-          <span className="num font-bold text-teal-900">{fmt(p.donors ?? 0)}</span> {t.common.donors}
-        </span>
+        <span className="text-muted"><span className="num font-bold text-teal-900">{fmt(p.donors ?? 0)}</span> {t.common.donors}</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-stone-200" role="progressbar" aria-valuenow={pct ?? undefined} aria-valuemin={0} aria-valuemax={100} aria-label={t.common.progress}>
+      <div className="h-2.5 overflow-hidden rounded-full bg-stone-200" role="progressbar" aria-valuenow={pct ?? undefined} aria-valuemin={0} aria-valuemax={100} aria-label={t.common.progress}>
         <div className="h-full rounded-full bg-gradient-to-l from-gold-400 to-gold-600" style={{ width: `${pct ?? 100}%` }} />
       </div>
       {pct != null && <p className="mt-1 text-xs font-semibold text-gold-700">{t.common.reached.replace("{p}", String(pct))}</p>}
@@ -57,43 +65,53 @@ export function Progress({ p, lang }: { p: Project; lang: Lang }) {
   );
 }
 
-export default function ProjectCard({ p, lang }: { p: Project; lang: Lang }) {
-  const t = getDict(lang);
-  const h = (x: string) => lhref(lang, x);
+/* بطاقة مشروع تفاعلية: اختيار المبلغ، تبرع مباشر، إضافة للسلة، إهداء */
+export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; lang: Lang; view?: "grid" | "list" }) {
+  const { t, f, href } = useI18n();
+  const cart = useCart();
+  const router = useRouter();
+  const [amount, setAmount] = useState(p.amounts[1] ?? p.amounts[0]);
+  const [added, setAdded] = useState(false);
+  const path = href(projectPath(p.slug));
+  const add = () => cart.add({ slug: p.slug, amount, freq: "once" });
+  const list = view === "list";
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[24px] border border-stone-200 bg-white transition hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(0,61,85,.5)]">
-      <Link href={h(`/projects/${p.slug}`)} tabIndex={-1} aria-hidden="true">
-        <ProjectCover p={p} lang={lang} />
+    <article className={`group flex overflow-hidden rounded-[24px] border border-stone-200 bg-white transition hover:-translate-y-1 hover:border-teal-500/40 hover:shadow-[0_28px_60px_-30px_rgba(0,61,85,.55)] ${list ? "flex-col md:flex-row" : "flex-col"}`}>
+      <Link href={path} tabIndex={-1} aria-hidden="true" className={list ? "md:w-80 md:shrink-0" : ""}>
+        <ProjectCover p={p} lang={lang} className={list ? "md:h-full md:min-h-60" : ""} />
       </Link>
       <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2 flex items-center gap-2 text-xs font-semibold text-teal-700">
-          <span>{tx(kindLabel[p.kind], lang)}</span>
-          {p.monthly && (
-            <span className="flex items-center gap-1 rounded-full bg-teal-100 px-2 py-0.5 text-teal-900">
-              <IconRepeat size={12} /> {t.common.regular}
-            </span>
-          )}
-        </div>
         <h3 className="mb-2 font-kufi text-xl font-bold leading-snug text-teal-900">
-          <Link href={h(`/projects/${p.slug}`)} className="hover:text-teal-700">{tx(p.title, lang)}</Link>
+          <Link href={path} className="hover:text-teal-700">{tx(p.title, lang)}</Link>
         </h3>
-        <p className="mb-4 line-clamp-2 text-[15px] leading-7 text-muted">{tx(p.summary, lang)}</p>
+        <p className={`mb-4 text-[15px] leading-7 text-muted ${list ? "line-clamp-3" : "line-clamp-2"}`}>{tx(p.summary, lang)}</p>
         <div className="mt-auto">
           <Progress p={p} lang={lang} />
-          <div className="mb-3 flex gap-2">
-            {p.amounts.slice(0, 3).map((a) => (
-              <Link
-                key={a}
-                href={h(`/projects/${p.slug}?amount=${a}`)}
-                className="num flex h-10 flex-1 items-center justify-center rounded-xl border border-stone-300 text-[15px] font-bold text-teal-900 hover:border-gold-500 hover:bg-gold-100 hover:text-gold-700"
-              >
+          <div className="mb-3 flex gap-1.5" role="group" aria-label={t.donate.amount}>
+            {p.amounts.slice(0, 4).map((a) => (
+              <button key={a} type="button" aria-pressed={amount === a} onClick={() => setAmount(a)}
+                className={`num flex h-10 flex-1 items-center justify-center rounded-xl border text-[15px] font-bold transition ${amount === a ? "border-gold-500 bg-gold-100 text-gold-700" : "border-stone-300 text-teal-900 hover:border-teal-500"}`}>
                 ${fmt(a)}
-              </Link>
+              </button>
             ))}
           </div>
-          <Link href={h(`/projects/${p.slug}`)} className="flex h-12 items-center justify-center gap-2 rounded-xl bg-teal-900 font-bold text-white transition hover:bg-teal-700">
-            {t.common.donateNow} <IconArrow size={18} />
-          </Link>
+          <div className="flex gap-2">
+            <button type="button" onClick={() => { add(); router.push(href("/checkout")); }}
+              className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-teal-900 font-bold text-white transition hover:bg-teal-700">
+              {t.common.donateNow} <span className="num text-gold-300">${fmt(amount)}</span> <IconArrow size={18} />
+            </button>
+            <button type="button" aria-label={f.cards.quickAdd} title={f.cards.quickAdd}
+              onClick={() => { add(); setAdded(true); setTimeout(() => setAdded(false), 1800); }}
+              className={`grid h-12 w-12 place-items-center rounded-xl border transition ${added ? "border-olive bg-olive text-white" : "border-stone-300 text-teal-900 hover:border-teal-500"}`}>
+              <IconBag size={20} />
+            </button>
+            <button type="button" aria-label={f.cards.gift} title={f.cards.gift} onClick={() => { add(); router.push(href("/checkout?gift=1")); }}
+              className="grid h-12 w-12 place-items-center rounded-xl border border-stone-300 text-teal-900 transition hover:border-gold-500 hover:text-gold-700">
+              <IconGift size={20} />
+            </button>
+          </div>
+          <p className="mt-2 h-4 text-center text-xs font-semibold text-olive" aria-live="polite">{added ? f.cards.added : ""}</p>
         </div>
       </div>
     </article>

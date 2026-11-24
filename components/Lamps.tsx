@@ -70,7 +70,7 @@ export default function Lamps() {
             </>
           )}
         </p>
-        <Link href={href("/projects?region=quds")} className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night shadow-[0_0_40px_-6px_rgba(235,205,122,.8)] hover:bg-gold-400">
+        <Link href={href("/lamps")} className="mt-6 inline-flex h-14 items-center gap-2 rounded-full bg-gold-500 px-8 text-lg font-bold text-night shadow-[0_0_40px_-6px_rgba(235,205,122,.8)] hover:bg-gold-400">
           {L.cta} <IconArrow size={20} />
         </Link>
       </div>
