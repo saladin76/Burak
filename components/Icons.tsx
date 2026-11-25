@@ -211,9 +211,10 @@ const kindPaths: Record<Kind, React.ReactNode> = {
   ),
   support: (
     <>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      <path d="M4 11h16v9H4z" />
-      <path d="M12 15v2" />
+      <circle cx="9" cy="7.5" r="3" />
+      <circle cx="17" cy="9" r="2.3" />
+      <path d="M3.5 20v-1.5a5.5 5.5 0 0 1 11 0V20" />
+      <path d="M14.5 15.2a4.2 4.2 0 0 1 6.5 3.5V20" />
     </>
   ),
 };

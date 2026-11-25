@@ -474,7 +474,9 @@ export const projects: Project[] = [
 
 export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
 /** صفحة المشروع (قناديل الأقصى لها صفحة حملة خاصة) */
-export const projectPath = (slug: string) => (slug === "qanadeel-al-aqsa" ? "/lamps" : `/projects/${slug}`);
+/** صفحة المشروع — القناديل والزكاة لها صفحاتها المخصّصة */
+export const projectPath = (slug: string) =>
+  slug === "qanadeel-al-aqsa" ? "/lamps" : slug === "alrka-alqds" ? "/zakat?region=quds" : slug === "zakat-gaza" ? "/zakat?region=gaza" : `/projects/${slug}`;
 
 export const pillars: { key: string; kind: Kind; title: L; text: L; href: string }[] = [
   {

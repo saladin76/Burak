@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
@@ -6,7 +6,7 @@ import PageHero from "@/components/PageHero";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectCard, { ProjectCover, Progress } from "@/components/ProjectCard";
 import { IconBank, IconGift, IconRepeat, IconShield } from "@/components/Icons";
-import { getProject, kindLabel, projects, regionLabel } from "@/lib/data";
+import { getProject, kindLabel, projectPath, projects, regionLabel } from "@/lib/data";
 import { isLang, locales, tx } from "@/lib/i18n";
 import { pageLang } from "@/lib/page";
 
@@ -28,6 +28,8 @@ export default async function ProjectPage({ params }: P) {
   const { lang, t, h } = await pageLang(params);
   const p = getProject(slug);
   if (!p) notFound();
+  // مشاريع الزكاة لها صفحة الزكاة المخصّصة
+  if (p.kind === "zakat") redirect(`/${lang}${projectPath(p.slug)}`);
   const P = t.projectsPage;
   const related = projects.filter((x) => x.slug !== p.slug && (x.region === p.region || x.kind === p.kind)).slice(0, 3);
 

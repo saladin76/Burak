@@ -19,6 +19,11 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
   const cart = useCart();
   const router = useRouter();
   const [region, setRegion] = useState<Region>("quds");
+  // ?region=gaza من روابط مشاريع الزكاة/الشهري
+  useEffect(() => {
+    const r = new URLSearchParams(window.location.search).get("region");
+    if (r === "gaza" || r === "quds") setRegion(r);
+  }, []);
   const options = useMemo(
     () => projects.filter((p) => inRegion(region, p) && (mode === "zakat" ? p.kind === "zakat" : p.monthly)),
     [region, mode],

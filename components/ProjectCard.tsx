@@ -89,14 +89,24 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
         <p className={`mb-4 text-[15px] leading-7 text-muted ${list ? "line-clamp-3" : "line-clamp-2"}`}>{tx(p.summary, lang)}</p>
         <div className="mt-auto">
           <Progress p={p} lang={lang} />
-          <div className="mb-3 flex gap-1.5" role="group" aria-label={t.donate.amount}>
+          {p.kind !== "zakat" && <div className="mb-3 flex gap-1.5" role="group" aria-label={t.donate.amount}>
             {p.amounts.slice(0, 4).map((a) => (
               <button key={a} type="button" aria-pressed={amount === a} onClick={() => setAmount(a)}
                 className={`num flex h-10 flex-1 items-center justify-center rounded-xl border text-[15px] font-bold transition ${amount === a ? "border-accent-500 bg-accent-100 text-accent-700" : "border-stone-300 text-teal-900 hover:border-teal-500"}`}>
                 ${fmt(a)}
               </button>
             ))}
-          </div>
+          </div>}
+          {p.kind === "zakat" ? (
+            <>
+              <Link href={path} className="btn-shine flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-accent-500 font-bold text-white transition hover:bg-accent-600">
+                {f.prog.giveOnce} <IconArrow size={18} />
+              </Link>
+              <Link href={href("/zakat#calculator")} className="mx-auto mt-2 flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
+                {f.prog.z.calcCta}
+              </Link>
+            </>
+          ) : (<>
           <button type="button" onClick={() => { add(); router.push(href("/checkout")); }}
             className="btn-shine flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-accent-500 font-bold text-white transition hover:bg-accent-600">
             {t.common.donateNow} <span className="num">${fmt(amount)}</span> <IconArrow size={18} />
@@ -105,6 +115,7 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
             className="mx-auto mt-2 flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">
             <IconBag size={16} /> {added ? f.cards.added : f.cards.quickAdd}
           </button>
+          </>)}
         </div>
       </div>
     </article>
