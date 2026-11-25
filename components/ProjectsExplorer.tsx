@@ -61,12 +61,20 @@ export default function ProjectsExplorer({ limit }: { limit?: number }) {
     return (
       <div>
         <div role="tablist" aria-label={P.filter} className="mb-8 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
-          {tabs.map((x) => (
-            <button key={x.key} role="tab" aria-selected={tab === x.key} onClick={() => setTab(x.key)}
-              className={`flex h-11 shrink-0 items-center gap-2 rounded-lg px-4 text-[15px] font-semibold transition ${tab === x.key ? "bg-accent-500 text-white" : "border border-stone-200 bg-white text-teal-900 hover:border-accent-400"}`}>
-              {tabIcon[x.key]} {x.label}
-            </button>
-          ))}
+          {tabs.map((x) => {
+            const page = x.key === "monthly" ? "/monthly" : x.key === "zakat" ? "/zakat" : null;
+            const cls = `flex h-11 shrink-0 items-center gap-2 rounded-lg px-4 text-[15px] font-semibold transition ${tab === x.key ? "bg-accent-500 text-white" : "border border-stone-200 bg-white text-teal-900 hover:border-accent-400"}`;
+            return page ? (
+              <Link key={x.key} href={href(page)} className={cls}>
+                {tabIcon[x.key]} {x.label}
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" className="text-accent-500 rtl:-scale-x-100" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+              </Link>
+            ) : (
+              <button key={x.key} role="tab" aria-selected={tab === x.key} onClick={() => setTab(x.key)} className={cls}>
+                {tabIcon[x.key]} {x.label}
+              </button>
+            );
+          })}
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((p) => <ProjectCard key={p.slug} p={p} lang={lang} view="grid" />)}
