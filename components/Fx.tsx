@@ -120,11 +120,11 @@ export function MonthsOrbit({ label, sub }: { label: string; sub: string }) {
         })}
       </svg>
       <div className="absolute inset-0 grid place-items-center text-center">
-        <div className="floaty">
+        <div className="floaty max-w-[56%]">
           <svg viewBox="0 0 24 24" width="54" height="54" className="mx-auto text-accent-300" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
             <path d="M17 2l4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="M7 22l-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" />
           </svg>
-          <p className="mt-3 font-kufi text-3xl font-extrabold text-white md:text-4xl">{label}</p>
+          <p className="mx-auto mt-3 max-w-[11ch] text-balance font-kufi text-2xl font-extrabold leading-tight text-white md:text-3xl">{label}</p>
           <p className="mt-1 text-sm text-accent-100/80">{sub}</p>
         </div>
       </div>

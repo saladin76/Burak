@@ -89,7 +89,7 @@ export default function TeacherGift() {
           </fieldset>
         </div>
         <div className="mt-6 flex gap-2">
-          <button type="submit" disabled={!ok} className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-50">
+          <button type="submit" disabled={!ok} className="flex min-h-14 py-3 text-center leading-snug flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-50">
             {T.cta} · <span className="num">${fmt(amount)}</span> <IconArrow size={20} />
           </button>
           <button type="button" disabled={!ok} aria-label={f.cards.quickAdd} title={f.cards.quickAdd}

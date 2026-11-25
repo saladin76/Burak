@@ -5,12 +5,12 @@ import { GivingWaves } from "./Motifs";
 import { useI18n } from "@/lib/lang-context";
 
 /* فيديو يوتيوب خفيف: صورة مصغّرة، ولا يُحمَّل المشغّل إلا عند الضغط */
-export default function VideoCard({ id, title, big = false }: { id: string; title: string; big?: boolean }) {
+export default function VideoCard({ id, title, big = false, className = "" }: { id: string; title: string; big?: boolean; className?: string }) {
   const { t } = useI18n();
   const [play, setPlay] = useState(false);
   return (
-    <figure className="group overflow-hidden rounded-2xl border border-stone-200 bg-white">
-      <div className={`relative overflow-hidden bg-night ${big ? "aspect-video" : "aspect-video"}`}>
+    <figure className={`group overflow-hidden rounded-2xl border border-stone-200 bg-white ${className}`}>
+      <div className={`relative overflow-hidden bg-night ${big ? "aspect-video min-h-[240px]" : "aspect-video"}`}>
         {play ? (
           <iframe
             className="absolute inset-0 h-full w-full"

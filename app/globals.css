@@ -249,7 +249,8 @@ body {
 }
 
 /* guard against horizontal overflow on mobile */
-html, body { overflow-x: clip; }
+body { overflow-x: hidden; }
+@supports (overflow-x: clip) { html, body { overflow-x: clip; } }
 
 /* ===== أسلوب منشورات البراق: عنوان على شريط لوني مصمت ===== */
 .brand-label {

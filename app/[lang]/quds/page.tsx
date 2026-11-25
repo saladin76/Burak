@@ -210,8 +210,8 @@ export default async function Quds({ params }: LangParams) {
           <h2 className="font-kufi text-3xl font-extrabold md:text-4xl">{L.ctaT}</h2>
           <p className="mt-3 max-w-2xl text-lg leading-8 text-accent-100">{L.ctaD}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link href={h("/lamps")} className="btn-shine flex h-14 items-center gap-2 rounded-lg bg-white px-7 text-lg font-bold text-accent-700 hover:bg-accent-100">{L.cta1} <IconArrow size={20} /></Link>
-            <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-lg border-2 border-white/60 px-7 text-lg font-bold hover:bg-white/10">{L.cta2}</Link>
+            <Link href={h("/lamps")} className="btn-shine flex min-h-14 items-center justify-center gap-2 rounded-lg bg-white px-6 py-3 text-center text-lg leading-snug font-bold text-accent-700 hover:bg-accent-100">{L.cta1} <IconArrow size={20} /></Link>
+            <Link href={h("/projects?region=quds")} className="flex min-h-14 items-center justify-center gap-2 rounded-lg border-2 border-white/60 px-6 py-3 text-center text-lg leading-snug font-bold hover:bg-white/10">{L.cta2}</Link>
           </div>
         </div>
       </section>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
-import { Khatam } from "@/components/Motifs";
+import { GivingRings, Khatam } from "@/components/Motifs";
 import { IconArrow, IconRepeat, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import JerusalemClock from "@/components/JerusalemClock";
@@ -149,7 +149,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
           </SectionHead>
         </Reveal>
         <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-          <VideoCard id={videos[0].id} title={videos[0].title} big />
+          <VideoCard id={videos[0].id} title={videos[0].title} big className="lg:flex lg:flex-col [&>div]:lg:flex-1 [&>div]:lg:aspect-auto" />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
             {videos.slice(4, 6).map((v) => (
               <VideoCard key={v.id} id={v.id} title={v.title} />
@@ -178,19 +178,19 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 
       {/* ========== كن داعماً ========== */}
       <section className="mx-auto max-w-7xl px-5 pt-24">
-        <div className="relative overflow-hidden rounded-3xl bg-accent-500 p-8 text-white md:p-14">
-          <div className="pattern-khatam-teal absolute inset-0 opacity-70" />
+        <div className="relative isolate overflow-hidden rounded-2xl bg-accent-700 p-8 text-white md:p-14">
+          <GivingRings className="pointer-events-none absolute -end-32 -top-32 -z-10 w-[520px]" rings={7} opacity={0.18} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#3aafc9", "#64b6d0", "#8acbda"]} />
           <div className="relative grid items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
             <div>
-              <p className="mb-3 flex items-center gap-2 font-bold text-teal-900"><IconRepeat size={20} /> {H.ctaKicker}</p>
-              <h2 className="font-kufi text-3xl font-bold leading-tight md:text-5xl">{H.ctaTitle}</h2>
-              <p className="mt-4 max-w-xl text-lg leading-8 text-night/80">{H.ctaText}</p>
+              <p className="brand-tag mb-4 !bg-white/15 ring-1 ring-white/20"><IconRepeat size={16} /> {H.ctaKicker}</p>
+              <h2 className="text-balance font-kufi text-3xl font-extrabold leading-tight md:text-5xl">{H.ctaTitle}</h2>
+              <p className="mt-4 max-w-xl text-lg leading-8 text-accent-100">{H.ctaText}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <Link href={h("/monthly")} className="flex h-14 items-center justify-center gap-2 rounded-2xl bg-teal-900 px-8 text-lg font-bold text-white hover:bg-teal-700">
+              <Link href={h("/monthly")} className="btn-shine flex min-h-14 items-center justify-center gap-2 rounded-lg bg-white px-8 py-3 text-center text-lg font-bold text-accent-700 hover:bg-accent-100">
                 {H.ctaMonthly} <IconArrow size={20} />
               </Link>
-              <Link href={h("/volunteer")} className="flex h-14 items-center justify-center rounded-2xl border-2 border-night/20 px-8 text-lg font-bold hover:bg-white/30">
+              <Link href={h("/volunteer")} className="flex min-h-14 items-center justify-center rounded-lg border-2 border-white/50 px-8 py-3 text-center text-lg font-bold text-white hover:border-white hover:bg-white/10">
                 {H.ctaVolunteer}
               </Link>
             </div>

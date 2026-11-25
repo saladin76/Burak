@@ -91,12 +91,12 @@ export default function Header() {
           scrolled ? "border-stone-200 bg-stone-50/95 shadow-[0_8px_30px_-18px_rgba(0,61,85,.45)] backdrop-blur" : "border-transparent bg-stone-50"
         }`}
       >
-        <div className="mx-auto flex max-w-7xl items-center gap-5 px-5 py-2">
-          <Link href={href("/")} aria-label={t.meta.org}>
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2 sm:px-5 2xl:gap-5">
+          <Link href={href("/")} aria-label={t.meta.org} className="shrink-0">
             <BurakLogo latin={lang !== "ar"} className="h-14 md:h-[68px]" />
           </Link>
 
-          <nav aria-label={t.nav.home} className="hidden flex-1 xl:block">
+          <nav aria-label={t.nav.home} className="hidden min-w-0 flex-1 xl:block">
             <ul className="flex items-center justify-center gap-0.5">
               {nav.map((n) => {
                 const active = n.href === "/" ? rest === "/" : rest.startsWith(n.href);
@@ -104,7 +104,7 @@ export default function Header() {
                   <li key={n.href}>
                     <Link
                       href={href(n.href)}
-                      className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[15px] ${
+                      className={`relative flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[15px] ${
                         n.special ? "bg-accent-100 font-bold text-accent-700 hover:bg-accent-300/50" : active ? "text-teal-900" : "text-muted hover:text-teal-700"
                       }`}
                     >
@@ -118,7 +118,7 @@ export default function Header() {
             </ul>
           </nav>
 
-          <div className="ms-auto flex items-center gap-2 xl:ms-0">
+          <div className="ms-auto flex shrink-0 items-center gap-2 xl:ms-0">
             <Link href={href("/cart")} aria-label={t.common.cart} className="relative grid h-11 w-11 place-items-center rounded-full text-teal-900 hover:bg-teal-100">
               <IconBag />
               {count > 0 && (
@@ -127,13 +127,15 @@ export default function Header() {
             </Link>
             <Link
               href={href("/volunteer#form")}
-              className="hidden h-11 items-center gap-2 rounded-lg border border-teal-500/40 bg-teal-50 px-4 text-[15px] font-semibold text-teal-900 hover:border-teal-500 hover:bg-teal-100 md:flex"
+              aria-label={f.vol.btn}
+              title={f.vol.btn}
+              className="hidden h-11 items-center gap-2 whitespace-nowrap rounded-lg border border-teal-500/40 bg-teal-50 px-3 text-[15px] font-semibold text-teal-900 hover:border-teal-500 hover:bg-teal-100 md:flex 2xl:px-4"
             >
-              <IconHeart size={18} /> {f.vol.btn}
+              <IconHeart size={18} /> <span className="xl:hidden 2xl:inline">{f.vol.btn}</span>
             </Link>
             <Link
               href={href("/#donate")}
-              className="btn-shine flex h-11 items-center gap-2 rounded-lg bg-accent-500 px-5 text-[15px] font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
+              className="btn-shine flex h-11 items-center gap-2 whitespace-nowrap rounded-lg bg-accent-500 px-4 text-[15px] 2xl:px-5 font-bold text-white shadow-[0_6px_20px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600"
             >
               {t.common.donateNow}
             </Link>
