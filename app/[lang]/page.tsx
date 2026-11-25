@@ -7,6 +7,7 @@ import { IconArrow, IconRepeat, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import JerusalemClock from "@/components/JerusalemClock";
 import Lamps from "@/components/Lamps";
+import StoriesBar from "@/components/StoriesBar";
 import ImpactStats from "@/components/ImpactStats";
 import Reveal from "@/components/Reveal";
 import VideoCard from "@/components/VideoCard";
@@ -80,11 +81,14 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
         </div>
       </section>
 
+      {/* ========== الوصول السريع ========== */}
+      <StoriesBar lang={lang} />
+
       {/* ========== تبرع سريع + العاجل ========== */}
-      <section className="relative z-10 mx-auto -mt-10 max-w-7xl px-5 lg:-mt-28">
+      <section className="relative z-10 mx-auto mt-10 max-w-7xl px-5">
         <div className="grid gap-6 lg:grid-cols-[440px_1fr]">
           <QuickDonate />
-          <div className="grid gap-6 lg:pt-28">
+          <div className="grid content-start gap-6">
             <div className="flex items-center justify-between">
               <h2 className="font-kufi text-2xl font-bold text-teal-900">{H.urgentTitle}</h2>
               <Link href={h("/projects")} className="flex items-center gap-1 font-semibold text-teal-700 hover:text-teal-900">
