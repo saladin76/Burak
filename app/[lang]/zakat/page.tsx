@@ -36,14 +36,6 @@ export default async function ZakatPage({ params }: LangParams) {
         <RegionGive mode="zakat" />
       </section>
 
-      <section id="calculator" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-24">
-        <Reveal className="mb-8 max-w-2xl">
-          <p className="brand-tag mb-3">{t.zakat.title}</p>
-          <h2 className="font-kufi text-3xl font-extrabold text-teal-900 md:text-[42px]">{Z.calcT}</h2>
-          <p className="mt-2 text-lg leading-8 text-muted">{Z.calcD}</p>
-        </Reveal>
-        <ZakatCalculator />
-      </section>
 
       <section className="relative mt-24 overflow-hidden bg-gradient-to-b from-white to-[#dff1f7] py-20">
         <GivingRings live className="pointer-events-none absolute -start-40 -top-40 w-[620px]" rings={7} opacity={0.25} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
@@ -56,6 +48,15 @@ export default async function ZakatPage({ params }: LangParams) {
             <AsnafStar items={Z.asnaf} center={Z.asnafCenter} />
           </div>
         </div>
+      </section>
+
+      <section id="calculator" className="mx-auto max-w-7xl scroll-mt-28 px-5 pt-24">
+        <Reveal className="mb-8 max-w-2xl">
+          <p className="brand-tag mb-3">{t.zakat.title}</p>
+          <h2 className="font-kufi text-3xl font-extrabold text-teal-900 md:text-[42px]">{Z.calcT}</h2>
+          <p className="mt-2 text-lg leading-8 text-muted">{Z.calcD}</p>
+        </Reveal>
+        <ZakatCalculator />
       </section>
 
       <Faq title={F.lamps.faqT} items={Z.faq} />
