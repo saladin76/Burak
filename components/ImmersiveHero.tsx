@@ -50,7 +50,7 @@ export default function ImmersiveHero({
             </ol>
           </nav>
           <p className="rise brand-tag mb-5 !bg-white/10 ring-1 ring-white/25 backdrop-blur">{kicker}</p>
-          <h1 className="rise-2 font-kufi text-[42px] font-extrabold leading-[1.3] md:text-[68px]">
+          <h1 className="rise-2 font-kufi text-[38px] font-extrabold leading-[1.3] md:text-[56px] xl:text-[64px]">
             <span className="brand-label !bg-accent-500">{title}</span>
           </h1>
           <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-accent-100 md:text-xl">{text}</p>

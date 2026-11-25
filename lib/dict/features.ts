@@ -1,4 +1,6 @@
 /* نصوص الميزات الجديدة: التطوع، يوم المعلم، قناديل الأقصى، الوصولات والشهادات */
+import { deepMerge } from "../merge";
+import { fF, dF, iF, uF } from "./features-extra";
 import type { Lang } from "../i18n";
 
 const ar = {
@@ -804,6 +806,6 @@ const en: F = {
   },
 };
 
-const all: Record<Lang, F> = { ar, tr, en };
+const all: Record<Lang, F> = { ar, tr, en, fr: deepMerge(en, fF), de: deepMerge(en, dF), id: deepMerge(en, iF), ur: deepMerge(en, uF) };
 export const getF = (l: Lang) => all[l];
 export type Features = F;

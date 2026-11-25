@@ -14,6 +14,10 @@ export default function BankAccounts() {
     ar: { name: "اسم الحساب", branch: "الفرع", copy: "نسخ", done: "نُسخ", more: "جميع الحسابات (ومنها Türkiye Finans) على الموقع الرسمي" },
     tr: { name: "Hesap adı", branch: "Şube", copy: "Kopyala", done: "Kopyalandı", more: "Tüm hesaplar (Türkiye Finans dahil) resmi sitede" },
     en: { name: "Account name", branch: "Branch", copy: "Copy", done: "Copied", more: "All accounts (incl. Türkiye Finans) on the official site" },
+    fr: { name: "Titulaire du compte", branch: "Agence", copy: "Copier", done: "Copié", more: "Tous les comptes (dont Türkiye Finans) sur le site officiel" },
+    de: { name: "Kontoinhaber", branch: "Filiale", copy: "Kopieren", done: "Kopiert", more: "Alle Konten (inkl. Türkiye Finans) auf der offiziellen Website" },
+    id: { name: "Nama rekening", branch: "Cabang", copy: "Salin", done: "Disalin", more: "Semua rekening (termasuk Türkiye Finans) di situs resmi" },
+    ur: { name: "اکاؤنٹ کا نام", branch: "برانچ", copy: "کاپی", done: "کاپی ہو گیا", more: "تمام اکاؤنٹس (بشمول Türkiye Finans) سرکاری ویب سائٹ پر" },
   }[lang];
   const copy = async (v: string) => {
     try { await navigator.clipboard.writeText(v.replace(/\s/g, "")); setCopied(v); setTimeout(() => setCopied(""), 1800); } catch {}

@@ -10,6 +10,10 @@ const L = {
   ar: { year: "هذا العام", since: "منذ التأسيس", text: "أرقام تعكس ثقة المتبرعين وعمل فرقنا الميدانية في القدس وغزة.", benef: "مستفيد من مشاريعنا هذا العام" },
   tr: { year: "Bu yıl", since: "Kuruluştan bu yana", text: "Bağışçılarımızın güvenini ve Kudüs ile Gazze'deki saha ekiplerimizin çalışmasını yansıtan rakamlar.", benef: "bu yıl projelerimizden faydalanan kişi" },
   en: { year: "This year", since: "Since founding", text: "Figures that reflect our donors' trust and the work of our field teams in Al-Quds and Gaza.", benef: "people benefited from our projects this year" },
+  fr: { year: "Cette année", since: "Depuis la fondation", text: "Des chiffres qui reflètent la confiance de nos donateurs et le travail de nos équipes à Al-Qods et à Gaza.", benef: "bénéficiaires de nos projets cette année" },
+  de: { year: "Dieses Jahr", since: "Seit der Gründung", text: "Zahlen, die das Vertrauen unserer Spender und die Arbeit unserer Teams in Al-Quds und Gaza widerspiegeln.", benef: "Begünstigte unserer Projekte in diesem Jahr" },
+  id: { year: "Tahun ini", since: "Sejak berdiri", text: "Angka yang mencerminkan kepercayaan donatur dan kerja tim lapangan kami di Al-Quds dan Gaza.", benef: "penerima manfaat program kami tahun ini" },
+  ur: { year: "اس سال", since: "قیام سے اب تک", text: "یہ اعداد عطیہ دہندگان کے اعتماد اور القدس و غزہ میں ہماری ٹیموں کے کام کی عکاسی کرتے ہیں۔", benef: "اس سال ہمارے منصوبوں سے مستفید افراد" },
 };
 
 /** قسم الأثر والإحصاءات في الصفحة الرئيسية */

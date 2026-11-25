@@ -12,15 +12,15 @@ export const RATES_DATE = "2026-11-24";
 
 export type CurrencyCode = "USD" | "TRY" | "EUR" | "SAR" | "AED" | "KWD" | "QAR" | "BHD" | "OMR";
 export const CURRENCIES: { code: CurrencyCode; rate: number; ar: string; name: Record<Lang, string> }[] = [
-  { code: "USD", rate: 1, ar: "$", name: { ar: "دولار أمريكي", tr: "ABD Doları", en: "US Dollar" } },
-  { code: "TRY", rate: 50.621508, ar: "₺", name: { ar: "ليرة تركية", tr: "Türk Lirası", en: "Turkish Lira" } },
-  { code: "EUR", rate: 0.915641, ar: "€", name: { ar: "يورو", tr: "Euro", en: "Euro" } },
-  { code: "SAR", rate: 3.75, ar: "ر.س", name: { ar: "ريال سعودي", tr: "Suudi Riyali", en: "Saudi Riyal" } },
-  { code: "AED", rate: 3.6725, ar: "د.إ", name: { ar: "درهم إماراتي", tr: "BAE Dirhemi", en: "UAE Dirham" } },
-  { code: "KWD", rate: 0.311688, ar: "د.ك", name: { ar: "دينار كويتي", tr: "Kuveyt Dinarı", en: "Kuwaiti Dinar" } },
-  { code: "QAR", rate: 3.64, ar: "ر.ق", name: { ar: "ريال قطري", tr: "Katar Riyali", en: "Qatari Riyal" } },
-  { code: "BHD", rate: 0.376, ar: "د.ب", name: { ar: "دينار بحريني", tr: "Bahreyn Dinarı", en: "Bahraini Dinar" } },
-  { code: "OMR", rate: 0.384497, ar: "ر.ع", name: { ar: "ريال عُماني", tr: "Umman Riyali", en: "Omani Rial" } },
+  { code: "USD", rate: 1, ar: "$", name: { ar: "دولار أمريكي", tr: "ABD Doları", en: "US Dollar", fr: "Dollar américain", de: "US-Dollar", id: "Dolar AS", ur: "امریکی ڈالر" } },
+  { code: "TRY", rate: 50.621508, ar: "₺", name: { ar: "ليرة تركية", tr: "Türk Lirası", en: "Turkish Lira", fr: "Livre turque", de: "Türkische Lira", id: "Lira Turki", ur: "ترک لیرا" } },
+  { code: "EUR", rate: 0.915641, ar: "€", name: { ar: "يورو", tr: "Euro", en: "Euro", fr: "Euro", de: "Euro", id: "Euro", ur: "یورو" } },
+  { code: "SAR", rate: 3.75, ar: "ر.س", name: { ar: "ريال سعودي", tr: "Suudi Riyali", en: "Saudi Riyal", fr: "Riyal saoudien", de: "Saudi-Riyal", id: "Riyal Saudi", ur: "سعودی ریال" } },
+  { code: "AED", rate: 3.6725, ar: "د.إ", name: { ar: "درهم إماراتي", tr: "BAE Dirhemi", en: "UAE Dirham", fr: "Dirham émirati", de: "VAE-Dirham", id: "Dirham UEA", ur: "اماراتی درہم" } },
+  { code: "KWD", rate: 0.311688, ar: "د.ك", name: { ar: "دينار كويتي", tr: "Kuveyt Dinarı", en: "Kuwaiti Dinar", fr: "Dinar koweïtien", de: "Kuwait-Dinar", id: "Dinar Kuwait", ur: "کویتی دینار" } },
+  { code: "QAR", rate: 3.64, ar: "ر.ق", name: { ar: "ريال قطري", tr: "Katar Riyali", en: "Qatari Riyal", fr: "Riyal qatari", de: "Katar-Riyal", id: "Riyal Qatar", ur: "قطری ریال" } },
+  { code: "BHD", rate: 0.376, ar: "د.ب", name: { ar: "دينار بحريني", tr: "Bahreyn Dinarı", en: "Bahraini Dinar", fr: "Dinar bahreïni", de: "Bahrain-Dinar", id: "Dinar Bahrain", ur: "بحرینی دینار" } },
+  { code: "OMR", rate: 0.384497, ar: "ر.ع", name: { ar: "ريال عُماني", tr: "Umman Riyali", en: "Omani Rial", fr: "Rial omanais", de: "Omanischer Rial", id: "Rial Oman", ur: "عمانی ریال" } },
 ];
 const byCode = Object.fromEntries(CURRENCIES.map((c) => [c.code, c])) as Record<CurrencyCode, (typeof CURRENCIES)[number]>;
 
@@ -69,7 +69,7 @@ const CurrencyCtx = createContext<Ctx | null>(null);
 const KEY = "burak-currency-v1";
 
 export function CurrencyProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
-  const [cur, setCurState] = useState<CurrencyCode>(lang === "tr" ? "TRY" : "USD");
+  const [cur, setCurState] = useState<CurrencyCode>(lang === "tr" ? "TRY" : lang === "fr" || lang === "de" ? "EUR" : "USD");
   useEffect(() => {
     try {
       const s = localStorage.getItem(KEY) as CurrencyCode | null;

@@ -1,5 +1,6 @@
 "use client";
 
+import { isRtl, localeOf } from "@/lib/i18n";
 import { BurakLogo, GivingRings, Khatam, OrnamentDivider } from "./Motifs";
 import { KindIcon } from "./Icons";
 import QR from "./QR";
@@ -38,7 +39,7 @@ const palette: Record<CertProps["variant"], { ring: string[]; accent: string }> 
 export default function Certificate(p: CertProps) {
   const pal = palette[p.variant];
   const dark = p.variant === "lamp";
-  const loc = p.lang === "ar" ? "ar-EG" : p.lang === "tr" ? "tr-TR" : "en-GB";
+  const loc = localeOf(p.lang);
   const greg = new Intl.DateTimeFormat(loc, { day: "numeric", month: "long", year: "numeric" }).format(p.date);
   const hijri = new Intl.DateTimeFormat(p.lang === "ar" ? "ar-SA-u-ca-islamic-umalqura-nu-arab" : `${loc}-u-ca-islamic-umalqura`, { day: "numeric", month: "long", year: "numeric" }).format(p.date);
   const fg = dark ? "text-white" : "text-teal-900";
@@ -72,7 +73,7 @@ export default function Certificate(p: CertProps) {
         )}
 
         <div className={`relative flex h-full flex-col items-center px-[9cqw] text-center ${p.variant === "lamp" ? "pt-[10cqw]" : "pt-[5.2cqw]"} pb-[4.6cqw]`}>
-          <BurakLogo latin={p.lang !== "ar"} light={dark} className="h-[7cqw]" />
+          <BurakLogo latin={!isRtl(p.lang)} light={dark} className="h-[7cqw]" />
           {p.occasion && <p className="mt-[1.2cqw] font-semibold text-accent-600" style={{ fontSize: "1.45cqw" }}>{p.occasion}</p>}
           <h2 className={`mt-[0.8cqw] font-kufi font-bold ${fg}`} style={{ fontSize: "3.6cqw", lineHeight: 1.2 }}>
             {p.heading}
@@ -114,7 +115,7 @@ export default function Certificate(p: CertProps) {
               <span className="relative grid h-[9cqw] w-[9cqw] place-items-center rounded-full border-[0.25cqw] border-accent-500 text-accent-600">
                 <span className="absolute inset-[0.6cqw] rounded-full border border-dashed border-accent-500/70" />
                 <Khatam className="h-[4.4cqw] w-[4.4cqw]" color="#3aafc9" />
-                <span className="absolute bottom-[1.2cqw] font-kufi font-bold" style={{ fontSize: "0.95cqw" }}>{p.lang === "ar" ? "البراق" : "BURAK"}</span>
+                <span className="absolute bottom-[1.2cqw] font-kufi font-bold" style={{ fontSize: "0.95cqw" }}>{isRtl(p.lang) ? "البراق" : "BURAK"}</span>
               </span>
             </div>
             <div className="flex items-end justify-end gap-[1.2cqw]">

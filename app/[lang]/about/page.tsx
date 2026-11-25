@@ -63,7 +63,7 @@ export default async function About({ params }: LangParams) {
             <Khatam className="h-6 w-6" color="#3aafc9" />
             {A.thisYear.replace("{p}", String(stats.annual[0].value)).replace("{b}", fmt(stats.annual[1].value))}
           </p>
-          <Link href={h("/projects")} className="flex h-12 items-center gap-2 rounded-lg bg-accent-500 px-6 font-bold text-white hover:bg-accent-600">
+          <Link href={h("/projects")} className="flex min-h-12 items-center justify-center gap-2 rounded-lg bg-accent-500 px-6 py-2.5 text-center leading-snug font-bold text-white hover:bg-accent-600">
             {A.contribute} <IconArrow size={18} />
           </Link>
         </div>

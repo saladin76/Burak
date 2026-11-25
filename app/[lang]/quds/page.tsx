@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { pick } from "@/lib/i18n";
 import PageHero from "@/components/PageHero";
 import AqsaMap from "@/components/AqsaMap";
 import { DomeOfTheRock, Khatam} from "@/components/Motifs";
@@ -95,7 +96,7 @@ const X = {
 export default async function Quds({ params }: LangParams) {
   const { lang, t, h } = await pageLang(params);
   const Q = t.quds;
-  const L = X[lang];
+  const L = pick(X, lang);
   const qudsProjects = projects.filter((p) => p.region === "quds" && p.kind !== "zakat").slice(0, 3);
   return (
     <>

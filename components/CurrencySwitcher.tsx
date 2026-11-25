@@ -7,7 +7,7 @@ import { useI18n } from "@/lib/lang-context";
 export default function CurrencySwitcher({ dark = true, className = "" }: { dark?: boolean; className?: string }) {
   const { lang } = useI18n();
   const { cur, setCur } = useCurrency();
-  const label = { ar: "العملة", tr: "Para birimi", en: "Currency" }[lang];
+  const label = { ar: "العملة", tr: "Para birimi", en: "Currency", fr: "Devise", de: "Währung", id: "Mata uang", ur: "کرنسی" }[lang];
   return (
     <label className={`relative inline-flex h-8 shrink-0 items-center gap-1 whitespace-nowrap rounded-md border pe-6 ps-2 text-[13px] font-semibold ${dark ? "border-white/20 bg-white/5 text-teal-100 hover:border-white/40" : "border-stone-300 bg-white text-teal-900"} ${className}`} dir="ltr">
       <span className="sr-only">{label}</span>

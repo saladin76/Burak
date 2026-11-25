@@ -63,9 +63,9 @@ export default function LampsBuilder() {
         <div className="mt-4 grid grid-cols-2 gap-3">
           {L.pkgs.map((p) => (
             <button type="button" key={p.n} aria-pressed={n === p.n} onClick={() => setN(p.n)}
-              className={`rounded-2xl border p-4 text-start transition ${n === p.n ? "border-accent-500 bg-accent-100 ring-4 ring-accent-400/20" : "border-stone-200 hover:border-teal-500"}`}>
-              <span className="flex items-baseline justify-between">
-                <b className="font-kufi text-xl text-teal-900">{p.t}</b>
+              className={`flex flex-col justify-start rounded-2xl border p-4 text-start transition ${n === p.n ? "border-accent-500 bg-accent-100 ring-4 ring-accent-400/20" : "border-stone-200 hover:border-teal-500"}`}>
+              <span className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
+                <b className="font-kufi text-lg leading-snug text-teal-900 sm:text-xl">{p.t}</b>
                 <span className="num font-bold text-accent-700" dir="ltr">{M(p.n * lampLocal)}</span>
               </span>
               <span className="mt-1 block text-sm text-muted">{p.d}</span>
@@ -112,7 +112,7 @@ export default function LampsBuilder() {
         </label>
 
         <div className="mt-6 flex gap-2">
-          <button type="submit" className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_0_40px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600">
+          <button type="submit" className="flex min-h-14 flex-1 items-center justify-center gap-2 rounded-2xl px-3 py-3 text-center leading-snug bg-accent-500 text-lg font-bold text-white shadow-[0_0_40px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600">
             {(n === 1 ? L.btnOne : L.btn).replace("{n}", fmt(n)).replace("{x}", M(n * lampLocal))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
           </button>
           <button type="button" aria-label={f.cards.quickAdd} title={f.cards.quickAdd} onClick={() => { commit(); setAdded(true); setTimeout(() => setAdded(false), 2200); }}

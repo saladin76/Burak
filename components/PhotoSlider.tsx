@@ -1,5 +1,6 @@
 "use client";
 
+import { isRtl } from "@/lib/i18n";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useI18n } from "@/lib/lang-context";
 
@@ -14,7 +15,7 @@ export default function PhotoSlider({ photos, alt }: { photos: string[]; alt: st
   const go = useCallback((d: number) => setI((x) => (x + d + n) % Math.max(1, n)), [n]);
   const thumbs = useRef<HTMLDivElement>(null);
   const touch = useRef(0);
-  const rtl = lang === "ar";
+  const rtl = isRtl(lang);
 
   useEffect(() => {
     if (paused || n < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

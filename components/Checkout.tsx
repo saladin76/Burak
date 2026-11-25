@@ -153,7 +153,7 @@ export default function Checkout() {
         </div>
         {C$.cur !== "USD" && (
           <p className="mt-2 text-xs leading-6 text-teal-100/80">
-            {{ ar: `≈ ${C$.money(total, { code: "USD" })} — تحويل تقريبي بسعر صرف ${RATES_DATE}، والسعر النهائي تحدده بوابة الدفع.`, tr: `≈ ${C$.money(total, { code: "USD" })} — ${RATES_DATE} tarihli yaklaşık kur; nihai tutarı ödeme sağlayıcısı belirler.`, en: `≈ ${C$.money(total, { code: "USD" })} — approximate rate of ${RATES_DATE}; the final amount is set by the payment provider.` }[lang]}
+            {{ ar: `≈ ${C$.money(total, { code: "USD" })} — تحويل تقريبي بسعر صرف ${RATES_DATE}، والسعر النهائي تحدده بوابة الدفع.`, tr: `≈ ${C$.money(total, { code: "USD" })} — ${RATES_DATE} tarihli yaklaşık kur; nihai tutarı ödeme sağlayıcısı belirler.`, en: `≈ ${C$.money(total, { code: "USD" })} — approximate rate of ${RATES_DATE}; the final amount is set by the payment provider.`, fr: `≈ ${C$.money(total, { code: "USD" })} — taux indicatif du ${RATES_DATE} ; le montant final est fixé par le prestataire de paiement.`, de: `≈ ${C$.money(total, { code: "USD" })} — ungefährer Kurs vom ${RATES_DATE}; den Endbetrag legt der Zahlungsanbieter fest.`, id: `≈ ${C$.money(total, { code: "USD" })} — kurs perkiraan per ${RATES_DATE}; nominal akhir ditentukan penyedia pembayaran.`, ur: `≈ ${C$.money(total, { code: "USD" })} — ${RATES_DATE} کا تقریبی ریٹ؛ حتمی رقم ادائیگی فراہم کنندہ طے کرے گا۔` }[lang]}
           </p>
         )}
         <button type="submit" disabled={busy || !total} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-60">

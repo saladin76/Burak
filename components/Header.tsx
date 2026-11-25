@@ -1,13 +1,15 @@
 "use client";
 
+import { isRtl } from "@/lib/i18n";
 import CurrencySwitcher from "./CurrencySwitcher";
+import LangSwitcher from "./LangSwitcher";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BurakLogo } from "./Motifs";
-import { IconBag, IconClose, IconGlobe, IconHeart, IconMail, IconMenu, IconPhone, KindIcon } from "./Icons";
+import { IconBag, IconClose, IconHeart, IconMail, IconMenu, IconPhone, KindIcon } from "./Icons";
 import { contact } from "@/lib/data";
-import { locales, type Lang } from "@/lib/i18n";
+import { type Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
 
@@ -66,21 +68,7 @@ export default function Header() {
               {t.common.bank}
             </Link>
             <span className="hidden h-3 w-px bg-teal-700 md:inline" />
-            <span className="flex items-center gap-1 sm:gap-1.5" dir="ltr">
-              <IconGlobe size={15} className="hidden sm:block" />
-              {locales.map((l, i) => (
-                <span key={l} className="flex items-center gap-1.5">
-                  {i > 0 && <span className="text-teal-300">·</span>}
-                  {l === lang ? (
-                    <span className="font-semibold text-accent-300" aria-current="true">{l.toUpperCase()}</span>
-                  ) : (
-                    <Link href={langLink(l)} hrefLang={l} lang={l} className="inline-flex min-w-8 items-center justify-center hover:text-accent-300">
-                      {l.toUpperCase()}
-                    </Link>
-                  )}
-                </span>
-              ))}
-            </span>
+            <LangSwitcher hrefFor={langLink} />
             <CurrencySwitcher />
           </div>
         </div>
@@ -93,7 +81,7 @@ export default function Header() {
       >
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2 sm:px-5 2xl:gap-5">
           <Link href={href("/")} aria-label={t.meta.org} className="shrink-0">
-            <BurakLogo latin={lang !== "ar"} className="h-14 md:h-[68px]" />
+            <BurakLogo latin={!isRtl(lang)} className="h-14 md:h-[68px]" />
           </Link>
 
           <nav aria-label={t.nav.home} className="hidden min-w-0 flex-1 xl:block">

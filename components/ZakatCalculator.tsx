@@ -66,7 +66,7 @@ export default function ZakatCalculator() {
           <legend className="mb-2 text-sm font-semibold text-muted">{Z.basis}</legend>
           <div className="inline-grid grid-cols-2 gap-1 rounded-2xl bg-stone-100 p-1">
             {(["gold", "silver"] as const).map((b) => (
-              <button key={b} type="button" aria-pressed={basis === b} onClick={() => setBasis(b)} className={`h-10 rounded-xl px-5 text-sm font-semibold ${basis === b ? "bg-teal-900 text-white" : "text-teal-900"}`}>
+              <button key={b} type="button" aria-pressed={basis === b} onClick={() => setBasis(b)} className={`min-h-10 rounded-xl px-3 py-1.5 text-sm font-semibold leading-snug sm:px-5 ${basis === b ? "bg-teal-900 text-white" : "text-teal-900"}`}>
                 {b === "gold" ? Z.gold : Z.silver}
               </button>
             ))}

@@ -741,7 +741,7 @@ export const contact = {
   website: "www.burakdernegi.org",
   legalName: "Burak Mukaddes Mekanları Tanıtma ve Kültür Derneği",
   address: "Murat Reis Mah. Payanda Sk. No:23, Bağlarbaşı, Üsküdar / İstanbul",
-  handles: { ar: "alburakorg", tr: "burakdernegi", en: "alburakorgen" },
+  handles: { ar: "alburakorg", tr: "burakdernegi", en: "alburakorgen", fr: "alburakorgen", de: "burakdernegi", id: "alburakorgen", ur: "alburakorgen" },
 };
 
 export const socials = (h: string) => [
@@ -777,3 +777,10 @@ export const fieldPhotos: string[] = [
   U + "DXcN1lYzm0D3Lp2coojV_1741181112337.jpg",
   U + "HRkUlJJhE19cb3C5LATS_1741181158487.jpg",
 ];
+
+/* ربط الترجمات الإضافية بالبيانات */
+import { kindX, projectSummaries, projectTitles, regionX, statX } from "./data-i18n";
+for (const p of projects) { Object.assign(p.title, projectTitles[p.slug] ?? {}); Object.assign(p.summary, projectSummaries[p.slug] ?? {}); }
+for (const k of Object.keys(kindLabel) as Kind[]) Object.assign(kindLabel[k], kindX[k] ?? {});
+for (const r of Object.keys(regionLabel) as Region[]) Object.assign(regionLabel[r], regionX[r] ?? {});
+[...stats.lifetime, ...stats.annual].forEach((s, i) => Object.assign(s.label, statX[i] ?? {}));

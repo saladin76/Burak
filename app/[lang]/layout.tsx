@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     title: { default: t.meta.title, template: `%s · ${t.meta.org}` },
     description: t.meta.desc,
     metadataBase: new URL("https://burakdernegi.org"),
-    alternates: { languages: { ar: "/ar", tr: "/tr", en: "/en" } },
+    alternates: { languages: Object.fromEntries(locales.map((l) => [l, `/${l}`])) },
     icons: { icon: "/brand/burak-logo.svg" },
     robots: ALLOW_INDEX ? undefined : { index: false, follow: false },
     openGraph: { siteName: t.meta.org, images: ["/brand/og.png"] },

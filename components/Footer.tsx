@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isRtl } from "@/lib/i18n";
 import { BurakLogo, GivingRings, QudsSkyline } from "./Motifs";
 import { IconBank, IconFacebook, IconInstagram, IconMail, IconPhone, IconShield, IconTiktok, IconWhatsapp, IconX, IconYoutube, IconPin } from "./Icons";
 import { contact, socials } from "@/lib/data";
@@ -28,7 +29,7 @@ export default function Footer({ lang }: { lang: Lang }) {
       <div className="relative mx-auto max-w-7xl px-5 pb-28 pt-16 lg:pb-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           <div>
-            <BurakLogo light latin={lang !== "ar"} className="h-24" />
+            <BurakLogo light latin={!isRtl(lang)} className="h-24" />
             <p className="mt-5 max-w-sm leading-8 text-teal-100/85">{t.footer.about}</p>
             <p className="mt-4 font-kufi text-xl text-accent-300">{t.common.slogan}</p>
           </div>

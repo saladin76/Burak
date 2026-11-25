@@ -1,12 +1,13 @@
 "use client";
 
+import { localeOf } from "@/lib/i18n";
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/lang-context";
 
 /* «الآن في القدس» — توقيت القدس والتاريخ الهجري الحي */
 export default function JerusalemClock({ light = false }: { light?: boolean } = {}) {
   const { lang, t } = useI18n();
-  const loc = lang === "ar" ? "ar-EG" : lang === "tr" ? "tr-TR" : "en-GB";
+  const loc = localeOf(lang);
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -34,8 +35,8 @@ export default function JerusalemClock({ light = false }: { light?: boolean } = 
         <span className="absolute -end-0.5 -top-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-[#22c55e]" />
       </span>
       <span className={`text-sm ${light ? "text-teal-700" : "text-teal-100"}`}>
-        {t.hero.nowIn} <b className={`mx-1 font-kufi text-base ${light ? "text-teal-900" : "text-white"}`} suppressHydrationWarning>{time}</b>
-        <span className={light ? "text-teal-600" : "text-teal-100/70"} suppressHydrationWarning>{hijri}</span>
+        {t.hero.nowIn} <b className={`mx-1 inline-block font-kufi text-base ${light ? "text-teal-900" : "text-white"}`} dir={lang === "ar" ? undefined : "ltr"} suppressHydrationWarning>{time}</b>
+        <bdi className={light ? "text-teal-600" : "text-teal-100/70"} suppressHydrationWarning>{hijri}</bdi>
       </span>
     </div>
   );

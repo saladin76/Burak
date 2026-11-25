@@ -27,7 +27,7 @@ export default async function TeachersDay({ params }: LangParams) {
             <h1 className="rise-2 mt-6 text-balance font-kufi text-5xl font-bold leading-[1.15] md:text-7xl">{T.title}</h1>
             <p className="rise-2 mt-3 font-kufi text-2xl text-accent-300 md:text-3xl">{T.sub}</p>
             <p className="rise-3 mt-6 max-w-2xl text-lg leading-9 text-white">{T.text}</p>
-            <a href="#gift" className="rise-3 mt-8 inline-flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white hover:bg-accent-600">{T.cta}</a>
+            <a href="#gift" className="rise-3 mt-8 inline-flex min-h-14 items-center justify-center gap-2 rounded-lg bg-accent-500 px-8 py-3 text-center leading-snug text-lg font-bold text-white hover:bg-accent-600">{T.cta}</a>
           </div>
           <figure className="rise-3 relative rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur">
             <span className="absolute -top-6 start-8 grid h-12 w-12 place-items-center rounded-full bg-accent-500 text-white"><KindIcon kind="education" size={26} /></span>

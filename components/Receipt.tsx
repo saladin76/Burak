@@ -1,5 +1,7 @@
 "use client";
 
+import { isRtl } from "@/lib/i18n";
+import { localeOf } from "@/lib/i18n";
 import { formatMoney, rateOf } from "@/lib/currency";
 import { BurakLogo, GivingRings, Khatam } from "./Motifs";
 import QR from "./QR";
@@ -13,7 +15,7 @@ import type { Order } from "@/lib/orders";
 export default function Receipt({ order, lang, verifyUrl }: { order: Order; lang: Lang; verifyUrl: string }) {
   const D = getF(lang).docs;
   const t = getDict(lang);
-  const loc = lang === "ar" ? "ar-EG" : lang === "tr" ? "tr-TR" : "en-GB";
+  const loc = localeOf(lang);
   const date = new Date(order.date);
   const when = new Intl.DateTimeFormat(loc, { dateStyle: "long", timeStyle: "short" }).format(date);
 
@@ -31,7 +33,7 @@ export default function Receipt({ order, lang, verifyUrl }: { order: Order; lang
                 {D.ref}: <b className="font-mono" dir="ltr">{order.ref}</b>
               </p>
             </div>
-            <BurakLogo light latin={lang !== "ar"} className="h-[16cqw]" />
+            <BurakLogo light latin={!isRtl(lang)} className="h-[16cqw]" />
           </div>
         </div>
 
