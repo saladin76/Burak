@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { fmt } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
+import { formatMoney, useCurrency } from "@/lib/currency";
 import { IconArrow } from "./Icons";
 
 /* حاسبة زكاة المال — نصاب الذهب 85 غراماً، والمقدار ربع العشر (2.5%) */
@@ -22,6 +22,8 @@ type K = (typeof fields)[number]["k"] | "goldPrice" | "silverPrice";
 
 export default function ZakatCalculator() {
   const { t, f } = useI18n();
+  const C$ = useCurrency();
+  const M = (x: number) => formatMoney(Math.round(x), C$.cur);
   const Z = t.zakat;
   const [v, setV] = useState<Record<K, string>>({
     cash: "", goldG: "", silverG: "", trade: "", receivable: "", debts: "", goldPrice: "", silverPrice: "",
@@ -57,8 +59,8 @@ export default function ZakatCalculator() {
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s1}</h2>
         <p className="mt-1 text-sm text-muted">{Z.s1d}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {Input({ k: "goldPrice", label: Z.goldPrice, unit: "$" })}
-          {Input({ k: "silverPrice", label: Z.silverPrice, unit: "$" })}
+          {Input({ k: "goldPrice", label: Z.goldPrice, unit: C$.symbol })}
+          {Input({ k: "silverPrice", label: Z.silverPrice, unit: C$.symbol })}
         </div>
         <fieldset className="mt-4">
           <legend className="mb-2 text-sm font-semibold text-muted">{Z.basis}</legend>
@@ -75,7 +77,7 @@ export default function ZakatCalculator() {
         <h2 className="font-kufi text-2xl font-bold text-teal-900">{Z.s2}</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {fields.map((f) => (
-            <div key={f.k}>{Input({ k: f.k, label: Z[f.k], unit: f.unit === "g" ? Z.g : "$" })}</div>
+            <div key={f.k}>{Input({ k: f.k, label: Z[f.k], unit: f.unit === "g" ? Z.g : C$.symbol })}</div>
           ))}
         </div>
       </div>
@@ -85,11 +87,11 @@ export default function ZakatCalculator() {
           <div className="pattern-khatam absolute inset-0 opacity-15" />
           <div className="relative">
             <p className="text-sm font-bold text-accent-300">{Z.due}</p>
-            <p className="num mt-2 text-6xl font-bold" aria-live="polite">${fmt(Math.round(r.due))}</p>
+            <p className="num mt-2 text-6xl font-bold" aria-live="polite" dir="ltr">{M(r.due)}</p>
             <dl className="mt-6 grid gap-3 border-t border-white/15 pt-5 text-sm">
-              <div className="flex justify-between"><dt className="text-teal-100">{Z.assets}</dt><dd className="num font-bold">${fmt(Math.round(r.assets))}</dd></div>
-              <div className="flex justify-between"><dt className="text-teal-100">{Z.net}</dt><dd className="num font-bold">${fmt(Math.round(r.net))}</dd></div>
-              <div className="flex justify-between"><dt className="text-teal-100">{Z.nisab}</dt><dd className="num font-bold">{r.nisab ? `$${fmt(Math.round(r.nisab))}` : "—"}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.assets}</dt><dd className="num font-bold">{M(r.assets)}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.net}</dt><dd className="num font-bold">{M(r.net)}</dd></div>
+              <div className="flex justify-between"><dt className="text-teal-100">{Z.nisab}</dt><dd className="num font-bold">{r.nisab ? M(r.nisab) : "—"}</dd></div>
             </dl>
             <p className="mt-5 rounded-xl bg-white/10 p-3 text-sm leading-7 text-teal-50">
               {priceMissing
@@ -104,7 +106,7 @@ export default function ZakatCalculator() {
               onClick={() => window.dispatchEvent(new CustomEvent("burak:zakat-amount", { detail: r.due }))}
               className={`mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-lg text-lg font-bold ${r.due ? "bg-accent-500 text-white hover:bg-accent-600" : "cursor-not-allowed bg-white/10 text-white/50"}`}
             >
-              {f.prog.z.useAmount}{r.due ? <span className="num">· ${fmt(Math.round(r.due))}</span> : null} <IconArrow size={20} />
+              {f.prog.z.useAmount}{r.due ? <span className="num">· {M(r.due)}</span> : null} <IconArrow size={20} />
             </button>
           </div>
         </div>

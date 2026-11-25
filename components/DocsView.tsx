@@ -1,11 +1,12 @@
 "use client";
 
+import { formatMoney, rateOf } from "@/lib/currency";
 import { useEffect, useMemo, useState } from "react";
 import Certificate from "./Certificate";
 import Receipt from "./Receipt";
 import { IconAward, IconPrint } from "./Icons";
 import { getProject } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { getOrder, lastOrder, type Order } from "@/lib/orders";
 
@@ -48,7 +49,7 @@ export default function DocsView() {
       { label: D.receipt, node: <Receipt order={order} lang={lang} verifyUrl={verify} /> },
       {
         label: D.certificate,
-        node: <Certificate {...base} variant="donation" heading={D.certificate} toLabel={D.certIntro} name={donor} body={`${D.certBody} ($${fmt(order.total)})`} projects={titles} dua={D.dua} />,
+        node: <Certificate {...base} variant="donation" heading={D.certificate} toLabel={D.certIntro} name={donor} body={`${D.certBody} (${formatMoney(Math.round(order.total * rateOf(order.currency)), order.currency ?? "USD")})`} projects={titles} dua={D.dua} />,
       },
     ];
     if (order.gift)
@@ -117,7 +118,7 @@ export default function DocsView() {
       {docs.map((d, i) => (
         <div key={d.label} className={i === tab ? "print-area" : "hidden"}>{d.node}</div>
       ))}
-      <p className="no-print mt-6 text-center text-sm text-muted">{t.cart.total}: <b className="num text-teal-900">${fmt(order.total)}</b> · {D.ref}: <b className="font-mono" dir="ltr">{order.ref}</b></p>
+      <p className="no-print mt-6 text-center text-sm text-muted">{t.cart.total}: <b className="num text-teal-900" dir="ltr">{formatMoney(Math.round(order.total * rateOf(order.currency)), order.currency ?? "USD")}</b> · {D.ref}: <b className="font-mono" dir="ltr">{order.ref}</b></p>
     </div>
   );
 }

@@ -1,18 +1,20 @@
 "use client";
 
+import { useCurrency } from "@/lib/currency";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getProject } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import type { CartItem } from "@/lib/cart";
 import { IconArrow, IconAward, IconFacebook, IconWhatsapp, IconX } from "./Icons";
 import { getOrder } from "@/lib/orders";
 import { GivingWaves, Khatam } from "./Motifs";
 
-type Order = { ref: string; items: CartItem[]; total: number; pay: string };
+type Order = { ref: string; items: CartItem[]; total: number; pay: string; currency?: import("@/lib/currency").CurrencyCode };
 
 export default function ThankYou() {
+  const C$ = useCurrency();
   const { lang, t, f, href } = useI18n();
   const T = t.thanks;
   const [o, setO] = useState<Order | null>(null);
@@ -43,7 +45,7 @@ export default function ThankYou() {
             {o.items.map((it) => (
               <li key={it.id} className="flex justify-between gap-3 border-b border-white/10 pb-2">
                 <span>{tx(getProject(it.slug)?.title ?? it.slug, lang)}</span>
-                <span className="num font-bold">${fmt(it.amount)}</span>
+                <span className="num font-bold" dir="ltr">{C$.money(it.amount, { code: o?.currency ?? "USD" })}</span>
               </li>
             ))}
           </ul>

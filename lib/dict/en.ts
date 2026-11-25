@@ -266,7 +266,7 @@ const en: typeof ar = {
     kicker: "﴿وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ﴾",
     text: "Calculate your Zakat in a minute, then deliver it to Jerusalemite families and the people of Gaza.",
     s1: "1. Today's prices",
-    s1d: "Enter today's price per gram of gold (24k) and silver in US dollars.",
+    s1d: "Enter today's price per gram of gold (24k) and silver in your selected currency.",
     goldPrice: "Gold price per gram",
     silverPrice: "Silver price per gram",
     basis: "Calculate Nisab using",

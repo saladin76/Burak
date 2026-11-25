@@ -1,9 +1,10 @@
 "use client";
 
+import { formatMoney, rateOf } from "@/lib/currency";
 import { BurakLogo, GivingRings, Khatam } from "./Motifs";
 import QR from "./QR";
 import { contact, getProject } from "@/lib/data";
-import { fmt, tx, type Lang } from "@/lib/i18n";
+import { tx, type Lang } from "@/lib/i18n";
 import { getF } from "@/lib/dict/features";
 import { getDict } from "@/lib/i18n";
 import type { Order } from "@/lib/orders";
@@ -64,7 +65,7 @@ export default function Receipt({ order, lang, verifyUrl }: { order: Order; lang
                   <tr key={it.id} className="border-b border-stone-100">
                     <td className="p-[1.6cqw] font-semibold text-teal-900">{p ? tx(p.title, lang) : it.slug}</td>
                     <td className="p-[1.6cqw] text-muted">{it.freq === "monthly" ? t.common.monthly : t.common.once}</td>
-                    <td className="num p-[1.6cqw] text-end font-bold text-teal-900">${fmt(it.amount)}</td>
+                    <td className="num p-[1.6cqw] text-end font-bold text-teal-900" dir="ltr">{formatMoney(Math.round(it.amount * rateOf(order.currency) * 100) / 100, order.currency ?? "USD")}</td>
                   </tr>
                 );
               })}
@@ -72,7 +73,7 @@ export default function Receipt({ order, lang, verifyUrl }: { order: Order; lang
             <tfoot>
               <tr>
                 <td colSpan={2} className="p-[1.6cqw] pt-[3cqw] text-end font-bold text-muted">{D.total}</td>
-                <td className="num p-[1.6cqw] pt-[3cqw] text-end font-bold text-teal-900" style={{ fontSize: "4cqw" }}>${fmt(order.total)}</td>
+                <td className="num p-[1.6cqw] pt-[3cqw] text-end font-bold text-teal-900" style={{ fontSize: "4cqw" }} dir="ltr">{formatMoney(Math.round(order.total * rateOf(order.currency) * 100) / 100, order.currency ?? "USD")}</td>
               </tr>
             </tfoot>
           </table>

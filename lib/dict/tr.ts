@@ -266,7 +266,7 @@ const tr: typeof ar = {
     kicker: "﴿وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ﴾",
     text: "Zekâtınızı bir dakikada hesaplayın ve Kudüslü ailelere ve Gazze halkına ulaştırın.",
     s1: "1. Günün fiyatları",
-    s1d: "Bugünkü piyasaya göre gram altın (24 ayar) ve gümüş fiyatını dolar olarak girin.",
+    s1d: "Bugünkü piyasaya göre gram altın (24 ayar) ve gümüş fiyatını seçili para biriminde girin.",
     goldPrice: "Gram altın fiyatı",
     silverPrice: "Gram gümüş fiyatı",
     basis: "Nisap hesabı",

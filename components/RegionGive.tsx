@@ -3,9 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { projects, type Project } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
+import { useCurrency } from "@/lib/currency";
 import SmartImg from "./SmartImg";
 import { IconArrow, IconBag, IconCheck, IconRepeat, IconShield, KindIcon } from "./Icons";
 
@@ -39,7 +40,8 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
   const [custom, setCustom] = useState("");
   const [fromCalc, setFromCalc] = useState(false);
   const [added, setAdded] = useState(false);
-  const value = custom ? Number(custom) || 0 : amount;
+  const C$ = useCurrency();
+  const value = custom ? C$.toUsd(Number(custom) || 0) : C$.pick(amount);
 
   // استقبال المبلغ من حاسبة الزكاة
   useEffect(() => {
@@ -131,17 +133,17 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
               return (
                 <button key={v} type="button" aria-pressed={on} onClick={() => { setAmount(v); setCustom(""); setFromCalc(false); }}
                   className={`num h-12 flex-[1_1_30%] rounded-lg border text-lg font-bold transition ${on ? "border-accent-500 bg-accent-500 text-white" : "border-stone-200 text-teal-900 hover:border-accent-400"}`}>
-                  ${fmt(v)}
+                  {C$.money(v, { nice: true })}
                 </button>
               );
             })}
           </div>
           <label className="relative mt-3 block">
             <span className="sr-only">{G.other}</span>
-            <span className="pointer-events-none absolute inset-y-0 start-4 grid place-items-center font-bold text-teal-700">$</span>
+            <span className="pointer-events-none absolute inset-y-0 start-4 grid place-items-center font-bold text-teal-700">{C$.symbol}</span>
             <input inputMode="numeric" value={custom} placeholder={G.other}
               onChange={(e) => { setCustom(e.target.value.replace(/[^\d]/g, "")); setFromCalc(false); }}
-              className="num h-12 w-full rounded-lg border border-stone-200 bg-stone-50 pe-4 ps-9 text-lg font-bold text-teal-900 focus:border-accent-400 focus:bg-white" />
+              className="num h-12 w-full rounded-lg border border-stone-200 bg-stone-50 pe-4 ps-12 text-lg font-bold text-teal-900 focus:border-accent-400 focus:bg-white" />
           </label>
           {mode === "monthly" && (
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -167,7 +169,7 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
           <div className="p-6">
             <p className="text-sm font-semibold text-accent-300">{G.summary}</p>
             <p className="num mt-2 font-kufi text-5xl font-extrabold">
-              ${fmt(value)}
+              <span dir="ltr">{C$.money(value)}</span>
               {mode === "monthly" && <span className="ms-2 text-lg font-semibold text-accent-300">/ {G.perMonth}</span>}
             </p>
             {mode === "monthly" && (
@@ -195,7 +197,7 @@ export default function RegionGive({ mode }: { mode: "monthly" | "zakat" }) {
               {mode === "monthly" && (
                 <div className="flex justify-between gap-3">
                   <dt className="text-accent-300">{G.total}</dt>
-                  <dd className="num text-end font-bold">${fmt(value * months)}</dd>
+                  <dd className="num text-end font-bold" dir="ltr">{C$.money(value * months)}</dd>
                 </div>
               )}
               {proj && (

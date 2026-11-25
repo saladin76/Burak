@@ -1,10 +1,11 @@
 "use client";
 
+import { RATES_DATE, useCurrency } from "@/lib/currency";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getProject } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/lang-context";
 import { IconBank, IconGift, IconRepeat, IconShield } from "./Icons";
@@ -16,6 +17,7 @@ export default function Checkout() {
   const { lang, t, f, href } = useI18n();
   const K = t.checkout;
   const { items, total, clear, ready } = useCart();
+  const C$ = useCurrency();
   const router = useRouter();
   const [gift, setGift] = useState(false);
   const [g, setG] = useState({ to: "", from: "", email: "", msg: "", design: 0 });
@@ -53,6 +55,7 @@ export default function Checkout() {
           date: new Date().toISOString(),
           items,
           total,
+          currency: C$.cur,
           pay,
           donor: { name: String(fd.get("name") || ""), email: String(fd.get("email") || ""), anon: fd.get("anon") === "on" },
           gift: gift ? g : null,
@@ -139,15 +142,20 @@ export default function Checkout() {
                   {p ? tx(p.title, lang) : it.slug}
                   {it.freq === "monthly" && <span className="ms-1 inline-flex items-center gap-1 text-accent-300"><IconRepeat size={12} /> {t.common.monthly}{it.months ? ` · ${f.prog.monthsN.replace("{n}", String(it.months))}` : ""}</span>}
                 </span>
-                <span className="num shrink-0 font-bold">${fmt(it.amount)}</span>
+                <span className="num shrink-0 font-bold" dir="ltr">{C$.money(it.amount)}</span>
               </li>
             );
           })}
         </ul>
         <div className="mt-4 flex items-baseline justify-between">
           <span className="text-teal-100">{t.cart.total}</span>
-          <span className="num text-4xl font-bold">${fmt(total)}</span>
+          <span className="num text-4xl font-bold" dir="ltr">{C$.money(total)}</span>
         </div>
+        {C$.cur !== "USD" && (
+          <p className="mt-2 text-xs leading-6 text-teal-100/80">
+            {{ ar: `≈ ${C$.money(total, { code: "USD" })} — تحويل تقريبي بسعر صرف ${RATES_DATE}، والسعر النهائي تحدده بوابة الدفع.`, tr: `≈ ${C$.money(total, { code: "USD" })} — ${RATES_DATE} tarihli yaklaşık kur; nihai tutarı ödeme sağlayıcısı belirler.`, en: `≈ ${C$.money(total, { code: "USD" })} — approximate rate of ${RATES_DATE}; the final amount is set by the payment provider.` }[lang]}
+          </p>
+        )}
         <button type="submit" disabled={busy || !total} className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-60">
           <IconShield size={20} /> {DEMO ? K.confirmDemo : K.confirm}
         </button>

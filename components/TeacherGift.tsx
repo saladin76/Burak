@@ -1,11 +1,12 @@
 "use client";
 
+import { useCurrency } from "@/lib/currency";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Certificate from "./Certificate";
 import { IconArrow, IconBag, KindIcon } from "./Icons";
 import { projects } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
 import { addDedication } from "@/lib/orders";
@@ -21,7 +22,8 @@ export default function TeacherGift() {
   const router = useRouter();
   const [v, setV] = useState({ title: 0, teacher: "", subject: "", student: "", msg: "", slug: EDU[0], amount: 50, custom: "" });
   const [added, setAdded] = useState(false);
-  const amount = v.custom ? Number(v.custom) || 0 : v.amount;
+  const C$ = useCurrency();
+  const amount = v.custom ? C$.toUsd(Number(v.custom) || 0) : C$.pick(v.amount);
   const proj = projects.find((p) => p.slug === v.slug)!;
   const ok = v.teacher.trim() && v.student.trim() && amount > 0;
 
@@ -81,16 +83,16 @@ export default function TeacherGift() {
               {AMOUNTS.map((a) => (
                 <button type="button" key={a} aria-pressed={!v.custom && v.amount === a} onClick={() => setV({ ...v, amount: a, custom: "" })}
                   className={`num h-12 rounded-xl border text-lg font-bold ${!v.custom && v.amount === a ? "border-accent-500 bg-accent-100 text-accent-700" : "border-stone-300 text-teal-900"}`}>
-                  ${a}
+                  {C$.money(a, { nice: true })}
                 </button>
               ))}
             </div>
-            <input inputMode="numeric" placeholder={f.vol ? "$ …" : ""} value={v.custom} onChange={(e) => setV({ ...v, custom: e.target.value.replace(/[^\d]/g, "") })} aria-label={T.amount} className={`${input} mt-2`} />
+            <input inputMode="numeric" placeholder={`${C$.symbol} …`} value={v.custom} onChange={(e) => setV({ ...v, custom: e.target.value.replace(/[^\d]/g, "") })} aria-label={T.amount} className={`${input} mt-2`} />
           </fieldset>
         </div>
         <div className="mt-6 flex gap-2">
-          <button type="submit" disabled={!ok} className="flex min-h-14 py-3 text-center leading-snug flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600 disabled:opacity-50">
-            {T.cta} · <span className="num">${fmt(amount)}</span> <IconArrow size={20} />
+          <button type="submit" disabled={!ok} className="flex min-h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 py-3 text-center text-lg font-bold leading-snug text-white hover:bg-accent-600 disabled:opacity-50">
+            {T.cta} · <span className="num" dir="ltr">{C$.money(amount)}</span> <IconArrow size={20} />
           </button>
           <button type="button" disabled={!ok} aria-label={f.cards.quickAdd} title={f.cards.quickAdd}
             onClick={() => { commit(); setAdded(true); setV({ ...v, teacher: "", subject: "", msg: "" }); setTimeout(() => setAdded(false), 2200); }}

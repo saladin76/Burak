@@ -1,8 +1,9 @@
 "use client";
 
+import { useCurrency } from "@/lib/currency";
 import Link from "next/link";
 import { getProject, projectPath } from "@/lib/data";
-import { fmt, tx } from "@/lib/i18n";
+import { tx } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/lang-context";
 import { IconArrow, IconClose, IconRepeat, KindIcon } from "./Icons";
@@ -10,6 +11,7 @@ import SmartImg from "./SmartImg";
 
 export default function CartView() {
   const { lang, t, f, href } = useI18n();
+  const C$ = useCurrency();
   const C = t.cart;
   const { items, remove, update, total, ready } = useCart();
 
@@ -49,10 +51,10 @@ export default function CartView() {
                 </div>
               </div>
               <label className="relative">
-                <span className="sr-only">{t.donate.amount}</span>
-                <input inputMode="numeric" value={it.amount} onChange={(e) => update(it.id, { amount: Number(e.target.value.replace(/[^\d]/g, "")) || 0 })}
-                  className="num h-12 w-28 rounded-xl border border-stone-300 bg-stone-50 pe-8 ps-3 text-lg font-bold text-teal-900" />
-                <span className="pointer-events-none absolute inset-y-0 end-3 grid place-items-center font-bold text-muted">$</span>
+                <span className="sr-only">{t.donate.amount.replace("{c}", C$.name)}</span>
+                <input inputMode="numeric" value={Math.round(C$.toLocal(it.amount))} onChange={(e) => update(it.id, { amount: C$.toUsd(Number(e.target.value.replace(/[^\d]/g, "")) || 0) })}
+                  className="num h-12 w-32 rounded-xl border border-stone-300 bg-stone-50 pe-8 ps-3 text-lg font-bold text-teal-900" />
+                <span className="pointer-events-none absolute inset-y-0 end-3 grid place-items-center font-bold text-muted">{C$.symbol}</span>
               </label>
               <button onClick={() => remove(it.id)} aria-label={C.remove} className="grid h-11 w-11 place-items-center rounded-full text-muted hover:bg-stone-100 hover:text-teal-900">
                 <IconClose size={18} />
@@ -66,7 +68,7 @@ export default function CartView() {
       </ul>
       <aside className="h-fit rounded-2xl bg-teal-900 p-6 text-white lg:sticky lg:top-28">
         <p className="text-sm font-bold text-accent-300">{C.total}</p>
-        <p className="num mt-1 text-5xl font-bold">${fmt(total)}</p>
+        <p className="num mt-1 text-5xl font-bold" dir="ltr">{C$.money(total)}</p>
         <Link href={href("/checkout")} className="mt-6 flex h-14 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white hover:bg-accent-600">
           {C.checkout} <IconArrow size={20} />
         </Link>

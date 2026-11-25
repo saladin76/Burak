@@ -11,6 +11,8 @@ export type Order = {
   date: string;
   items: CartItem[];
   total: number;
+  /** عملة الدفع (المبالغ مخزّنة بالدولار) */
+  currency?: import("./currency").CurrencyCode;
   pay: "card" | "bank";
   donor: { name: string; email?: string; anon: boolean };
   gift?: { to: string; from: string; email?: string; msg?: string; design: number } | null;

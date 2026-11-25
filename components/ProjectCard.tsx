@@ -6,6 +6,8 @@ import { useState } from "react";
 import { kindLabel, projectPath, regionLabel, type Project } from "@/lib/data";
 import { fmt, getDict, tx, type Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/lang-context";
+import { useCurrency } from "@/lib/currency";
+import Money from "./Money";
 import { useCart } from "@/lib/cart";
 import { IconArrow, IconBag, IconRepeat, KindIcon } from "./Icons";
 import { GivingWaves } from "./Motifs";
@@ -53,8 +55,8 @@ export function Progress({ p, lang }: { p: Project; lang: Lang }) {
     <div className="mb-4">
       <div className="mb-1.5 flex items-baseline justify-between text-sm">
         <span>
-          <span className="num text-lg font-bold text-teal-900">${fmt(p.raised)}</span>
-          {p.goal && <span className="text-muted"> {t.common.of} ${fmt(p.goal)}</span>}
+          <Money usd={p.raised} className="num text-lg font-bold text-teal-900" />
+          {p.goal && <span className="text-muted"> {t.common.of} <Money usd={p.goal} nice /></span>}
         </span>
         <span className="text-muted"><span className="num font-bold text-teal-900">{fmt(p.donors ?? 0)}</span> {t.common.donors}</span>
       </div>
@@ -74,7 +76,8 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
   const [amount, setAmount] = useState(p.amounts[1] ?? p.amounts[0]);
   const [added, setAdded] = useState(false);
   const path = href(projectPath(p.slug));
-  const add = () => cart.add({ slug: p.slug, amount, freq: "once" });
+  const C$ = useCurrency();
+  const add = () => cart.add({ slug: p.slug, amount: C$.pick(amount), freq: "once" });
   const list = view === "list";
 
   return (
@@ -89,11 +92,11 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
         <p className={`mb-4 text-[15px] leading-7 text-muted ${list ? "line-clamp-3" : "line-clamp-2"}`}>{tx(p.summary, lang)}</p>
         <div className="mt-auto">
           <Progress p={p} lang={lang} />
-          {p.kind !== "zakat" && <div className="mb-3 flex gap-1.5" role="group" aria-label={t.donate.amount}>
+          {p.kind !== "zakat" && <div className="mb-3 flex gap-1.5" role="group" aria-label={t.donate.amount.replace("{c}", C$.name)}>
             {p.amounts.slice(0, 4).map((a) => (
               <button key={a} type="button" aria-pressed={amount === a} onClick={() => setAmount(a)}
                 className={`num flex h-10 flex-1 items-center justify-center rounded-xl border text-[15px] font-bold transition ${amount === a ? "border-accent-500 bg-accent-100 text-accent-700" : "border-stone-300 text-teal-900 hover:border-teal-500"}`}>
-                ${fmt(a)}
+                {C$.money(a, { nice: true })}
               </button>
             ))}
           </div>}
@@ -109,7 +112,7 @@ export default function ProjectCard({ p, lang, view = "grid" }: { p: Project; la
           ) : (<>
           <button type="button" onClick={() => { add(); router.push(href("/checkout")); }}
             className="btn-shine flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-accent-500 font-bold text-white transition hover:bg-accent-600">
-            {t.common.donateNow} <span className="num">${fmt(amount)}</span> <IconArrow size={18} />
+            {t.common.donateNow} <span className="num" dir="ltr">{C$.money(amount, { nice: true })}</span> <IconArrow size={18} />
           </button>
           <button type="button" onClick={() => { add(); setAdded(true); setTimeout(() => setAdded(false), 1800); }}
             className="mx-auto mt-2 flex h-9 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-teal-700 hover:bg-teal-50">

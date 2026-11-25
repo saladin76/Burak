@@ -6,6 +6,7 @@ import Certificate from "./Certificate";
 import { IconArrow, IconBag, IconRepeat } from "./Icons";
 import { LAMP_GOAL, LAMP_PRICE } from "@/lib/data";
 import { fmt } from "@/lib/i18n";
+import { formatMoney, useCurrency } from "@/lib/currency";
 import { useI18n } from "@/lib/lang-context";
 import { useCart } from "@/lib/cart";
 import { addDedication } from "@/lib/orders";
@@ -35,7 +36,10 @@ export default function LampsBuilder() {
   const [name, setName] = useState("");
   const [monthly, setMonthly] = useState(false);
   const [added, setAdded] = useState(false);
-  const total = n * LAMP_PRICE;
+  const C$ = useCurrency();
+  const lampLocal = C$.toLocal(LAMP_PRICE, true);
+  const M = (local: number) => formatMoney(local, C$.cur);
+  const total = C$.toUsd(n * lampLocal);
   // مقياس متدرّج: الشبكة 50 فانوساً، وكل فانوس يمثّل 1 أو 10 أو 100 … حتى مليون قنديل
   const unit = n <= 50 ? 1 : Math.pow(10, Math.ceil(Math.log10(n / 50)));
   const shown = Math.min(50, Math.ceil(n / unit));
@@ -62,7 +66,7 @@ export default function LampsBuilder() {
               className={`rounded-2xl border p-4 text-start transition ${n === p.n ? "border-accent-500 bg-accent-100 ring-4 ring-accent-400/20" : "border-stone-200 hover:border-teal-500"}`}>
               <span className="flex items-baseline justify-between">
                 <b className="font-kufi text-xl text-teal-900">{p.t}</b>
-                <span className="num font-bold text-accent-700">${fmt(p.n * LAMP_PRICE)}</span>
+                <span className="num font-bold text-accent-700" dir="ltr">{M(p.n * lampLocal)}</span>
               </span>
               <span className="mt-1 block text-sm text-muted">{p.d}</span>
             </button>
@@ -84,7 +88,7 @@ export default function LampsBuilder() {
               {fmt(v)}
             </button>
           ))}
-          <span className="ms-auto text-xs text-muted">{L.priceNote.replace("{p}", String(LAMP_PRICE))}</span>
+          <span className="ms-auto text-xs text-muted">{L.priceNote.replace("{p}", M(lampLocal))}</span>
         </div>
 
         <fieldset className="mt-6">
@@ -109,7 +113,7 @@ export default function LampsBuilder() {
 
         <div className="mt-6 flex gap-2">
           <button type="submit" className="flex h-14 flex-1 items-center justify-center gap-2 rounded-2xl bg-accent-500 text-lg font-bold text-white shadow-[0_0_40px_-8px_rgba(0,125,165,.9)] hover:bg-accent-600">
-            {(n === 1 ? L.btnOne : L.btn).replace("{n}", fmt(n)).replace("{x}", fmt(total))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
+            {(n === 1 ? L.btnOne : L.btn).replace("{n}", fmt(n)).replace("{x}", M(n * lampLocal))}{monthly ? ` · ${t.common.monthly}` : ""} <IconArrow size={20} />
           </button>
           <button type="button" aria-label={f.cards.quickAdd} title={f.cards.quickAdd} onClick={() => { commit(); setAdded(true); setTimeout(() => setAdded(false), 2200); }}
             className={`grid h-14 w-14 place-items-center rounded-2xl border-2 ${added ? "border-olive bg-olive text-white" : "border-teal-900/15 text-teal-900"}`}>
