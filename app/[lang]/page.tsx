@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import QuickDonate from "@/components/QuickDonate";
 import ProjectsExplorer from "@/components/ProjectsExplorer";
-import { DomeOfTheRock, GivingRings, Khatam } from "@/components/Motifs";
+import { Khatam } from "@/components/Motifs";
 import { IconArrow, IconBank, IconCheck, IconRepeat, IconShield, KindIcon } from "@/components/Icons";
 import { ProjectCover } from "@/components/ProjectCard";
 import JerusalemClock from "@/components/JerusalemClock";
@@ -46,33 +46,36 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     <>
 
       {/* ========== HERO ========== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white via-[#eef8fb] to-[#c5e5f1] text-teal-900">
-        <GivingRings live className="pointer-events-none absolute -top-40 -end-40 w-[560px] lg:-top-60 lg:end-auto lg:start-[-180px] lg:w-[760px]" rings={7} opacity={0.22} palette={["#8acbda", "#aeddec", "#64b6d0", "#c5e5f1", "#8acbda", "#aeddec", "#64b6d0"]} />
-        <div className="relative mx-auto grid max-w-7xl items-end gap-8 px-5 pt-12 lg:grid-cols-[1.05fr_1fr] lg:pt-20">
-          <div className="pb-20 lg:pb-40">
-            <p className="rise brand-tag mb-6">
+      <section className="relative isolate overflow-hidden bg-accent-700 text-white">
+        {/* صورة جوية للمسجد الأقصى المبارك والبلدة القديمة */}
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/brand/hero-aqsa-sm.jpg" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/hero-aqsa.jpg" alt={t.hero.domeAlt} className="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_55%]" fetchPriority="high" />
+        </picture>
+        <div className="absolute inset-0 -z-10 from-accent-700/95 via-accent-700/70 to-accent-700/10 ltr:bg-gradient-to-r rtl:bg-gradient-to-l" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-accent-700/70 to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-5 pt-14 lg:pt-24">
+          <div className="max-w-2xl pb-24 lg:pb-44">
+            <p className="rise brand-tag mb-6 !bg-white/15 ring-1 ring-white/25 backdrop-blur">
               <Khatam className="h-4 w-4" color="#ffffff" /> {t.hero.since}
             </p>
-            <h1 className="rise-2 font-kufi text-[40px] font-extrabold leading-[1.35] md:text-[56px] xl:text-[60px]">
-              <span className="block text-teal-900">{t.hero.title1}</span>
+            <h1 className="rise-2 font-kufi text-[40px] font-extrabold leading-[1.35] md:text-[56px] xl:text-[64px]">
+              <span className="block drop-shadow-[0_2px_12px_rgba(0,0,0,.35)]">{t.hero.title1}</span>
               <span className="brand-label mt-2 inline-block sm:whitespace-nowrap">{t.hero.title2}</span>
             </h1>
-            <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-teal-700 md:text-xl">{t.hero.text}</p>
+            <p className="rise-3 mt-6 max-w-xl text-lg leading-9 text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,.35)] md:text-xl">{t.hero.text}</p>
             <div className="rise-3 mt-9 flex flex-wrap gap-3">
-              <Link href="#donate" className="btn-shine flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_14px_30px_-14px_rgba(0,125,165,.7)] hover:bg-accent-600">
+              <Link href="#donate" className="btn-shine flex h-14 items-center gap-2 rounded-lg bg-accent-500 px-8 text-lg font-bold text-white shadow-[0_14px_30px_-14px_rgba(0,0,0,.6)] hover:bg-accent-600">
                 {t.common.donateNow} <IconArrow size={20} />
               </Link>
-              <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-lg border-2 border-accent-700 px-7 text-lg font-bold text-accent-700 hover:bg-accent-700 hover:text-white">
+              <Link href={h("/projects?region=quds")} className="flex h-14 items-center gap-2 rounded-lg border-2 border-white/70 px-7 text-lg font-bold text-white backdrop-blur-sm hover:bg-white hover:text-accent-700">
                 {t.hero.cta2}
               </Link>
             </div>
             <div className="rise-3 mt-8">
-              <JerusalemClock light />
+              <JerusalemClock />
             </div>
-          </div>
-          <div className="relative mx-auto hidden w-full max-w-[640px] self-end lg:block">
-            <GivingRings live className="pointer-events-none absolute -bottom-[30%] left-1/2 w-[150%] -translate-x-1/2" rings={8} opacity={0.55} palette={["#3aafc9", "#64b6d0", "#8acbda", "#aeddec", "#3aafc9", "#64b6d0", "#8acbda", "#aeddec"]} />
-            <DomeOfTheRock className="relative block w-full" label={t.hero.domeAlt} />
           </div>
         </div>
       </section>
